@@ -13,10 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Test routes
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/app', function () {
+    return view('layouts.app');
+});
+Route::get('/side', function () {
+    return view('layouts.sidebar');
+});
+
+//Real routes
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
