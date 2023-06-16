@@ -109,7 +109,7 @@
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                            <a class="nav-link sidebar-text" data-bs-toggle="collapse" href="#dashboardCollapse" role="button" aria-expanded="true" aria-controls="dashboardCollapse">Dashboard</a>
+                            <a class="nav-link sidebar-text" href="{{ url('/home') }}">Dashboard</a>
                             <ul class="collapse show ml-3" id="dashboardCollapse">
                                 <li><a class="nav-link sidebar-text" href="{{ url('/leads') }}">Lead/Rfx</a></li>
                                 <li><a class="nav-link sidebar-text" href="{{ url('/tasks') }}">Tasks</a></li>
@@ -118,13 +118,15 @@
                             <li class="nav-item">
                                 <a class="nav-link sidebar-text" href="{{ url('/analysis') }}">Analysis/Report</a>
                             </li>
+                            @if ( (Auth::user()->is_admin) === 0)
                             <li class="nav-item">
                                 <a class="nav-link sidebar-text" data-bs-toggle="collapse" href="#usersCollapse" role="button" aria-expanded="false" aria-controls="usersCollapse">Users</a>
                                 <ul class="collapse ml-3" id="usersCollapse">
-                                    <li><a class="nav-link sidebar-text" href="{{ url('/registration') }}">Registration</a></li>
-                                    <li><a class="nav-link sidebar-text" href="{{ url('/listing') }}">Listing</a></li>
+                                    <li><a class="nav-link sidebar-text" href="{{ url('/user/register') }}">Registration</a></li>
+                                    <li><a class="nav-link sidebar-text" href="{{ url('/user/listing') }}">Listing</a></li>
                                 </ul>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link sidebar-text" data-bs-toggle="collapse" href="#customerCollapse" role="button" aria-expanded="false" aria-controls="customerCollapse">Customer</a>
                                 <ul class="collapse ml-3" id="customerCollapse">
