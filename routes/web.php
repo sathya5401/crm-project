@@ -34,8 +34,27 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+use App\Http\Controllers\UserController;
+Route::get('/user/register', [UserController::class, 'create'])->name('user.register.create');
+Route::post('/user/register', [UserController::class, 'store'])->name('user.register.store');
+Route::get('/user/listing', [UserController::class, 'index'])->name('user.listing');
+Route::get('user/search', [UserController::class, 'search'])->name('user.search');
+Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
+
+
+
+Route::get('/user/confirmregister', function () {
+    return view('user.confirm');
+});
+
+// Route::get('/user/listing', function () {
+//     return view('user.listing');
+// });
 
