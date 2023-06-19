@@ -40,6 +40,8 @@ class CustomerController extends Controller
         $user->email = $validatedData['creditLimit'];
         $user->save();
 
+        Customer::create($validatedData);
+
         return redirect('/customer/confirmregister');
     }
 

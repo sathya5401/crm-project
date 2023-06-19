@@ -57,8 +57,6 @@
 <body>
 @extends('layouts.sidebar')
 @section('content')
-<form method="POST" action="{{ route('customer.register.store') }}">
-@csrf
    <Section class="container-fluid bg-purple">
 
       <div class=container style="padding-top: 3%; margin-top: 3%">
@@ -76,7 +74,6 @@
          <div class="row card-row">
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
-                  <form method="POST" action="{{ route('customer.register.store') }}">
                      @csrf
                      
                      <div class="row">
@@ -120,7 +117,7 @@
                         </div>
                      </div>
                      <div class="col-12" style="margin-top:3%">
-                        <button type="submit" class="store-button" >Create</button>
+                        <button type="submit" href="{{ url('/customer/confirmregister') }}" >Create</button>
                      </div>
                   </form>
                </div>
