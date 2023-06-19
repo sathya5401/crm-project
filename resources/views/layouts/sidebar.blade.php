@@ -130,12 +130,12 @@
                             <li class="nav-item">
                                 <a class="nav-link sidebar-text" data-bs-toggle="collapse" href="#customerCollapse" role="button" aria-expanded="false" aria-controls="customerCollapse">Customer</a>
                                 <ul class="collapse ml-3" id="customerCollapse">
-                                    <li><a class="nav-link sidebar-text" href="{{ url('/') }}">Registration</a></li>
-                                    <li><a class="nav-link sidebar-text" href="{{ url('/') }}">Listing</a></li>
+                                    <li><a class="nav-link sidebar-text" href="{{ url('/customer/register') }}">Registration</a></li>
+                                    <li><a class="nav-link sidebar-text" href="{{ url('/customer/listing') }}">Listing</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link sidebar-text" href="{{ url('/') }}">Marketing</a>
+                                <a class="nav-link sidebar-text" href="{{ url('/marketing/home') }}">Marketing</a>
                             </li>
                         </ul>
                     </div>
