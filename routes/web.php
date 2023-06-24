@@ -47,9 +47,6 @@ Route::get('/user/listing', [UserController::class, 'index'])->name('user.listin
 Route::get('user/search', [UserController::class, 'search'])->name('user.search');
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
-
-
-
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
@@ -58,3 +55,19 @@ Route::get('/user/confirmregister', function () {
 //     return view('user.listing');
 // });
 
+
+Route::get('/customer/register', function () {
+    return view('customer.register');
+});
+
+Route::get('/customer/listing', function () {
+    return view('customer.listing');
+});
+
+Route::get('/customer/confirmregister', function () {
+    return view('customer.confirm');
+});
+
+Route::get('/marketing/home', function () {
+    return view('marketing.home');
+});
