@@ -67,7 +67,7 @@
                             <img src="{{ url('img/search.png') }}" alt="search"> 
                             Search
                         </a> -->
-                        <form action="{{ route('user.search') }}" method="GET" style="display: flex;">
+                        <form action="{{ route('customer.search') }}" method="GET" style="display: flex;">
                             <input type="text" name="search" placeholder="Search customers" class="form-control" style="margin-right: 5px;">
                             <button type="submit" class="btn btn-outline-primary" style="color: black">Search</button>
                         </form>

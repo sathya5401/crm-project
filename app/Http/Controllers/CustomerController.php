@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
-    public function create()
+    public function showRegistrationForm()
     {
-        return view('customer.register');
+        return view('customer.registration');
     }
 
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -42,7 +42,7 @@ class CustomerController extends Controller
 
         Customer::create($validatedData);
 
-        return redirect('/customer/confirmregister');
+        return redirect()->back()->with('success', 'Customer registered successfully!');
     }
 
 }

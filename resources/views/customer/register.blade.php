@@ -75,7 +75,6 @@
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
                      @csrf
-                     
                      <div class="row">
                         <div class="col-6 flex-inputs">
                            <label for="name">Name</label>
@@ -117,7 +116,7 @@
                         </div>
                      </div>
                      <div class="col-12" style="margin-top:3%">
-                        <button type="submit" href="{{ url('/customer/confirmregister') }}" >Create</button>
+                        <button type="submit" >Create</button>
                      </div>
                   </form>
                </div>
