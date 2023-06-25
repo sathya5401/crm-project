@@ -116,9 +116,8 @@
                         </div>
                      </div>
                      <div class="col-12" style="margin-top:3%">
-                        <button type="submit" >Create</button>
+                        <a href="{{ url('customer/confirm') }}" class="btn btn-dark">Create</a>
                      </div>
-                  </form>
                </div>
             </div>
          </div>

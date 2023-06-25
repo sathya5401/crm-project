@@ -67,8 +67,13 @@
                 </div>
             </div>
         </div>    
-
    </section>
+    <section>
+        <div>
+             <h4> DEALS</h4>
+        </div>
+    </section>
+
 @endsection
 
 
