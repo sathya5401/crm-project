@@ -103,7 +103,9 @@
                         <td>{{ $user->phone_number}}</td>
                         <td class="icons">  
                             <img src="{{ url('img/role.png') }}" alt="role"> 
-                            <img src="{{ url('img/edit.png') }}" alt="role"> 
+                            <a href="{{ route('user.edit', $user->id) }}">
+                                <img src="{{ url('img/edit.png') }}" alt="Edit">
+                            </a> 
                             <a href="{{ route('user.delete', $user->id) }}"
                         onclick="event.preventDefault();
                                     if (confirm('Are you sure you want to delete this user?')) {

@@ -46,6 +46,9 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.regi
 Route::get('/user/listing', [UserController::class, 'index'])->name('user.listing');
 Route::get('user/search', [UserController::class, 'search'])->name('user.search');
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+
 
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
