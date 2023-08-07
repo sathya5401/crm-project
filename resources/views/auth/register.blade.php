@@ -99,6 +99,27 @@
                                         </div>
 
                                         <div class="row mb-3">
+                                            <label for="company" class="col-md-4 col-form-label text-md-end" style="font-weight: bold;">{{ __('Company Name') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="company" class="form-control" name="company">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row mb-3">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-end" style="font-weight: bold;">{{ __('Phone Number') }}</label>
+
+                                            <div class="col-md-6">
+                                                <input id="phone_number"  class="form-control" name="phone_number" autofocus>
+
+                                    
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mb-3">
                                             <label for="password" class="col-md-4 col-form-label text-md-end" style="font-weight: bold;">{{ __('Password') }}</label>
 
                                             <div class="col-md-6">

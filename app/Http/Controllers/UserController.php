@@ -91,5 +91,47 @@ class UserController extends Controller
         return Redirect::back()->with('success', 'User deleted successfully.');
     }
 
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            abort(404); // User not found
+        }
+
+        return view('user.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|unique:users,email,'.$id.'|max:255',
+        'role' => 'nullable|string|max:255',
+        'branch' => 'nullable|string|max:255',
+        'phone_number' => 'nullable|string|max:255',
+        // Add validation rules for other fields
+    ]);
+
+    $user = User::find($id);
+
+    if (!$user) {
+        abort(404); // User not found
+    }
+
+    $user->name = $validatedData['name'];
+    $user->email = $validatedData['email'];
+    $user->role = $validatedData['role'];
+    $user->branch = $validatedData['branch'];
+    $user->phone_number = $validatedData['phone_number'];
+    // Update other user fields
+
+    $user->save();
+
+    return redirect()->route('user.listing')->with('success', 'User updated successfully.');
+}
+
+
+
 
 }
