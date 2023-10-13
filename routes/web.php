@@ -46,6 +46,9 @@ Route::post('/user/register', [UserController::class, 'store'])->name('user.regi
 Route::get('/user/listing', [UserController::class, 'index'])->name('user.listing');
 Route::get('user/search', [UserController::class, 'search'])->name('user.search');
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+
 
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
@@ -54,6 +57,15 @@ Route::get('/user/confirmregister', function () {
 // Route::get('/user/listing', function () {
 //     return view('user.listing');
 // });
+
+/*
+use App\Http\Controllers\CustomerController;
+Route::get('/customer/register', [CustomerController::class, 'create'])->name('customer.register.create');
+Route::post('/customer/register', [CustomerController::class, 'store'])->name('customer.register.store');
+Route::get('/customer/listing', [CustomerController::class, 'index'])->name('customer.listing');
+Route::get('customer/search', [CustomerController::class, 'search'])->name('customer.search');
+Route::delete('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+*/
 
 
 Route::get('/customer/register', function () {
@@ -64,10 +76,22 @@ Route::get('/customer/listing', function () {
     return view('customer.listing');
 });
 
-Route::get('/customer/confirmregister', function () {
+Route::get('/customer/confirm', function () {
     return view('customer.confirm');
 });
 
 Route::get('/marketing/home', function () {
     return view('marketing.home');
+});
+
+Route::get('/marketing/deals', function () {
+    return view('marketing.deals');
+});
+
+Route::get('/marketing/meeting', function () {
+    return view('marketing.meeting');
+});
+
+Route::get('/marketing/email', function () {
+    return view('marketing.email');
 });

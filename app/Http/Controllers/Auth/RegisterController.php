@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'company' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required','string','max:255'],
         ]);
     }
 
@@ -69,6 +71,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'is_admin' => 0, // Set the default role for registered users as 0 (admin)
+            'company' => $data['company'],
+            'phone_number' => $data['phone_number'],
         ]);
     }
 }
