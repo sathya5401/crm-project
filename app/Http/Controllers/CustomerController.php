@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
-    public function showRegistrationForm()
+    public function create()
     {
-        return view('customer.registration');
+        return view('customer.register');
     }
 
-    public function register(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -29,20 +29,57 @@ class CustomerController extends Controller
 
         ]);
 
-        $customer = new Customer();
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['phoneNo'];
-        $user->name = $validatedData['address'];
-        $user->email = $validatedData['inv_address'];
-        $user->name = $validatedData['pic'];
-        $user->email = $validatedData['email'];
-        $user->name = $validatedData['faxNo'];
-        $user->email = $validatedData['creditLimit'];
-        $user->save();
+        $customer = Customer::create([
+            'name' => $validatedData['name'],
+            'phoneNo' => $validatedData['phoneNo'],
+            'address' => $validatedData['address'],
+            'inv_address' => $validatedData['inv_address'],
+            'pic' => $validatedData['pic'],
+            'email' => $validatedData['email'],
+            'faxNo' => $validatedData['faxNo'],
+            'creditLimit' => $validatedData['creditLimit'],
+        ]);
 
-        Customer::create($validatedData);
+        return view('customer.confirm');    }
 
-        return redirect()->back()->with('success', 'Customer registered successfully!');
+    public function index()
+    {
+        
+        $searchTerm = null; // Set the default value for $searchTerm
+
+        return view('customer.listing');
     }
+/*
+    public function search(Request $request)
+{
+    $searchTerm = $request->input('search');
+    $customer = null;
+
+    if ($searchTerm) {
+        $users = User::where('is_admin', 1)
+                      ->where(function ($query) use ($searchTerm) {
+                          $query->where('name', 'like', '%'.$searchTerm.'%')
+                                ->orWhere('email', 'like', '%'.$searchTerm.'%')
+                                ->orWhere('role', 'like', '%'.$searchTerm.'%')
+                                ->orWhere('branch', 'like', '%'.$searchTerm.'%')
+                                ->orWhere('phone_number', 'like', '%'.$searchTerm.'%');
+                      })
+                      ->get();
+    } else {
+        $users = User::where('is_admin', 1)->get();
+    }
+
+    return view('user.listing', ['users' => $users, 'searchTerm' => $searchTerm]);
+}
+
+    public function delete($id)
+    {
+            if ($customer) {
+            $customer->delete();
+        }
+
+        return Redirect::back()->with('success', 'Customer deleted successfully.');
+    }
+*/
 
 }

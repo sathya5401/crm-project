@@ -69,6 +69,11 @@
         </div>    
 
    </section>
+   <section>
+        <div>
+             <h4> EMAIL</h4>
+        </div>
+    </section>
 @endsection
 
 

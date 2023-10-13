@@ -58,6 +58,15 @@ Route::get('/user/confirmregister', function () {
 //     return view('user.listing');
 // });
 
+/*
+use App\Http\Controllers\CustomerController;
+Route::get('/customer/register', [CustomerController::class, 'create'])->name('customer.register.create');
+Route::post('/customer/register', [CustomerController::class, 'store'])->name('customer.register.store');
+Route::get('/customer/listing', [CustomerController::class, 'index'])->name('customer.listing');
+Route::get('customer/search', [CustomerController::class, 'search'])->name('customer.search');
+Route::delete('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+*/
+
 
 Route::get('/customer/register', function () {
     return view('customer.register');
@@ -67,10 +76,22 @@ Route::get('/customer/listing', function () {
     return view('customer.listing');
 });
 
-Route::get('/customer/confirmregister', function () {
+Route::get('/customer/confirm', function () {
     return view('customer.confirm');
 });
 
 Route::get('/marketing/home', function () {
     return view('marketing.home');
+});
+
+Route::get('/marketing/deals', function () {
+    return view('marketing.deals');
+});
+
+Route::get('/marketing/meeting', function () {
+    return view('marketing.meeting');
+});
+
+Route::get('/marketing/email', function () {
+    return view('marketing.email');
 });
