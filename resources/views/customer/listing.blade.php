@@ -88,32 +88,7 @@
                     <th scope="col"> Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td scope="col">1</td>
-                    <td scope="col">Stabilo Sdn Bhd</td>
-                    <td scope="col">stabilo@gmail.com</td>
-                    <td scope="col">6, Jalan SR 8/3, Taman Serdang Raya, 43300 Seri Kembangan, Selangor</td>
-                    <td scope="col">Farhan</td>
-                    <td class="icons">  
-                            <img src="{{ url('img/role.png') }}" alt="role"> 
-                            <img src="{{ url('img/edit.png') }}" alt="role"> 
-                            <img src="{{ url('img/delete.png') }}" alt="delete">
-                        </td>
-                </tr>
-                <tr>
-                    <td scope="col">2</td>
-                    <td scope="col">Zaba' enterprise sdn bhd</td>
-                    <td scope="col">zaba@gmail.com</td>
-                    <td scope="col">101, Persiaran Damai, Taman Sentosa, 32610, Perak</td>
-                    <td scope="col">Azfar Harim</td>
-                    <td class="icons">  
-                            <img src="{{ url('img/role.png') }}" alt="role"> 
-                            <img src="{{ url('img/edit.png') }}" alt="role"> 
-                            <img src="{{ url('img/delete.png') }}" alt="delete">
-                        </td>
-                </tr>
-            </tbody>   
+        {{$customerTest}}    
         </table>
 
    </section>
