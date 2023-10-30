@@ -32,9 +32,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
-
-
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -48,8 +45,6 @@ Route::get('user/search', [UserController::class, 'search'])->name('user.search'
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
-
-
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
@@ -57,6 +52,45 @@ Route::get('/user/confirmregister', function () {
 // Route::get('/user/listing', function () {
 //     return view('user.listing');
 // });
+
+
+use App\Http\Controllers\LeadController;
+// Route::get('/leads/new', [LeadController::class, 'create'])->name('leads.create');
+Route::get('/leads/new', function () {
+    return view('newlead');
+});
+
+Route::post('/leads/new', [LeadController::class, 'store'])->name('leads.store');
+Route::get('/leads', [LeadController::class, 'index'])->name('leads');
+Route::get('/leads/search', [LeadController::class, 'search'])->name('leads.search');
+Route::delete('/leads/delete/{id}', [LeadController::class, 'delete'])->name('leads.delete');
+Route::get('/leads/edit/{id}', [LeadController::class, 'edit'])->name('leads.edit');
+Route::put('/leads/update/{id}', [LeadController::class, 'update'])->name('lead.update');
+
+// Route::get('/leads', function () {
+//     return view('leads');
+// });
+
+use App\Http\Controllers\RfxController;
+// Route::get('/RFx', function () {
+//     return view('RFx');
+// });
+Route::get('/RFx/new', function () {
+    return view('newRFx');
+});
+Route::post('/RFx/new', [RfxController::class, 'store'])->name('rfx.store');
+Route::get('/RFx', [RfxController::class, 'index'])->name('rfx.index');
+Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
+Route::patch('/RFx/{id}/updateStatus',[RfxController::class,'updateStatus'])->name('rfx.updateStatus');
+Route::delete('/RFx/delete/{id}', [RFxController::class, 'delete'])->name('rfx.delete');
+
+
+
+Route::get('/leads/confirmregister', function () {
+    return view('user.confirm');
+});
+
+
 
 /*
 use App\Http\Controllers\CustomerController;
@@ -66,7 +100,6 @@ Route::get('/customer/listing', [CustomerController::class, 'index'])->name('cus
 Route::get('customer/search', [CustomerController::class, 'search'])->name('customer.search');
 Route::delete('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
 */
-
 
 Route::get('/customer/register', function () {
     return view('customer.register');
