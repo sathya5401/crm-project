@@ -16,11 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phoneNo');
             $table->string('address');
-            $table->string('inv_address');
-            $table->string('pic');
             $table->string('email');
-            $table->string('faxNo');
-            $table->string('creditLimit');
             $table->timestamps();
         });
     }

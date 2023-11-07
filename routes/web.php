@@ -91,13 +91,13 @@ Route::get('/leads/confirmregister', function () {
 });
 
 
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerController;/*
 Route::get('/customer/register', [CustomerController::class, 'create'])->name('customer.register.create');
 Route::post('/customer/register', [CustomerController::class, 'store'])->name('customer.register.store');
 Route::get('/customer/listing', [CustomerController::class, 'index'])->name('customer.listing');
 Route::get('customer/search', [CustomerController::class, 'search'])->name('customer.search');
 Route::delete('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-
+*/
 
 Route::get('/customer/register', function () {
     return view('customer.register');

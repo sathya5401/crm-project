@@ -91,30 +91,9 @@
                            <input type="address" name="address" id="address" required />
                         </div>
                         <div class="col-6 flex-inputs">
-                           <label for="inv_address">Invoice Address</label>
-                           <input type="inv_address" name="inv_address" id="inv_address" required />
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-6 flex-inputs">
-                           <label for="pic">Person In Charge</label>
-                           <input type="pic" name="pic" id="pic" required />
-                        </div>
-                        <div class="col-6 flex-inputs">
-                           <label for="email">Email</label>
+                        <label for="email">Email</label>
                            <input type="email" name="email" id="email"/>
                         </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-6 flex-inputs">
-                           <label for="faxNo">Fax No.</label>
-                           <input type="faxNo" name="faxNo" id="faxNo" required/>
-                        </div>
-                        <div class="col-6 flex-inputs">
-                           <label for="creditLimit">Credit Limit(RM)</label>
-                           <input type="creditLimit" name="creditLimit" id="creditLimit" required/>
-                        </div>
-                     </div>
                      <div class="col-12" style="margin-top:3%">
                         <a href="{{ url('customer/confirm') }}" class="btn btn-dark">Create</a>
                      </div>
