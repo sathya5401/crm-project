@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 
 class CustomerController extends Controller
@@ -42,13 +43,13 @@ class CustomerController extends Controller
 
         return view('customer.confirm');    }
 
-    public function index()
-    {
+    // public function index()
+    // {
         
-        $searchTerm = null; // Set the default value for $searchTerm
+    //     $searchTerm = null; // Set the default value for $searchTerm
 
-        return view('customer.listing');
-    }
+    //     return view('customer.listing');
+    // }
 /*
     public function search(Request $request)
 {
@@ -81,5 +82,10 @@ class CustomerController extends Controller
         return Redirect::back()->with('success', 'Customer deleted successfully.');
     }
 */
+
+public function index(){
+    $customerTest = DB::table('customer')->get();
+    return view('customer.listing',['customerTest'=>$customerTest]);
+}
 
 }
