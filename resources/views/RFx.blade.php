@@ -130,17 +130,6 @@
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right:2%"> Set</button>
-                                    <!-- <a href="{{ route('rfx.delete', $rfq->id) }}"
-                                        onclick="event.preventDefault();
-                                                    if (confirm('Are you sure you want to delete this user?')) {
-                                                        document.getElementById('delete-form-{{ $rfq->id }}').submit();
-                                                    }">
-                                        <img src="{{ url('img/delete.png') }}" alt="delete">
-                                    </a>
-                                    <form id="delete-form-{{ $rfq->id }}" action="{{ route('rfx.delete', $rfq->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form> -->
                                 </div>
                             </form>
                             <a href="{{ route('rfx.delete', $rfq->id) }}"

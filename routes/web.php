@@ -84,11 +84,27 @@ Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
 Route::patch('/RFx/{id}/updateStatus',[RfxController::class,'updateStatus'])->name('rfx.updateStatus');
 Route::delete('/RFx/delete/{id}', [RFxController::class, 'delete'])->name('rfx.delete');
 
-
-
 Route::get('/leads/confirmregister', function () {
     return view('user.confirm');
 });
+
+use App\Http\Controllers\TaskController;
+// Route::get('/tasks', function () {
+//     return view('tasks');
+// });
+Route::get('/tasks/new', [TaskController::class, 'new'])->name('tasks.new');
+Route::post('/tasks/new', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::patch('/tasks/{id}/updateStatus',[TaskController::class,'updateStatus'])->name('tasks.updateStatus');
+Route::patch('/tasks/{id}/updatePriority',[TaskController::class,'updatePriority'])->name('tasks.updatePriority');
+Route::delete('/tasks/delete/{id}', [TaskController::class, 'delete'])->name('tasks.delete');
+Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->name('tasks.update');
+Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+// Route::get('/tasks/assign/{id}', [TaskController::class, 'assigntask'])->name('tasks.assignTask');
+// Route::post('/tasks/assign/{id}', [TaskController::class, 'assign'])->name('tasks.assign');
+
+
 
 
 use App\Http\Controllers\CustomerController;
