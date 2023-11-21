@@ -111,27 +111,13 @@
                         </div>
                      </div>
                      <div class="row">
-                        <!-- <div class="col-6 flex-inputs">
-                           <label for="company_name">Company Name </label>
-                           <input type="company_name" name="company_name" id="company_name" required/>
-                        </div> -->
-                        <div class="col-6 flex-inputs">
-                           <label for="Custom_Number">Customer Number</label>
-                           <input type="number" name="Custom_Number" id="Custom_Number" required />
-                        </div>
-                        <!-- <div class="col-6 flex-inputs">
-                           <label for="company">Company</label>
-                           <input type="company" name="company" id="company" required />
-                        </div> -->
-                     </div>
-                     <div class="row">
-                        <!-- <div class="col-6 flex-inputs">
-                           <label for="RFQ_number">RFQ number </label>
-                           <input type="text" name="RFQ_number" id="RFQ_number" required/>
-                        </div> -->
                         <div class="col-6 flex-inputs">
                            <label for="RFQ_title">RFQ Title</label>
                            <input type="text" name="RFQ_title" id="RFQ_title" required />
+                        </div>
+                        <div class="col-6 flex-inputs">
+                           <label for="Custom_Number">Customer Number</label>
+                           <input type="number" name="Custom_Number" id="Custom_Number" required />
                         </div>
                      </div>
                      <div class="row">
