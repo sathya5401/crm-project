@@ -106,41 +106,11 @@ Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
 
 
 
-use App\Http\Controllers\CustomerController;
-Route::get('/customer/register', [CustomerController::class, 'create'])->name('customer.register.create');
-Route::post('/customer/register', [CustomerController::class, 'store'])->name('customer.register.store');
-Route::get('/customer/listing', [CustomerController::class, 'index'])->name('customer.listing');
-Route::get('customer/search', [CustomerController::class, 'search'])->name('customer.search');
-Route::delete('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-
-
-Route::get('/customer/register', function () {
-    return view('customer.register');
-});
-
-Route::get('/customer/listing', function () {
-    return view('customer.listing');
-});
-
-Route::get('/customer/confirm', function () {
-    return view('customer.confirm');
-});
-
-Route::get('/marketing/home', function () {
-    return view('marketing.home');
-});
-
-Route::get('/marketing/deals', function () {
-    return view('marketing.deals');
-});
-
-Route::get('/marketing/meeting', function () {
-    return view('marketing.meeting');
-});
-
-Route::get('/marketing/email', function () {
-    return view('marketing.email');
-});
-
-
-Route::get('/customer/listing', CustomerController::class.'@index')->name('customer.listing');
+use App\Http\Controllers\CustomersController;
+Route:: resource ('customers', CustomersController::class);
+Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
+Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
+// Display edit form
+Route::get('/customers/{customer}/edit', [CustomersController::class, 'edit'])->name('customers.edit');
+// Handle update
+Route::put('/customers/{customer}', [CustomersController::class, 'update'])->name('customers.update');
