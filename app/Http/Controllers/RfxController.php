@@ -103,8 +103,21 @@ class RfxController extends Controller
             })
             ->get();
 
-        $totalRecords = $Rfx->count();
-        return view('RFx', ['Rfx' => $Rfx, 'searchTerm' => $searchTerm, 'totalRecords' => $totalRecords]);
+        $perPage = 6; // Number of items to display per page
+        $currentPage = $request->input('page', 1);
+        $offset = ($currentPage - 1) * $perPage;
+        
+        // $Rfx = Rfx::skip($offset)->take($perPage)->get();  
+        // Calculate total number of records (for pagination)
+        $totalRecords = Rfx::count();
+
+        return view('RFx', [
+            'Rfx' => $Rfx,
+            'currentPage' => $currentPage,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'searchTerm' => $searchTerm
+        ]);
         }
 
         public function updateStatus(Request $request, $id)

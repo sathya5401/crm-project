@@ -67,7 +67,21 @@ class LeadController extends Controller
         ->orWhere('company','like','%'. $searchTerm . '%' )
         ->get();
 
-    return view('leads', ['leads' => $leads, 'searchTerm' => $searchTerm]);
+    $perPage = 6; // Number of items to display per page
+    $currentPage = $request->input('page', 1);
+    $offset = ($currentPage - 1) * $perPage;
+    
+    // $leads = Lead::skip($offset)->take($perPage)->get();
+    
+    // Calculate total number of records (for pagination)
+    $totalRecords = Lead::count();
+    return view('leads', [
+        'leads' => $leads,
+        'currentPage' => $currentPage,
+        'perPage' => $perPage,
+        'totalRecords' => $totalRecords,
+        'searchTerm' => $searchTerm
+    ]);
     }
 
     public function delete($id)

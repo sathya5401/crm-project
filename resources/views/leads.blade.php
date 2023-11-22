@@ -151,9 +151,9 @@
 
            
         <div class="pagination flex-page">
-            @for ($i = 1; $i <= ceil($totalRecords / $perPage); $i++)
-                <a href="{{ route('leads', ['page' => $i]) }}" class="{{ $currentPage == $i ? 'active' : '' }}">{{ $i }}</a>
-            @endfor
+            @for ($i = 1; $i <= ceil($totalRecords / $perPage); $i++) 
+               <a href="{{ route('leads', ['page' => $i, 'search' => $searchTerm]) }}" class="{{ $currentPage == $i ? 'active' : '' }}">{{ $i }}</a> 
+            @endfor 
         </div>
    
 
