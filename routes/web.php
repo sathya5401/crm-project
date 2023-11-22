@@ -45,6 +45,7 @@ Route::get('user/search', [UserController::class, 'search'])->name('user.search'
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/details/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
@@ -75,9 +76,7 @@ use App\Http\Controllers\RfxController;
 // Route::get('/RFx', function () {
 //     return view('RFx');
 // });
-Route::get('/RFx/new', function () {
-    return view('newRFx');
-});
+Route::get('/RFx/new', [RfxController::class, 'new'])->name('rfx.new');
 Route::post('/RFx/new', [RfxController::class, 'store'])->name('rfx.store');
 Route::get('/RFx', [RfxController::class, 'index'])->name('rfx.index');
 Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
