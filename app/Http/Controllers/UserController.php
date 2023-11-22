@@ -131,6 +131,13 @@ class UserController extends Controller
     return redirect()->route('user.listing')->with('success', 'User updated successfully.');
 }
 
+public function show($id)
+{
+$user = User::findOrFail($id);
+
+return view('user.details', compact('user'));
+}
+
 
 
 
