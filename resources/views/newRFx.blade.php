@@ -85,9 +85,17 @@
                            <label for="Company">Company</label>
                            <input type="text" name="Company" id="Company" required autofocus />
                         </div>
-                        <div class="col-6 flex-inputs">
+                        <!-- <div class="col-4 flex-inputs">
                            <label for="Pic">Customer PIC</label>
                            <input type="text" name="Pic" id="Pic"/>
+                        </div> -->
+                        <div class="col-6 flex-inputs">
+                           <label for="user_id">Assigned User</label>
+                           <select name="user_id" id="user_id" required>
+                              @foreach ($users as $user)
+                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
+                              @endforeach
+                           </select>
                         </div>
                      </div>
                      <!-- <div class="row">
