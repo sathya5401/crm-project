@@ -42,16 +42,30 @@ class UserController extends Controller
 
         return view('user.confirm');    }
 
-    public function index()
+    public function index(Request $request)
     {
         if ( (Auth::user()->is_admin) === 1)  {
             abort(403); // Return a 403 Forbidden response if normal user tries to access user listing
         }
 
         $searchTerm = null; // Set the default value for $searchTerm
-        $users = User::where('is_admin', 1)->get(); // Retrieve only normal users (is_admin = 1)
+        // $users = User::where('is_admin', 1)->get(); // Retrieve only normal users (is_admin = 1)
+        $perPage = 6; // Number of items to display per page
+        $currentPage = $request->input('page', 1);
+        $offset = ($currentPage - 1) * $perPage;
+    
+        $users = User::where('is_admin', 1)->skip($offset)->take($perPage)->get();
+    
+        // Calculate total number of records (for pagination)
+        $totalRecords = User::count();
 
-        return view('user.listing', ['users' => $users, 'searchTerm' => $searchTerm]);
+        return view('user.listing', [
+            'users' => $users,
+            'currentPage' => $currentPage,
+            'perPage' => $perPage,
+            'totalRecords' => $totalRecords,
+            'searchTerm' => $searchTerm
+        ]);
     }
 
     public function search(Request $request)
@@ -73,7 +87,22 @@ class UserController extends Controller
         $users = User::where('is_admin', 1)->get();
     }
 
-    return view('user.listing', ['users' => $users, 'searchTerm' => $searchTerm]);
+    $perPage = 6; // Number of items to display per page
+    $currentPage = $request->input('page', 1);
+    $offset = ($currentPage - 1) * $perPage;
+    
+    // $users = User::where('is_admin', 1)->skip($offset)->take($perPage)->get();
+    
+    // Calculate total number of records (for pagination)
+    $totalRecords = User::count();
+
+    return view('user.listing', [
+        'users' => $users,
+        'currentPage' => $currentPage,
+        'perPage' => $perPage,
+        'totalRecords' => $totalRecords,
+        'searchTerm' => $searchTerm
+    ]);
 }
 
     public function delete($id)

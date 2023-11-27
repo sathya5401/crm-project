@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('faxNo');
             $table->string('inv_address');
+            // Add timestamps
+            $table->timestamps();
         });
     }
 
