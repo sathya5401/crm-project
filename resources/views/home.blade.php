@@ -71,6 +71,60 @@
 .no-tasks {
     color: #888; /* Dim the text color for a subtle look */
 }
+
+.dealscontainer {
+    background-color: #FFFFFF;
+    margin-top: 3%;
+    padding: 2%;
+    width: 60%;
+    margin-left: 6%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+}
+
+.dealscontainer h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.deals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3px;
+}
+
+.deals-table th,
+.deals-table td {
+    border: 1px solid #ddd;
+    padding: 12px; /* Increase padding for a bit more space */
+    text-align: left;
+}
+
+.deals-table th {
+    background-color: #f5f5f5; /* Lighter background color for header cells */
+}
+
+.no-deals {
+    color: #888;
+}
+
+/* Add some space between the table rows for better readability */
+.deals-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.deals-table tbody tr:hover {
+    background-color: #f9f9f9; /* Light background color on hover */
+}
+
+/* Add a fixed height and make the table scrollable */
+.deals-table-container {
+    max-height: 240px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+}
+
+
 </style>
 
 </head>
@@ -117,6 +171,41 @@
                 @else
                     <p class="no-tasks"> No tasks assigned to you. </p>
                 @endif
+            </div>
+        </div>
+        <div class="container dealscontainer">
+            <h3>My Pending Deals</h3>
+            <div class="deals-table-container">
+                @if(count($rfx) > 0)
+                        <table class="deals-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Quote No</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Customer Email</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">Title </th>
+                                    <th scope="col">Due date </th>
+                                    <th scope="col">Quote Amount </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($rfx as $rfq)
+                                    <tr>
+                                        <td>RQ{{ $rfq->id }}</td>
+                                        <td>{{ $rfq->Custom_Name }}</td>    
+                                        <td>{{ $rfq->Custom_Email }}</td>
+                                        <td>{{ $rfq->Company }}</td>
+                                        <td>{{ $rfq->RFQ_title }}</td>
+                                        <td>{{ $rfq->Due_date }}</td>
+                                        <td> {{ $rfq->Quota_mount }}</td>
+                                    </tr>
+                                @endforeach   
+                            </tbody>
+                        </table>   
+                    @else
+                        <p class="no-deals"> No deals pending for you. </p>
+                    @endif
             </div>
         </div>
     </section>

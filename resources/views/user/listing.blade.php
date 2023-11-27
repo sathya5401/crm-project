@@ -47,6 +47,10 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.flex-page {
+    display: flex !important;
+    justify-content: flex-end !important;
+}
 </style>
 
 
@@ -122,7 +126,11 @@
                 @endforeach
             </tbody>
         </table>
-
+        <div class="pagination flex-page">
+            @for ($i = 1; $i <= ceil($totalRecords / $perPage); $i++) 
+               <a href="{{ route('user.listing', ['page' => $i, 'search' => $searchTerm]) }}" class="{{ $currentPage == $i ? 'active' : '' }}">{{ $i }}</a> 
+            @endfor 
+        </div>
    </section>
 @endsection
 
