@@ -126,6 +126,7 @@
                                             <option value="new" {{ $rfq->Status == 'new' ? 'selected' : '' }} >New</option>
                                             <option value="in-progress" {{ $rfq->Status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
                                             <option value="approved" {{ $rfq->Status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                            <option value="rejected" {{ $rfq->Status == 'rejected' ? 'selected' : '' }}>Rejected</option>
                                             <!-- Add more status options as needed -->
                                         </select>
                                     </div>

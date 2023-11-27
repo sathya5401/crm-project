@@ -26,5 +26,5 @@ class Lead extends Model
     ];
 
     // Disable timestamps
-    public $timestamps = false;
+    public $timestamps = true;
 }

@@ -121,7 +121,7 @@
             <tbody>
                 @foreach ($leads as $key => $lead)
                     <tr >
-                        <td scope="row">{{ $key + 1 }}</td>
+                        <td scope="row">{{ $key+1 }}</td>
                         <td>{{ $lead->name }}</td>
                         <td>{{ $lead->email }}</td>
                         <td>{{ $lead->title}}</td>

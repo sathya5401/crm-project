@@ -50,9 +50,7 @@ Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
 
-// Route::get('/user/listing', function () {
-//     return view('user.listing');
-// });
+
 
 
 use App\Http\Controllers\LeadController;
@@ -104,6 +102,9 @@ Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
 // Route::post('/tasks/assign/{id}', [TaskController::class, 'assign'])->name('tasks.assign');
 
 
+use App\Http\Controllers\AnalyticsController;
+
+Route::get('/analysis', [AnalyticsController::class, 'index'])->name('analysis');
 
 
 use App\Http\Controllers\CustomersController;
