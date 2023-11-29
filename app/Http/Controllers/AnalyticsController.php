@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Lead;
 use Carbon\Carbon;
 use App\Models\Rfx;
-
+use Spatie\QueryBuilder\QueryBuilder;
+use ZipArchive;
 
 class AnalyticsController extends Controller
 {
@@ -117,5 +119,66 @@ class AnalyticsController extends Controller
         
         
     }
+
+    public function downloadDataZip()
+    {
+        // Fetch leads and RFQs data
+        $leadsData = Lead::all();
+        $rfqsData = Rfx::all();
+
+        // Create a new ZipArchive instance
+        $zip = new ZipArchive;
+
+        // Define the zip file path
+        $zipFilePath = public_path('raw_data.zip');
+
+        // Open the zip file
+        if ($zip->open($zipFilePath, ZipArchive::CREATE) === true) {
+            // Add leads data to the zip file
+            $this->addToZip($zip, $leadsData, 'leads_data.csv');
+
+            // Add RFQs data to the zip file
+            $this->addToZip($zip, $rfqsData, 'rfqs_data.csv');
+
+            // Close the zip file
+            $zip->close();
+
+            // Set the appropriate headers for downloading
+            $headers = array(
+                'Content-Type' => 'application/zip',
+                'Content-Disposition' => 'attachment; filename=analytics_data.zip',
+            );
+
+            // Return the zip file as a response
+            return Response::download($zipFilePath, 'raw_data.zip', $headers);
+        } else {
+            // If unable to open the zip file, return an error response
+            return response()->json(['error' => 'Unable to create zip file'], 500);
+        }
+    }
+
+    // Helper method to add data to the zip file
+    private function addToZip($zip, $data, $fileName)
+{
+    // Open a temporary file for writing
+    $tempFile = tmpfile();
+
+    // Write header row to the temporary file
+    fputcsv($tempFile, array_keys($data->first()->toArray()));
+
+    // Write data to the temporary file
+    foreach ($data as $row) {
+        fputcsv($tempFile, $row->toArray());
+    }
+
+    // Move the file pointer to the beginning of the file
+    fseek($tempFile, 0);
+
+    // Add the temporary file to the zip archive
+    $zip->addFromString($fileName, stream_get_contents($tempFile));
+
+    // Close the temporary file
+    fclose($tempFile);
+}
 
 }

@@ -73,9 +73,9 @@
     margin-top: 2%;
 }
 
-.connect-button {
+/* .connect-button {
     background-color: rgba(255,255,255,20%) !important;
-}
+} */
 
 .last-container {
     margin-top: 20px;
@@ -133,10 +133,10 @@
                     <div class="col-12">
                         <div class="flex-buttons">
                             <div>
-                                <a href="" class="btn btn-primary connect-button" style="color: black;"><b>Connect with Looker Studio</b></a>
+                                <a href="" class="btn btn-outline-primary connect-button" style="color: black;"><b>Connect with Looker Studio</b></a>
                             </div>
                             <div>
-                                <a href="" class="btn btn-primary" style="color: black;"><b> Download Raw Data</b></a>
+                                <a href="{{ route('download') }}" class="btn btn-primary" style="color: black;"><b> Download Raw Data</b></a>
                             </div>
                             </div>
                     </div>
