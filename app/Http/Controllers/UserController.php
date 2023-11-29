@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\RegistrationEmail;
 
 
 class UserController extends Controller
@@ -160,12 +161,12 @@ class UserController extends Controller
     return redirect()->route('user.listing')->with('success', 'User updated successfully.');
 }
 
-public function show($id)
-{
-$user = User::findOrFail($id);
+    public function show($id)
+    {
+    $user = User::findOrFail($id);
 
-return view('user.details', compact('user'));
-}
+    return view('user.details', compact('user'));
+    }
 
 
 

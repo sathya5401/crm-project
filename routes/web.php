@@ -51,8 +51,6 @@ Route::get('/user/confirmregister', function () {
 });
 
 
-
-
 use App\Http\Controllers\LeadController;
 // Route::get('/leads/new', [LeadController::class, 'create'])->name('leads.create');
 Route::get('/leads/new', function () {
@@ -105,7 +103,7 @@ Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
 use App\Http\Controllers\AnalyticsController;
 
 Route::get('/analysis', [AnalyticsController::class, 'index'])->name('analysis');
-
+Route::get('/download-rawdata', [AnalyticsController::class, 'downloadDataZip'])->name('download');
 
 use App\Http\Controllers\CustomersController;
 Route:: resource ('customers', CustomersController::class);
