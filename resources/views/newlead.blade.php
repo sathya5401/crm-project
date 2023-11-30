@@ -106,7 +106,7 @@
                            <input type="address" name="address" id="address" required />
                         </div>
                         <div class="col-6 flex-inputs">
-                           <label for="title">Title</label>
+                           <label for="title">Designation</label>
                            <input type="title" name="title" id="title" required/>
                         </div>
                      </div>

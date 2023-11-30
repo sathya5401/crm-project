@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Rfx;
 use Spatie\QueryBuilder\QueryBuilder;
 use ZipArchive;
+use Sheets;
 
 class AnalyticsController extends Controller
 {
@@ -119,6 +120,68 @@ class AnalyticsController extends Controller
         
         
     }
+
+    public function insertDataToLeads()
+{
+    // Retrieve data from the database (assuming you have the Lead model)
+    $leads = Lead::all();
+
+    // Get the Google Sheet
+    $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('lead');
+    $sheet->clear();
+    // Add header row
+    $headerRow = ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company'];
+    $sheet->append([$headerRow]);
+
+    // Add data rows
+    foreach ($leads as $lead) {
+        $rowData = [
+            $lead->name,
+            $lead->phone_number,
+            $lead->address,
+            $lead->title,
+            $lead->email,
+            $lead->faxNo,
+            $lead->inv_address,
+            $lead->company,
+        ];
+        $sheet->append([$rowData]);
+    }
+
+    return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=0&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
+}
+
+public function insertDataToRfx()
+{
+    // Retrieve data from the database (assuming you have the Lead model)
+    $rfx = Rfx::all();
+
+    // Get the Google Sheet
+    $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('rfqs');
+    $sheet->clear();
+    // Add header row
+    $headerRow = ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status', 'user_id'];
+    $sheet->append([$headerRow]);
+
+    // Add data rows
+    foreach ($rfx as $rfq) {
+        $rowData = [
+            $rfq->Company,
+            $rfq->Custom_Name,
+            $rfq->Custom_Email,
+            $rfq->Custom_Number,
+            $rfq->RFQ_number,
+            $rfq->RFQ_title,
+            $rfq->Due_date,
+            $rfq->Quota_mount,
+            $rfq->Status,
+            $rfq->user_id,
+        ];
+        $sheet->append([$rowData]);
+    }
+
+    return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=1522162644&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
+}
 
     public function downloadDataZip()
     {

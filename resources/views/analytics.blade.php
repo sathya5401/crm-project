@@ -133,7 +133,8 @@
                     <div class="col-12">
                         <div class="flex-buttons">
                             <div>
-                                <a href="" class="btn btn-outline-primary connect-button" style="color: black;"><b>Connect with Looker Studio</b></a>
+                                <a href="{{ route('integrate.rfx') }}" target="blank" class="btn btn-outline-primary connect-button" style="color: black;"><b>Connect rfqs data</b></a>
+                                <a href="{{ route('integrate.leads') }}" target="blank" class="btn btn-outline-primary connect-button" style="color: black;"><b>Connect leads data</b></a>
                             </div>
                             <div>
                                 <a href="{{ route('download') }}" class="btn btn-primary" style="color: black;"><b> Download Raw Data</b></a>
@@ -156,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="card revenue">
-                                <h2>Revenue this Month</h2>
+                                <h2>Sales this Month</h2>
                                 <div class="flex-percent">
                                     <h4> RM {{  number_format($totalRevenue,2) }}</h4>
                                     <p class="percentage-increase">^ {{ $percentageIncreaseRevenue }}%</p>
@@ -191,7 +192,7 @@
                                     <table class="table table-border table-sm" style="margin-top: 2%;">
                                         <tbody>
                                             <tr class="table-info">
-                                                <td class="performance-font-tr">Total Revenue for {{ $selectedMonths }} months </td>
+                                                <td class="performance-font-tr">Total Sales for {{ $selectedMonths }} months </td>
                                                 <td class="performance-font-td">RM{{$revenueWon}}</td>
                                             </tr>
                                         </tbody>
