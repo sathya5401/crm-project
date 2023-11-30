@@ -111,7 +111,7 @@
                     <th scope="col">No</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Designation</th>
                     <th scope="col">Fax No</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Company</th>
@@ -122,7 +122,7 @@
                 @foreach ($leads as $key => $lead)
                     <tr >
                         <td scope="row">{{ $key+1 }}</td>
-                        <td>{{ $lead->name }}</td>
+                        <td><a href="{{ route('leads.show', $lead->id) }}"> {{ $lead->name }} </a> </td>
                         <td>{{ $lead->email }}</td>
                         <td>{{ $lead->title}}</td>
                         <td>{{ $lead->faxNo}}</td>
