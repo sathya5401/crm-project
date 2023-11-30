@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 //Test routes
 Route::get('/', function () {
     return view('welcome');
@@ -104,6 +105,12 @@ use App\Http\Controllers\AnalyticsController;
 
 Route::get('/analysis', [AnalyticsController::class, 'index'])->name('analysis');
 Route::get('/download-rawdata', [AnalyticsController::class, 'downloadDataZip'])->name('download');
+Route::get('/leads-analysis', [AnalyticsController::class, 'insertDataToLeads'])->name('integrate.leads');
+Route::get('/rfx-analysis', [AnalyticsController::class, 'insertDataToRfx'])->name('integrate.rfx');
+
+use App\Http\Controllers\GoogleSpreadsheetController;
+Route::get('/insert-data-to-sheet', [GoogleSpreadsheetController::class, 'insertDataToSheet']);
+
 
 use App\Http\Controllers\CustomersController;
 Route:: resource ('customers', CustomersController::class);
