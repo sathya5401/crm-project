@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Task;
 use App\Models\User; 
+use App\Models\Comment; 
 
 class TaskController extends Controller
 {
@@ -144,10 +145,29 @@ class TaskController extends Controller
 
     public function show($id)
     {
-    $task = Task::findOrFail($id);
+    $task = Task::with('comments.user')->findOrFail($id);
+    $comments = $task->comments;
     
-    return view('task_details', compact('task'));
+    return view('task_details', compact('task','comments'));
     }
+
+    public function storeComment(Request $request)
+{
+    
+    $validatedData = $request->validate([
+        'task_id' => 'required|exists:tasks,id',
+        'body' => 'required|string',
+    ]);
+
+    Comment::create([
+        'user_id' => auth()->id(),
+        'task_id' => $validatedData['task_id'],
+        'body' => $validatedData['body'],
+    ]);
+
+    return back()->with('success', 'Comment added successfully.');
+}
+
     
 //     public function assigntask($id)
 //     {

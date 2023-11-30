@@ -136,8 +136,14 @@
                            <input type="faxNo" name="faxNo" id="faxNo" value="{{ $leads->faxNo }}" required />
                         </div>
                      </div>
-                     <div class="col-12" style="margin-top:3%">
-                        <button type="submit">Submit</button>
+                     <div class="row">
+                        <div class="col-12 flex-inputs">
+                           <label for="remarks">Remarks</label>
+                           <input type="remarks" name="remarks" id="remarks" value="{{ $leads->remarks }}" />
+                        </div>
+                        <div class="col-12" style="margin-top:3%">
+                           <button type="submit">Submit</button>
+                        </div>
                      </div>
                   </form>
                </div>

@@ -22,7 +22,8 @@ class Lead extends Model
         'email',
         'faxNo',
         'inv_address',
-        'company'
+        'company',
+        'remarks',
     ];
 
     // Disable timestamps

@@ -64,7 +64,7 @@ Route::get('/leads/search', [LeadController::class, 'search'])->name('leads.sear
 Route::delete('/leads/delete/{id}', [LeadController::class, 'delete'])->name('leads.delete');
 Route::get('/leads/edit/{id}', [LeadController::class, 'edit'])->name('leads.edit');
 Route::put('/leads/update/{id}', [LeadController::class, 'update'])->name('lead.update');
-
+Route::get('/leads/{id}', [LeadController::class, 'show'])->name('leads.show');
 // Route::get('/leads', function () {
 //     return view('leads');
 // });
@@ -97,6 +97,7 @@ Route::delete('/tasks/delete/{id}', [TaskController::class, 'delete'])->name('ta
 Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->name('tasks.update');
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+Route::post('/comments/store', [TaskController::class, 'storeComment'])->name('comments.store');
 // Route::get('/tasks/assign/{id}', [TaskController::class, 'assigntask'])->name('tasks.assignTask');
 // Route::post('/tasks/assign/{id}', [TaskController::class, 'assign'])->name('tasks.assign');
 
