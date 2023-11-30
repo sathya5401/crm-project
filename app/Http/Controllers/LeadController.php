@@ -20,6 +20,7 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'remarks' => 'string|max:255'
         ]);
 
         $lead = Lead::create($validatedData);
@@ -114,6 +115,7 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
+            'remarks' => 'string|max:255',
         ]);
     
         $leads = Lead::find($id);
@@ -127,6 +129,7 @@ class LeadController extends Controller
         $leads->faxNo = $validatedData['faxNo'];
         $leads->inv_address = $validatedData['inv_address'];
         $leads->title = $validatedData['title'];
+        $leads->remarks = $validatedData['remarks'];
 
     
         $leads->save();
@@ -134,4 +137,10 @@ class LeadController extends Controller
         return redirect()->route('leads')->with('success', 'Lead updated successfully.');
     }
 
+    public function show($id)
+    {
+    $leads = Lead::findOrFail($id);
+    
+    return view('lead_details', compact('leads'));
+    }
 }
