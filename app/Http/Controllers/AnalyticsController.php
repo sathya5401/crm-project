@@ -130,7 +130,7 @@ class AnalyticsController extends Controller
     $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('lead');
     $sheet->clear();
     // Add header row
-    $headerRow = ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company'];
+    $headerRow = ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company','remarks'];
     $sheet->append([$headerRow]);
 
     // Add data rows
@@ -144,6 +144,7 @@ class AnalyticsController extends Controller
             $lead->faxNo,
             $lead->inv_address,
             $lead->company,
+            $lead->remarks,
         ];
         $sheet->append([$rowData]);
     }
