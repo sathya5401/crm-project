@@ -115,3 +115,4 @@ Route::get ('/customers/create', [CustomersController::class, 'create']) ->name(
 Route::get('/customers/{customer}/edit', [CustomersController::class, 'edit'])->name('customers.edit');
 // Handle update
 Route::put('/customers/{customer}', [CustomersController::class, 'update'])->name('customers.update');
+
