@@ -13,7 +13,7 @@ class RFx extends Model
 
     protected $fillable = [
         'Company',
-        'Pic',  
+        // 'Pic',  
         'Custom_Name',
         'Custom_Email',
         'Custom_Number',
@@ -22,7 +22,13 @@ class RFx extends Model
         'Due_date',
         'Quota_mount',
         'Status',
+        'user_id',
         //Remark
     ];
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 }

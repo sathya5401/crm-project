@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 //Test routes
 Route::get('/', function () {
     return view('welcome');
@@ -45,13 +46,10 @@ Route::get('user/search', [UserController::class, 'search'])->name('user.search'
 Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/details/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
-
-// Route::get('/user/listing', function () {
-//     return view('user.listing');
-// });
 
 
 use App\Http\Controllers\LeadController;
@@ -66,7 +64,7 @@ Route::get('/leads/search', [LeadController::class, 'search'])->name('leads.sear
 Route::delete('/leads/delete/{id}', [LeadController::class, 'delete'])->name('leads.delete');
 Route::get('/leads/edit/{id}', [LeadController::class, 'edit'])->name('leads.edit');
 Route::put('/leads/update/{id}', [LeadController::class, 'update'])->name('lead.update');
-
+Route::get('/leads/{id}', [LeadController::class, 'show'])->name('leads.show');
 // Route::get('/leads', function () {
 //     return view('leads');
 // });
@@ -75,9 +73,7 @@ use App\Http\Controllers\RfxController;
 // Route::get('/RFx', function () {
 //     return view('RFx');
 // });
-Route::get('/RFx/new', function () {
-    return view('newRFx');
-});
+Route::get('/RFx/new', [RfxController::class, 'new'])->name('rfx.new');
 Route::post('/RFx/new', [RfxController::class, 'store'])->name('rfx.store');
 Route::get('/RFx', [RfxController::class, 'index'])->name('rfx.index');
 Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
@@ -101,10 +97,20 @@ Route::delete('/tasks/delete/{id}', [TaskController::class, 'delete'])->name('ta
 Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->name('tasks.update');
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+Route::post('/comments/store', [TaskController::class, 'storeComment'])->name('comments.store');
 // Route::get('/tasks/assign/{id}', [TaskController::class, 'assigntask'])->name('tasks.assignTask');
 // Route::post('/tasks/assign/{id}', [TaskController::class, 'assign'])->name('tasks.assign');
 
 
+use App\Http\Controllers\AnalyticsController;
+
+Route::get('/analysis', [AnalyticsController::class, 'index'])->name('analysis');
+Route::get('/download-rawdata', [AnalyticsController::class, 'downloadDataZip'])->name('download');
+Route::get('/leads-analysis', [AnalyticsController::class, 'insertDataToLeads'])->name('integrate.leads');
+Route::get('/rfx-analysis', [AnalyticsController::class, 'insertDataToRfx'])->name('integrate.rfx');
+
+use App\Http\Controllers\GoogleSpreadsheetController;
+Route::get('/insert-data-to-sheet', [GoogleSpreadsheetController::class, 'insertDataToSheet']);
 
 
 use App\Http\Controllers\CustomersController;

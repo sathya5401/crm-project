@@ -115,7 +115,7 @@
                         <td>{{ $rfq->RFQ_title }}</td>
                         <td>{{ $rfq->Due_date }}</td>
                         <td> {{ $rfq->Quota_mount }}</td>
-                        <td> {{ $rfq->Pic }}</td>
+                        <td> {{ optional($rfq->assignedUser)->name }}</td>
                         <td class="flex-accordion">
                             <form method="post" action="{{ route('rfx.updateStatus', $rfq->id) }}">
                                 @csrf
@@ -126,6 +126,7 @@
                                             <option value="new" {{ $rfq->Status == 'new' ? 'selected' : '' }} >New</option>
                                             <option value="in-progress" {{ $rfq->Status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
                                             <option value="approved" {{ $rfq->Status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                            <option value="rejected" {{ $rfq->Status == 'rejected' ? 'selected' : '' }}>Rejected</option>
                                             <!-- Add more status options as needed -->
                                         </select>
                                     </div>
@@ -150,11 +151,13 @@
     </table>
 
    
-    <div class="pagination flex-page">
+<div class="pagination flex-page">
+    @if ($perPage > 0)
         @for ($i = 1; $i <= ceil($totalRecords / $perPage); $i++)
             <a href="{{ route('rfx.index', ['page' => $i]) }}" class="{{ $currentPage == $i ? 'active' : '' }}">{{ $i }}</a>
         @endfor
-    </div>
+    @endif
+</div>
    
 
 

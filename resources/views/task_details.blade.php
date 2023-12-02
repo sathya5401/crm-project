@@ -27,7 +27,40 @@
             color: #343a40;
         } 
         .btn-back {
-            margin-top: 20px;
+            margin-top: 10px;
+        }
+
+        .comments-div {
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #f8f9fa;
+            max-height: 130px;  
+        }
+
+        .comments-display{
+            margin-bottom: 10px; 
+            padding: 10px; 
+            border: 1px solid #ced4da; 
+            border-radius: 5px; 
+            background-color: #ffffff;
+        }
+
+        .comment-btn {
+            background-color: #007bff; 
+            color: #ffffff; 
+            padding: 5px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+
+        .comment-input {
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ced4da; 
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -62,6 +95,32 @@
                     <td> {{ optional($task->assignedUser)->name }} </td>
                 </tr>
             </table>
+            <div style="margin-top: 20px;">
+                @if ($task->comments->isNotEmpty())
+                    <h3 style="color: #6c757d;">Comments</h3>
+                    <div class="comments-div">
+                        @foreach($task->comments as $comment)
+                            <div class="comments-display">
+                                <strong style="color: #007bff;">{{ $comment->user->name }}:</strong>
+                                <span style="color: #495057;">{{ $comment->body }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p>No comments available.</p>
+                @endif
+            </div>
+            <form action="{{ route('comments.store') }}" method="post" style="margin-top: 20px;">
+                @csrf
+                <input type="hidden" name="task_id" value="{{ $task->id }}">
+                
+                <div style="margin-bottom: 10px;">
+                    <label for="comment" style="display: block; color: #495057; font-weight: bold;">Add a Comment:</label>
+                    <textarea class="comment-input" name="body" id="comment" cols="30" rows="2"></textarea>
+                </div>
+
+                <button class="comment-btn" type="submit">Add Comment</button>
+            </form>
             <a href="{{ route('tasks.index') }}" class="btn btn-primary btn-back">Back</a>
         </div>
     @endsection
