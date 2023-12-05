@@ -13,7 +13,6 @@ class RFx extends Model
 
     protected $fillable = [
         'Company',
-        // 'Pic',  
         'Custom_Name',
         'Custom_Email',
         'Custom_Number',
@@ -23,7 +22,14 @@ class RFx extends Model
         'Quota_mount',
         'Status',
         'user_id',
-        //Remark
+        'rfx_type',
+        'remarks',
+        'decline',
+        'date_award',
+        'award_amount',
+        // 'document_name',
+        // 'document_type',
+        // 'file',
     ];
 
     public function assignedUser()
@@ -31,4 +37,12 @@ class RFx extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    protected $casts = [
+        'file' => 'array',
+    ];
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'rfx_id');
+    }
 }

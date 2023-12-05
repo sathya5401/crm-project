@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('rfqs', function (Blueprint $table) {
             //
-            $table->boolean('first_login')->default(true);
+        $table->string('document_name')->nullable();
+        $table->string('document_type')->nullable();
+        $table->json('file')->nullable(); // Assuming you're storing file paths as JSON array
         });
     }
 
@@ -22,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('rfqs', function (Blueprint $table) {
             //
         });
     }
