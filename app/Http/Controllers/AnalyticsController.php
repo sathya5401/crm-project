@@ -30,17 +30,17 @@ class AnalyticsController extends Controller
         $endOfMonth = now()->endOfMonth();
 
         // Filter Rfx records with approved status and within the current month
-        $approvedRfx = Rfx::where('Status', 'approved')
-            ->whereBetween('updated_at', [$startOfMonth, $endOfMonth])
+        $approvedRfx = Rfx::where('Status', 'awarded')
+            ->whereBetween('date_award', [$startOfMonth, $endOfMonth])
             ->get();
 
         // Calculate total revenue for this month
-        $totalRevenue = $approvedRfx->sum('Quota_mount');
+        $totalRevenue = $approvedRfx->sum('award_amount');
 
         // Calculate the percentage increase compared to the previous month
-        $previousMonthRevenue = Rfx::where('Status', 'approved')
-            ->whereBetween('updated_at', [$startOfMonth->subMonth()->startOfMonth(), $endOfMonth->subMonth()->endOfMonth()])
-            ->sum('Quota_mount');
+        $previousMonthRevenue = Rfx::where('Status', 'awarded')
+            ->whereBetween('date_award', [$startOfMonth->subMonth()->startOfMonth(), $endOfMonth->subMonth()->endOfMonth()])
+            ->sum('award_amount');
 
         $percentageIncreaseRevenue = ($previousMonthRevenue > 0) ? (($totalRevenue - $previousMonthRevenue) / $previousMonthRevenue) * 100 : 100;
 
@@ -77,13 +77,13 @@ class AnalyticsController extends Controller
 
         $leadsCreated = Lead::whereBetween('created_at', [$startmonth, $endmonth])->count();
         $dealsCreated = Rfx::whereBetween('created_at', [$startmonth, $endmonth])->count();
-        $dealsWon = Rfx::where('Status', 'approved')
-                        ->whereBetween('updated_at', [$startmonth, $endmonth])
+        $dealsWon = Rfx::where('Status', 'awarded')
+                        ->whereBetween('date_award', [$startmonth, $endmonth])
                         ->count();   
-        $dealsApproved = Rfx::where('Status', 'approved')
-                                    ->whereBetween('updated_at', [$startmonth, $endmonth])
+        $dealsApproved = Rfx::where('Status', 'awarded')
+                                    ->whereBetween('date_award', [$startmonth, $endmonth])
                                     ->get();
-        $revenueWon = $dealsApproved->sum('Quota_mount');
+        $revenueWon = $dealsApproved->sum('award_amount');
 
 
 
@@ -94,10 +94,10 @@ class AnalyticsController extends Controller
         $endMonthDeals = now()->endOfMonth();
         
         $rfxCreated = Rfx::whereBetween('created_at', [$startMonthDeals, $endMonthDeals])->count();
-        $rfxApproved = Rfx::where('Status', 'approved')
-                                ->whereBetween('updated_at', [$startmonth, $endmonth])
+        $rfxApproved = Rfx::where('Status', 'awarded')
+                                ->whereBetween('date_award', [$startmonth, $endmonth])
                                 ->count();
-        $rfxRejected = Rfx::where('Status', 'rejected')
+        $rfxRejected = Rfx::where('Status', 'decline')
                                 ->whereBetween('updated_at', [$startmonth, $endmonth])
                                 ->count();  
 
@@ -161,7 +161,7 @@ public function insertDataToRfx()
     $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('rfqs');
     $sheet->clear();
     // Add header row
-    $headerRow = ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status', 'user_id'];
+    $headerRow = ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status','Rfx Type','date_award','award_amount'];
     $sheet->append([$headerRow]);
 
     // Add data rows
@@ -176,7 +176,13 @@ public function insertDataToRfx()
             $rfq->Due_date,
             $rfq->Quota_mount,
             $rfq->Status,
-            $rfq->user_id,
+            // $rfq->user_id,
+            $rfq->rfx_type,
+            // $rfq->remarks,
+            // $rfq->decline,
+            $rfq->date_award,
+            $rfq->award_amount,
+
         ];
         $sheet->append([$rowData]);
     }

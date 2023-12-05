@@ -47,7 +47,7 @@ class GoogleSpreadsheetController extends Controller
         $this->insertDataForWorksheet($spreadsheetId, 'lead', ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company','remarks'], $leads);
 
         // Insert data for 'rfqs' worksheet
-        $this->insertDataForWorksheet($spreadsheetId, 'rfqs', ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status', 'user_id'], $rfqs);
+        $this->insertDataForWorksheet($spreadsheetId, 'rfqs', ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status', 'user_id','rfx_type','remarks','decline','date_award','award_amount'], $rfqs);
 
         return response()->json(['message' => 'Data inserted into Google Sheet successfully']);
     }

@@ -153,14 +153,14 @@
                                 <h2>Leads This Month</h2>
                                 <div class="flex-percent">
                                     <h4>{{ $currentMonthLeads }}</h4>
-                                    <h5 class="percentage-increase"> ^ {{ $percentageIncreaseLeads }}%</h5>
+                                    <h5 class="percentage-increase"> ^ {{ number_format($percentageIncreaseLeads,2) }}%</h5>
                                 </div>
                             </div>
                             <div class="card revenue">
                                 <h2>Sales this Month</h2>
                                 <div class="flex-percent">
                                     <h4> RM {{  number_format($totalRevenue,2) }}</h4>
-                                    <p class="percentage-increase">^ {{ $percentageIncreaseRevenue }}%</p>
+                                    <p class="percentage-increase">^ {{ number_format($percentageIncreaseRevenue,2) }}%</p>
                                 </div>
                             </div> 
                         </div>

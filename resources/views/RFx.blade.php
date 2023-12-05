@@ -52,6 +52,7 @@
     display: flex !important;
     justify-content: flex-end !important;
 }
+
 </style>
 </head>
 
@@ -95,29 +96,31 @@
             <thead>
                 <tr>
                     <th scope="col">Quote No</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Customer Email</th>
                     <th scope="col">Company </th>
+                    <th scope="col">Customer PIC</th>
+                    <th scope="col">Customer Email</th>
                     <th scope="col">Title</th>
                     <th scope="col">Due Date</th>
-                    <th scope="col">Quote Amount</th>
+                    <th scope="col"> Final Pricing</th>
                     <th scope="col"> PIC</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($Rfx as $key => $rfq)
                     <tr >
-                        <td scope="row">RQ{{ $rfq->id }}</td>
+                        <td scope="row"><a href="{{ route('rfx.show', $rfq->id) }}">RQ{{ $rfq->id }} </a></td>
+                        <td>{{ $rfq->Company }}</td>
                         <td>{{ $rfq->Custom_Name }}</td>    
                         <td>{{ $rfq->Custom_Email }}</td>
-                        <td>{{ $rfq->Company }}</td>
                         <td>{{ $rfq->RFQ_title }}</td>
                         <td>{{ $rfq->Due_date }}</td>
                         <td> {{ $rfq->Quota_mount }}</td>
                         <td> {{ optional($rfq->assignedUser)->name }}</td>
-                        <td class="flex-accordion">
-                            <form method="post" action="{{ route('rfx.updateStatus', $rfq->id) }}">
+                        <td>
+                        {{ $rfq->Status }}
+                            <!-- <form method="post" action="{{ route('rfx.updateStatus', $rfq->id) }}">
                                 @csrf
                                 @method('PATCH')
                                 <div class="flex-accordion">
@@ -125,14 +128,20 @@
                                         <select name="status" class="form-control">
                                             <option value="new" {{ $rfq->Status == 'new' ? 'selected' : '' }} >New</option>
                                             <option value="in-progress" {{ $rfq->Status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
-                                            <option value="approved" {{ $rfq->Status == 'approved' ? 'selected' : '' }}>Approved</option>
-                                            <option value="rejected" {{ $rfq->Status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                            <!-- Add more status options as needed -->
+                                            <option value="submitted" {{ $rfq->Status == 'submitted' ? 'selected' : '' }}>Submitted</option>
+                                            <option value="awarded" {{ $rfq->Status == 'approved' ? 'selected' : '' }}>Awarded</option>
+                                            <option value="decline" {{ $rfq->Status == 'rejected' ? 'selected' : '' }}>Declined</option>
+                                            Add more status options as needed
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-sm" style="margin-left:2%;margin-right:2%"> Set</button>
                                 </div>
-                            </form>
+                            </form> -->
+                        </td>
+                        <td>
+                            <a href="{{ route('rfx.edit', $rfq->id) }}">
+                                <img src="{{ url('img/edit.png') }}" alt="Edit">
+                            </a>
                             <a href="{{ route('rfx.delete', $rfq->id) }}"
                                 onclick="event.preventDefault();
                                 if (confirm('Are you sure you want to delete this user?')) {
