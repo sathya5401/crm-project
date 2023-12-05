@@ -39,8 +39,17 @@
     padding-bottom: 15%;
 }
 
+.notify-img{
+    width: 7%;
+}
+
 .nav-font {
     font-weight: bolder;
+}
+
+.flex-icon {
+    display: flex;
+    flex-direction: row;
 }
 </style>
 </head>
@@ -50,6 +59,9 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     MY_CRM
+                </a>
+                <a href="">
+                    <img class="notify-img" src="{{ url('img/notification.png') }}">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

@@ -78,7 +78,11 @@ Route::post('/RFx/new', [RfxController::class, 'store'])->name('rfx.store');
 Route::get('/RFx', [RfxController::class, 'index'])->name('rfx.index');
 Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
 Route::patch('/RFx/{id}/updateStatus',[RfxController::class,'updateStatus'])->name('rfx.updateStatus');
-Route::delete('/RFx/delete/{id}', [RFxController::class, 'delete'])->name('rfx.delete');
+Route::delete('/RFx/delete/{id}', [RfxController::class, 'delete'])->name('rfx.delete');
+Route::get('/RFx/edit/{id}', [RfxController::class, 'edit'])->name('rfx.edit');
+Route::put('/RFx/update/{id}', [RfxController::class, 'update'])->name('rfx.update');
+Route::get('/RFx/{id}', [RfxController::class, 'show'])->name('rfx.show');
+
 
 Route::get('/leads/confirmregister', function () {
     return view('user.confirm');
