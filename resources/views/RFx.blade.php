@@ -144,7 +144,7 @@
                             </a>
                             <a href="{{ route('rfx.delete', $rfq->id) }}"
                                 onclick="event.preventDefault();
-                                if (confirm('Are you sure you want to delete this user?')) {
+                                if (confirm('Are you sure you want to delete this Rfx?')) {
                                     document.getElementById('delete-form-{{ $rfq->id }}').submit();
                                     }">
                                 <img src="{{ url('img/delete.png') }}" alt="delete">

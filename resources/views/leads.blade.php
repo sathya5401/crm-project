@@ -134,7 +134,7 @@
                             </a>
                             <a href="{{ route('leads.delete', $lead->id) }}"
                             onclick="event.preventDefault();
-                                        if (confirm('Are you sure you want to delete this user?')) {
+                                        if (confirm('Are you sure you want to delete this lead?')) {
                                             document.getElementById('delete-form-{{ $lead->id }}').submit();
                                         }">
                                 <img src="{{ url('img/delete.png') }}" alt="delete">

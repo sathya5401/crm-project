@@ -56,20 +56,32 @@
 
 
 </head>
-
 <body>
-
 @extends('layouts.sidebar')
 @section('content')
-    <div class="container">
-        <h2>Edit User</h2>
+   <Section class="container-fluid bg-purple">
 
-        <form method="POST" action="{{ route('user.update', $user->id) }}">
-            @csrf
-            @method('PUT')
+      <div class=container style="padding-top: 3%; margin-top: 3%">
+         <div class="row" style="margin-bottom: 3%;">
+            <div class="col-12 flex">
+               <div>
+                  <h4> Edit User</h4>
+               </div>
+               <div>
+                  <a href="{{ url('/user/listing') }}" class="btn btn-light"> Back </a>
+               </div>
+               
+            </div>
+         </div>
+         <div class="row card-row">
+            <div class="col-12">
+               <div class="card-body" style="padding: 2%;">
+                  <form method="POST" action="{{ route('user.update', $user->id) }}">
+                     @csrf
+                     @method('PUT')
 
-            <!-- Display existing user details in form fields -->
-            <div class="row">
+                     <!-- Display existing user details in form fields -->
+                     <div class="row">
                         <div class="col-6 flex-inputs">
                            <label for="name">Name</label>
                            <input type="text" name="name" id="name" value="{{ $user->name }}" required autofocus />
@@ -99,9 +111,32 @@
                      <div class="col-12" style="margin-top:3%">
                         <button type="submit">Register</button>
                      </div>
-        </form>
-    </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+   </section>
 @endsection
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

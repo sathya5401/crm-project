@@ -65,7 +65,7 @@
          <div class="row" style="margin-bottom: 3%;">
             <div class="col-12 flex">
                <div>
-                  <h4> Create New User</h4>
+                  <h4> Create New Lead</h4>
                </div>
                <div>
                   <a href="{{ url('/leads') }}" class="btn btn-light"> Back </a>
@@ -83,7 +83,10 @@
                      <div class="row">
                         <div class="col-6 flex-inputs">
                            <label for="name">Name</label>
-                           <input type="text" name="name" id="name" required autofocus />
+                           <input type="text" name="name" id="name" required />
+                           @error('name')
+                              <span class="text-danger">{{ $message }}</span>
+                           @enderror
                         </div>
                         <div class="col-6 flex-inputs">
                            <label for="phone_number">Phone Number</label>
