@@ -41,7 +41,8 @@ class UserController extends Controller
             
         ]);
 
-        return view('user.confirm');    }
+        return redirect()->route('user.listing')->with('success', 'User created successfully.');
+    }
 
     public function index(Request $request)
     {
@@ -168,7 +169,41 @@ class UserController extends Controller
     return view('user.details', compact('user'));
     }
 
+    public function permission($id)
+    {
+        $user = User::find($id);
 
+        if (!$user) {
+            abort(404); // User not found
+        }
+
+        return view('user.permission', ['user' => $user]);
+    }
+
+    public function updatePermission(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            abort(404); // User not found
+        }
+
+        // Update user flags based on checkbox values
+        $user->can_create_leads = $request->has('lead_create');
+        $user->can_delete_leads = $request->has('lead_delete');
+        $user->can_edit_leads = $request->has('lead_edit');
+        $user->can_create_rfx = $request->has('rfx_create');
+        $user->can_delete_rfx = $request->has('rfx_delete');
+        $user->can_edit_rfx = $request->has('rfx_edit');
+        $user->can_connect_rfqs_data = $request->has('connect_rfx');
+        $user->can_connect_leads_data = $request->has('connect_leads');
+        $user->can_download_data = $request->has('download_data');
+
+
+        $user->save();
+
+        return redirect()->route('user.listing')->with('success', 'User updated successfully.');
+    }
 
 
 }

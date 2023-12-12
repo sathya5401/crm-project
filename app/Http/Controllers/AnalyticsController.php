@@ -122,76 +122,94 @@ class AnalyticsController extends Controller
     }
 
     public function insertDataToLeads()
-{
-    // Retrieve data from the database (assuming you have the Lead model)
-    $leads = Lead::all();
+    {
+        $user = Auth::user();
 
-    // Get the Google Sheet
-    $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('lead');
-    $sheet->clear();
-    // Add header row
-    $headerRow = ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company','remarks'];
-    $sheet->append([$headerRow]);
+        if (!$user->can_connect_leads_data) {
+            return view('errors.permission')->with('message', 'You do not have permission to connect the leads data with Looker Studio.');
+        }
 
-    // Add data rows
-    foreach ($leads as $lead) {
-        $rowData = [
-            $lead->name,
-            $lead->phone_number,
-            $lead->address,
-            $lead->title,
-            $lead->email,
-            $lead->faxNo,
-            $lead->inv_address,
-            $lead->company,
-            $lead->remarks,
-        ];
-        $sheet->append([$rowData]);
+        // Retrieve data from the database (assuming you have the Lead model)
+        $leads = Lead::all();
+
+        // Get the Google Sheet
+        $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('lead');
+        $sheet->clear();
+        // Add header row
+        $headerRow = ['name', 'phone_number', 'address', 'title', 'email', 'faxNo', 'inv_address', 'company','remarks'];
+        $sheet->append([$headerRow]);
+
+        // Add data rows
+        foreach ($leads as $lead) {
+            $rowData = [
+                $lead->name,
+                $lead->phone_number,
+                $lead->address,
+                $lead->title,
+                $lead->email,
+                $lead->faxNo,
+                $lead->inv_address,
+                $lead->company,
+                $lead->remarks,
+            ];
+            $sheet->append([$rowData]);
+        }
+
+        return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=0&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
     }
-
-    return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=0&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
-}
 
 public function insertDataToRfx()
-{
-    // Retrieve data from the database (assuming you have the Lead model)
-    $rfx = Rfx::all();
+    {
+        $user = Auth::user();
 
-    // Get the Google Sheet
-    $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('rfqs');
-    $sheet->clear();
-    // Add header row
-    $headerRow = ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status','Rfx Type','date_award','award_amount'];
-    $sheet->append([$headerRow]);
+        if (!$user->can_connect_rfqs_data) {
+            return view('errors.permission')->with('message', 'You do not have permission to connect the rfx data with Looker Studio.');
+        }
 
-    // Add data rows
-    foreach ($rfx as $rfq) {
-        $rowData = [
-            $rfq->Company,
-            $rfq->Custom_Name,
-            $rfq->Custom_Email,
-            $rfq->Custom_Number,
-            $rfq->RFQ_number,
-            $rfq->RFQ_title,
-            $rfq->Due_date,
-            $rfq->Quota_mount,
-            $rfq->Status,
-            // $rfq->user_id,
-            $rfq->rfx_type,
-            // $rfq->remarks,
-            // $rfq->decline,
-            $rfq->date_award,
-            $rfq->award_amount,
+        // Retrieve data from the database (assuming you have the Lead model)
+        $rfx = Rfx::all();
 
-        ];
-        $sheet->append([$rowData]);
+        // Get the Google Sheet
+        $sheet = Sheets::spreadsheet('13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI')->sheet('rfqs');
+        $sheet->clear();
+        // Add header row
+        $headerRow = ['Company', 'Custom_Name', 'Custom_Email', 'Custom_Number', 'RFQ_number', 'RFQ_title', 'Due_date', 'Quota_mount', 'Status','Rfx Type','date_award','award_amount'];
+        $sheet->append([$headerRow]);
+
+        // Add data rows
+        foreach ($rfx as $rfq) {
+            $rowData = [
+                $rfq->Company,
+                $rfq->Custom_Name,
+                $rfq->Custom_Email,
+                $rfq->Custom_Number,
+                $rfq->RFQ_number,
+                $rfq->RFQ_title,
+                $rfq->Due_date,
+                $rfq->Quota_mount,
+                $rfq->Status,
+                // $rfq->user_id,
+                $rfq->rfx_type,
+                // $rfq->remarks,
+                // $rfq->decline,
+                $rfq->date_award,
+                $rfq->award_amount,
+
+            ];
+            $sheet->append([$rowData]);
+        }
+
+        return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=1522162644&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
     }
-
-    return redirect('https://lookerstudio.google.com/reporting/create?&c.mode=edit&ds.connector=googleSheets&ds.spreadsheetId=13sEPzmtfPdHeiNwPgeqBPmJ52K07RCFoN7LnQIBgCnI&ds.worksheetId=1522162644&ds.includeHiddenCells=true&ds.includeFilteredCells=true&ds.refreshFields=true');
-}
 
     public function downloadDataZip()
     {
+        $user = Auth::user();
+
+        if (!$user->can_download_data) {
+            return view('errors.permission')->with('message', 'You do not have permission to download the raw data.');
+        }
+
         // Fetch leads and RFQs data
         $leadsData = Lead::all();
         $rfqsData = Rfx::all();

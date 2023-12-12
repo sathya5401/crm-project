@@ -14,6 +14,11 @@ class RfxController extends Controller
 {
     public function new()
     {
+        $user = Auth::user();
+
+        if (!$user->can_create_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to create proposals.');
+        }
         $users = User::all(); // Fetch the list of users
 
         return view('newRFx', ['users' => $users]);
@@ -167,6 +172,12 @@ class RfxController extends Controller
 
     public function delete($id)
     {
+        $user = Auth::user();
+
+        if (!$user->can_delete_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to delete proposals.');
+        }
+
         $Rfx = Rfx::find($id);
 
         if ($Rfx) {
@@ -178,6 +189,12 @@ class RfxController extends Controller
 
     public function edit($id)
     {
+        $user = Auth::user();
+
+        if (!$user->can_edit_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to edit proposals.');
+        }
+
         $Rfx = Rfx::find($id);
         $users = User::all();
     
