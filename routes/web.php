@@ -47,17 +47,15 @@ Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('use
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/details/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/permission/{id}', [UserController::class, 'permission'])->name('user.permission');
+Route::post('/user/updatePermission/{id}',[UserController::class, 'updatePermission'])->name('user.updatePermission');
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
 
 
 use App\Http\Controllers\LeadController;
-// Route::get('/leads/new', [LeadController::class, 'create'])->name('leads.create');
-Route::get('/leads/new', function () {
-    return view('newlead');
-});
-
+Route::get('/leads/new', [LeadController::class, 'new'])->name('leads.new');
 Route::post('/leads/new', [LeadController::class, 'store'])->name('leads.store');
 Route::get('/leads', [LeadController::class, 'index'])->name('leads');
 Route::get('/leads/search', [LeadController::class, 'search'])->name('leads.search');

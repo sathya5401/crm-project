@@ -73,6 +73,15 @@ class RegisterController extends Controller
             'is_admin' => 0, // Set the default role for registered users as 0 (admin)
             'company' => $data['company'],
             'phone_number' => $data['phone_number'],
+            'can_create_leads' => 1 ,
+            'can_edit_leads' => 1,
+            'can_delete_leads' =>1,
+            'can_create_rfx' => 1 ,
+            'can_edit_rfx' => 1,
+            'can_delete_rfx' =>1,
+            'can_download_data' => 1,
+            'can_connect_rfqs_data' => 1,
+            'can_connect_leads_data' => 1,
         ]);
     }
 }
