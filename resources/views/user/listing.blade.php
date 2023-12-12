@@ -106,7 +106,9 @@
                         <td>{{ $user->branch}}</td>
                         <td>{{ $user->phone_number}}</td>
                         <td class="icons">  
-                            <img src="{{ url('img/role.png') }}" alt="role"> 
+                            <a href="">
+                                <img src="{{ url('img/role.png') }}" alt="role">
+                            </a> 
                             <a href="{{ route('user.edit', $user->id) }}">
                                 <img src="{{ url('img/edit.png') }}" alt="Edit">
                             </a> 

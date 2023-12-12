@@ -20,12 +20,12 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'remarks' => 'string|max:255'
+            'remarks' => 'nullable|string|max:255'
         ]);
 
         $lead = Lead::create($validatedData);
         
-        return view('user.confirm'); 
+        return redirect()->route('leads')->with('success', 'Lead registered successfully.');
     }
 
     public function index(Request $request)
@@ -115,7 +115,7 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'remarks' => 'string|max:255',
+            'remarks' => 'nullable|string|max:255',
         ]);
     
         $leads = Lead::find($id);
