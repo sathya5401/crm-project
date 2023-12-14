@@ -36,7 +36,7 @@
             border-radius: 5px;
             padding: 5px;
             background-color: #f8f9fa;
-            max-height: 130px;  
+            max-height: 270px;  
         }
 
         .comments-display{

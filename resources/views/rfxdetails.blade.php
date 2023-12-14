@@ -24,10 +24,10 @@
         .btn-back {
             /* margin-top: 10px; */
         }
-        .scroller {
+        /* .scroller {
             max-height: 720px;
             overflow-y: auto;
-        }
+        } */
         .file-list {
             list-style: none;
             padding: 0;

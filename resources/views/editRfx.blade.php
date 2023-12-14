@@ -51,6 +51,10 @@
 
 }
 
+.scroller {
+   /* max-height: 95vh; */
+   /* overflow-y: auto; */
+}
 </style>
 
 
@@ -59,10 +63,10 @@
 <body>
 @extends('layouts.sidebar')
 @section('content')
-   <Section class="container-fluid bg-purple">
+   <Section class="container-fluid bg-purple" style="margin-bottom: 1%;">
 
-      <div class=container style="padding-top: 3%; margin-top: 3%">
-         <div class="row" style="margin-bottom: 3%;">
+      <div class="container scroller" style="padding-top: 3%; margin-top: 1%">
+         <div class="row" style="margin-bottom: 2%;">
             <div class="col-12 flex">
                <div>
                   <h4> Edit RFx</h4>
@@ -76,7 +80,7 @@
          <div class="row card-row">
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
-                  <form method="POST" action="{{ route('rfx.update', $Rfx->id) }}">
+                  <form method="POST" action="{{ route('rfx.update', $Rfx->id) }}"  enctype="multipart/form-data">
 
                      @csrf
                      @method('PUT')
@@ -170,6 +174,39 @@
                            <input type="date" name="date_award" id="date_award" min="{{ date('Y-m-d') }}" value="{{ $Rfx->date_award }}" />
                         </div> 
                      </div>
+                     <div class="row" id="documentInputsContainer">
+                        @foreach($documents as $document)
+                           <div class="col-4 flex-inputs">
+                                 <label for="document_name">Document Name</label>
+                                 <input type="text" name="document_name[]" value="{{ $document->document_name }}" required />
+                           </div>
+                           <div class="col-4 flex-inputs">
+                                 <label for="document_type">Document Type</label>
+                                 <select name="document_type[]" required>
+                                    <option value="Contract" @if($document->document_type == 'Contract') selected @endif>Contract</option>
+                                    <option value="Costing Sheet" @if($document->document_type == 'Costing Sheet') selected @endif>Costing Sheet</option>
+                                    <option value="Final Quotation" @if($document->document_type == 'Final Quotation') selected @endif>Final Quotation</option>
+                                    <option value="Submission Document" @if($document->document_type == 'Submission Document') selected @endif>Submission Document</option>
+                                    <option value="Supporting Document" @if($document->document_type == 'Supporting Document') selected @endif>Supporting Document</option>
+                                    <option value="Tender Document" @if($document->document_type == 'Tender Document') selected @endif>Tender Document</option>
+                                    <option value="Invoice" @if($document->document_type == 'Invoice') selected @endif>Invoice</option>
+                                    <option value="Costing Summary" @if($document->document_type == 'Costing Summary') selected @endif>Costing Summary</option>
+                                    <option value="Credit Note" @if($document->document_type == 'Credit Note') selected @endif>Credit Note</option>
+                                 </select>
+                           </div>
+                           <div class="col-2 flex-inputs">
+                                 <label for="file">File</label>
+                                 <a href="{{ asset('storage/' . json_decode($document->file)->path) }}" target="_blank" class="file-link">
+                                    {{ json_decode($document->file)->path }}
+                                </a>
+                           </div>
+                           <div class="col-2 flex-inputs">
+                              <label for="delete_document_{{ $document->id }}">Delete</label>
+                              <input type="checkbox" name="delete_documents[]" value="{{ $document->id }}" />
+                           </div>
+                        @endforeach
+                     </div>
+                     <button style="margin-top: 1%" type="button" id="addDocumentInput">Add Document</button>
                      <div class="row">
                         <div class="col-12" style="margin-top:3%">
                            <button type="submit">Submit</button>
@@ -181,15 +218,43 @@
          </div>
       </div>
 
-
-
-
    </section>
 @endsection
 
 
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const addDocumentInputButton = document.getElementById('addDocumentInput');
+    const documentInputsContainer = document.getElementById('documentInputsContainer');
+
+    addDocumentInputButton.addEventListener('click', function () {
+         const newDocumentInputsGroup = document.createElement('div');
+         newDocumentInputsGroup.className = 'row';
+
+         const documentNameInput = document.createElement('div');
+         documentNameInput.className = 'col-4 flex-inputs';
+         documentNameInput.innerHTML = '<label for="document_name[]">Document Name</label><input type="text" name="document_name[]" required />';
+
+         const documentTypeInput = document.createElement('div');
+         documentTypeInput.className = 'col-4 flex-inputs';
+         documentTypeInput.innerHTML = '<label for="document_type[]">Document Type</label><select name="document_type[]" required><option value="Contract">Contract</option><option value="Costing Sheet">Costing Sheet</option><option value="Final Quotation">Final Quotation</option><option value="Submission Document">Submission Document</option><option value="Supporting Document">Supporting Document</option><option value="Tender Document">Tender Document</option><option value="Invoice">Invoice</option><option value="Costing Summary">Costing Summary</option><option value="Credit Note">Credit Note</option></select>';
+
+         const fileInput = document.createElement('div');
+         fileInput.className = 'col-4 flex-inputs';
+         fileInput.innerHTML = '<label for="file[]">File</label><input type="file" name="file[]" />';
+
+         newDocumentInputsGroup.appendChild(documentNameInput);
+         newDocumentInputsGroup.appendChild(documentTypeInput);
+         newDocumentInputsGroup.appendChild(fileInput);
+
+         documentInputsContainer.appendChild(newDocumentInputsGroup);
+    });
+});
+
+</script>
 
 
 
