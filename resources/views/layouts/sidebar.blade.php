@@ -24,7 +24,8 @@
 
 .sidebar-colour{
     background-color: #ffffff;
-    height : 100vh;
+    max-height : 150vh;
+    min-height : 100vh;
     width : 30vh
 }
 
@@ -39,8 +40,23 @@
     padding-bottom: 15%;
 }
 
+.notify-img{
+    width: 7%;
+}
+
 .nav-font {
     font-weight: bolder;
+}
+
+.flex-icon {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-container {
+    background-color: #e0e4f4; 
+    max-height: 150vh;
+    min-height: 100vh
 }
 </style>
 </head>
@@ -50,6 +66,9 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     MY_CRM
+                </a>
+                <a href="">
+                    <img class="notify-img" src="{{ url('img/notification.png') }}">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -142,7 +161,7 @@
                 </nav>
             </div>
 
-            <div class="container" style="background-color: #e0e4f4; height: 100vh;">
+            <div class="container content-container ">
                 <main>
                     @yield('content')
                 </main>

@@ -144,7 +144,7 @@
                             </a> 
                             <a href="{{ route('tasks.delete', $temp->id) }}"
                                 onclick="event.preventDefault();
-                                    if (confirm('Are you sure you want to delete this user?')) {
+                                    if (confirm('Are you sure you want to delete this task?')) {
                                         document.getElementById('delete-form-{{ $temp->id }}').submit();
                                     }">
                                 <img src="{{ url('img/delete.png') }}" alt="delete">

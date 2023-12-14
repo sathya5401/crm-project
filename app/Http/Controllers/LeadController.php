@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lead;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class LeadController extends Controller
 {
+    public function new(){
+        
+        $user = Auth::user();
+
+        if (!$user->can_create_leads) {
+            return view('errors.permission')->with('message', 'You do not have permission to create leads.');
+        }
+
+        return view('newlead');
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -20,12 +32,12 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'remarks' => 'string|max:255'
+            'remarks' => 'nullable|string|max:255'
         ]);
 
         $lead = Lead::create($validatedData);
         
-        return view('user.confirm'); 
+        return redirect()->route('leads')->with('success', 'Lead registered successfully.');
     }
 
     public function index(Request $request)
@@ -87,6 +99,12 @@ class LeadController extends Controller
 
     public function delete($id)
     {
+        $user = Auth::user();
+
+        if (!$user->can_delete_leads) {
+            return view('errors.permission')->with('message', 'You do not have permission to delete leads.');
+        }
+
         $leads = Lead::find($id);
 
         if ($leads) {
@@ -97,7 +115,13 @@ class LeadController extends Controller
     }
 
     public function edit($id)
-    {
+    {   
+        $user = Auth::user();
+
+        if (!$user->can_edit_leads) {
+            return view('errors.permission')->with('message', 'You do not have permission to edit leads data.');
+        }
+
         $leads = Lead::find($id);
 
 
@@ -106,6 +130,7 @@ class LeadController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:255',
@@ -115,7 +140,7 @@ class LeadController extends Controller
             'faxNo' => 'required|string|max:255',
             'inv_address' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'remarks' => 'string|max:255',
+            'remarks' => 'nullable|string|max:255',
         ]);
     
         $leads = Lead::find($id);

@@ -47,17 +47,15 @@ Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('use
 Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/details/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/permission/{id}', [UserController::class, 'permission'])->name('user.permission');
+Route::post('/user/updatePermission/{id}',[UserController::class, 'updatePermission'])->name('user.updatePermission');
 Route::get('/user/confirmregister', function () {
     return view('user.confirm');
 });
 
 
 use App\Http\Controllers\LeadController;
-// Route::get('/leads/new', [LeadController::class, 'create'])->name('leads.create');
-Route::get('/leads/new', function () {
-    return view('newlead');
-});
-
+Route::get('/leads/new', [LeadController::class, 'new'])->name('leads.new');
 Route::post('/leads/new', [LeadController::class, 'store'])->name('leads.store');
 Route::get('/leads', [LeadController::class, 'index'])->name('leads');
 Route::get('/leads/search', [LeadController::class, 'search'])->name('leads.search');
@@ -78,7 +76,12 @@ Route::post('/RFx/new', [RfxController::class, 'store'])->name('rfx.store');
 Route::get('/RFx', [RfxController::class, 'index'])->name('rfx.index');
 Route::get('/RFx/search', [RfxController::class, 'search'])->name('rfx.search');
 Route::patch('/RFx/{id}/updateStatus',[RfxController::class,'updateStatus'])->name('rfx.updateStatus');
-Route::delete('/RFx/delete/{id}', [RFxController::class, 'delete'])->name('rfx.delete');
+Route::delete('/RFx/delete/{id}', [RfxController::class, 'delete'])->name('rfx.delete');
+Route::get('/RFx/edit/{id}', [RfxController::class, 'edit'])->name('rfx.edit');
+Route::put('/RFx/update/{id}', [RfxController::class, 'update'])->name('rfx.update');
+Route::get('/RFx/{id}', [RfxController::class, 'show'])->name('rfx.show');
+
+
 
 Route::get('/leads/confirmregister', function () {
     return view('user.confirm');

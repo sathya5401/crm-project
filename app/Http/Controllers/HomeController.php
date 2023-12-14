@@ -33,7 +33,7 @@ class HomeController extends Controller
                         ->where('status', 'open')
                         ->get();
         $rfx = Rfx::where('user_id', $user->id)
-                    ->whereIn('Status',['new', 'in-progress']) 
+                    ->whereIn('Status',['new', 'in-progress',]) 
                     ->get();
 
         return view('home', ['user' => $user, 'tasks' => $tasks, 'rfx' => $rfx]);

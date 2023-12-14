@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Rfx;
 use App\Models\User; 
+use App\Models\Document; 
+
 
 class RfxController extends Controller
 {
     public function new()
     {
+        $user = Auth::user();
+
+        if (!$user->can_create_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to create proposals.');
+        }
         $users = User::all(); // Fetch the list of users
 
         return view('newRFx', ['users' => $users]);
@@ -29,6 +36,15 @@ class RfxController extends Controller
             'Due_date' => 'required|date',
             'Quota_mount' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id', // Add this validation rule
+            'rfx_type' => 'required|string|max:255',
+            'remarks' => 'nullable|string|max:255', 
+            'decline' => 'nullable|string|max:255', 
+            'date_award' => 'nullable|date', 
+            'award_amount' => 'nullable|numeric',
+            'Status' => 'nullable|string|max:255',
+            // 'document_name' => 'nullable|string|max:255',
+            // 'document_type' => 'nullable|string|max:255',
+            // 'file.*' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Adjust allowed file types and size
 
         ]);
 
@@ -46,7 +62,32 @@ class RfxController extends Controller
             'Due_date' => $validatedData['Due_date'],
             'Quota_mount' => $validatedData['Quota_mount'],
             'user_id' => $validatedData['user_id'],
+            'rfx_type' => $validatedData['rfx_type'], 
+            'remarks' => $validatedData['remarks'], 
+            'decline' => $validatedData['decline'], 
+            'date_award' => $validatedData['date_award'],
+            'award_amount' => $validatedData['award_amount'],
+            'Status' => $validatedData['Status'],
+            // 'document_name' => $validatedData['document_name'],
+            // 'document_type' => $validatedData['document_type'],
+            // 'file.*' => $validatedData['file.*'],
         ]);
+
+            // Handle file uploads and associate them with the RFx as documents
+            foreach ($request->file('file') as $key => $file) {
+                $filename = $file->getClientOriginalName();
+                $filePath = $file->storeAs('files', $filename, 'public');
+
+                // Create associated Document for each file
+                $document = new Document([
+                    'document_name' => $request->input('document_name')[$key] ?? null,
+                    'document_type' => $request->input('document_type')[$key] ?? null,
+                    'file' => json_encode(['path' => $filePath]),
+                ]);
+
+                // Associate the Document with the RFx
+                $rfx->documents()->save($document);
+            }
                 
         $rfx->assignedUser()->associate($validatedData['user_id']);
         $rfx->save();
@@ -131,6 +172,12 @@ class RfxController extends Controller
 
     public function delete($id)
     {
+        $user = Auth::user();
+
+        if (!$user->can_delete_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to delete proposals.');
+        }
+
         $Rfx = Rfx::find($id);
 
         if ($Rfx) {
@@ -140,42 +187,102 @@ class RfxController extends Controller
         return Redirect::back()->with('success', 'rfq deleted successfully.');
     }
 
-    // public function edit($id)
-    // {
-    //     $leads = Lead::find($id);
+    public function edit($id)
+    {
+        $user = Auth::user();
 
-
-    //     return view('editlead', ['leads' => $leads]);
-    // }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'phone_number' => 'required|string|max:255',
-    //         'address' => 'required|string|max:255',
-    //         'title' => 'required|string|max:255',
-    //         'email' => 'required|string|email|unique:leads,email,' . $id . ',id|max:255',
-    //         'faxNo' => 'required|string|max:255',
-    //         'inv_address' => 'required|string|max:255',
-    //         'company' => 'required|string|max:255',
-    //     ]);
+        if (!$user->can_edit_rfx) {
+            return view('errors.permission')->with('message', 'You do not have permission to edit proposals.');
+        }
     
-    //     $leads = Lead::find($id);
+        $Rfx = Rfx::find($id);
+        $users = User::all();
+        $documents = $Rfx->documents; // Retrieve associated documents
+    
+        return view('editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'Company' => 'required|string|max:255',
+            'Custom_Name' => 'required|string|max:255',
+            'Custom_Email' => 'required|email|max:255',
+            'Custom_Number' => 'required|numeric',
+            'RFQ_title' => 'required|string|max:255',
+            'Due_date' => 'required|date',
+            'Quota_mount' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id', // Add this validation rule
+            'rfx_type' => 'required|string|max:255',
+            'remarks' => 'nullable|string|max:255', 
+            'decline' => 'nullable|string|max:255', 
+            'date_award' => 'nullable|date', 
+            'award_amount' => 'nullable|numeric',
+            'Status' => 'nullable|string|max:255',
+        ]);
+    
+        $Rfx = Rfx::find($id);
+    
+        if (!$Rfx) {
+            return redirect()->route('rfx.index')->with('error', 'Rfx not found.');
+        }
+        
+        $Rfx->Company = $validatedData['Company'];
+        $Rfx->Custom_Name = $validatedData['Custom_Name'];
+        $Rfx->Custom_Email = $validatedData['Custom_Email'];
+        $Rfx->Custom_Number = $validatedData['Custom_Number'];
+        $Rfx->RFQ_title = $validatedData['RFQ_title'];
+        $Rfx->Due_date = $validatedData['Due_date'];
+        $Rfx->Quota_mount = $validatedData['Quota_mount'];
+        $Rfx->user_id = $validatedData['user_id'];
+        $Rfx->rfx_type = $validatedData['rfx_type']; 
+        $Rfx->remarks = $validatedData['remarks'];
+        $Rfx->decline = $validatedData['decline']; 
+        $Rfx->date_award = $validatedData['date_award'];
+        $Rfx->award_amount = $validatedData['award_amount'];
+        $Rfx->Status = $validatedData['Status'];
+
+        // Remove deleted documents
+        if ($request->has('delete_documents')) {
+            foreach ($request->delete_documents as $documentId) {
+                $document = Document::find($documentId);
+                if ($document) {
+                    $document->delete();
+                }
+            }
+        }
+
+        // Update documents if files are provided
+        if ($request->hasFile('file')) {
+            // Handle file uploads and associate them with the RFx as documents
+            foreach ($request->file('file') as $key => $file) {
+                $filename = $file->getClientOriginalName();
+                $filePath = $file->storeAs('files', $filename, 'public');
+
+                // Create associated Document for each file
+                $document = new Document([
+                    'document_name' => $request->input('document_name')[$key] ?? null,
+                    'document_type' => $request->input('document_type')[$key] ?? null,
+                    'file' => json_encode(['path' => $filePath]),
+                ]);
+
+                // Associate the Document with the RFx
+                $Rfx->documents()->save($document);
+            }
+        }
+
+        $Rfx->assignedUser()->associate($validatedData['user_id']);
+        $Rfx->save();
+    
+        return redirect()->route('rfx.index')->with('success', 'Rfx updated successfully.');
+    }
+
+    public function show($id)
+    {
+    $Rfx = Rfx::find($id);
+    $documents = $Rfx->documents; // Retrieve associated documents
 
     
-    //     $leads->name = $validatedData['name'];
-    //     $leads->email = $validatedData['email'];
-    //     $leads->address = $validatedData['address'];
-    //     $leads->company = $validatedData['company'];
-    //     $leads->phone_number = $validatedData['phone_number'];
-    //     $leads->faxNo = $validatedData['faxNo'];
-    //     $leads->inv_address = $validatedData['inv_address'];
-    //     $leads->title = $validatedData['title'];
-
-    
-    //     $leads->save();
-
-    //     return redirect()->route('leads')->with('success', 'Lead updated successfully.');
-    // }
+    return view('rfxdetails', compact('Rfx', 'documents'));
+    }
 }
