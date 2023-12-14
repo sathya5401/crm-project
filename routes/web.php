@@ -117,6 +117,12 @@ Route::get('/insert-data-to-sheet', [GoogleSpreadsheetController::class, 'insert
 
 
 use App\Http\Controllers\CustomersController;
+Route::get('/customers/create', function () {
+    return view('customers.create');
+});
+Route::get('/customers', function () {
+    return view('customers.index');
+});
 Route:: resource ('customers', CustomersController::class);
 Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
 Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
@@ -125,3 +131,30 @@ Route::get('/customers/{customer}/edit', [CustomersController::class, 'edit'])->
 // Handle update
 Route::put('/customers/{customer}', [CustomersController::class, 'update'])->name('customers.update');
 
+
+use App\Http\Controllers\ClientInquiryController;
+use App\Http\Controllers\SupportInquiryController;
+
+Route::get('/inquiry', [ClientInquiryController::class, 'create']);
+Route::post('/inquiry', [ClientInquiryController::class, 'store']);
+Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
+
+
+
+
+
+Route::get('/marketing/home', function () {
+    return view('marketing.home');
+});
+
+Route::get('/marketing/deals', function () {
+    return view('marketing.deals');
+});
+
+Route::get('/marketing/meeting', function () {
+    return view('marketing.meeting');
+});
+
+Route::get('/marketing/email', function () {
+    return view('marketing.email');
+});

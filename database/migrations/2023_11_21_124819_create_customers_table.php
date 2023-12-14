@@ -16,6 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('address');
+            $table->string('registration_no');
+            $table->string('website_url');
+            $table->string('fax_no');
+            $table->string('pic');
+            $table->string('pic_phone');
+            $table->string('designation');
             $table->timestamps();
         });
     }

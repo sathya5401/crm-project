@@ -6,7 +6,7 @@
 <ul>
     @foreach ($customers as $customer)
         <li>
-            {{ $customer->name }} - {{ $customer->email }}
+            {{ $customer->name }} - {{ $customer->address }}
             <a href="{{ route('customers.edit', $customer->id) }}">Edit</a>
             <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
                 @csrf

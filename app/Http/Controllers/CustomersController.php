@@ -24,6 +24,13 @@ class CustomersController extends Controller
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->registration_no = $request->registration_no;
+        $customer->website_url = $request->website_url;
+        $customer->fax_no = $request->fax_no;
+        $customer->pic = $request->pic;
+        $customer->pic_phone = $request->pic_phone;
+        $customer->designation = $request->designation;
         $customer->save();
 
         return redirect()->route('customers.index');
@@ -36,9 +43,17 @@ class CustomersController extends Controller
 
     public function update(Request $request, Customer $customer)
     {
+        $customer = new Customer;
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->registration_no = $request->registration_no;
+        $customer->website_url = $request->website_url;
+        $customer->fax_no = $request->fax_no;
+        $customer->pic = $request->pic;
+        $customer->pic_phone = $request->pic_phone;
+        $customer->designation = $request->designation;
         $customer->save();
 
         return redirect()->route('customers.index');
