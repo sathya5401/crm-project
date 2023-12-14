@@ -120,7 +120,7 @@
 
 /* Add a fixed height and make the table scrollable */
 .deals-table-container {
-    max-height: 240px; /* Adjust the maximum height as needed */
+    max-height: 360px; /* Adjust the maximum height as needed */
     overflow-y: auto;
 }
 

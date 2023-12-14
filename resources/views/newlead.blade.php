@@ -73,7 +73,7 @@
                
             </div>
          </div>
-         <div class="row card-row">
+         <div class="row card-row" style="margin-bottom: 1%;" >
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
                   <form method="POST" action="{{ route('leads.store') }}">

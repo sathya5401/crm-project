@@ -24,7 +24,8 @@
 
 .sidebar-colour{
     background-color: #ffffff;
-    height : 100vh;
+    max-height : 150vh;
+    min-height : 100vh;
     width : 30vh
 }
 
@@ -50,6 +51,12 @@
 .flex-icon {
     display: flex;
     flex-direction: row;
+}
+
+.content-container {
+    background-color: #e0e4f4; 
+    max-height: 150vh;
+    min-height: 100vh
 }
 </style>
 </head>
@@ -154,7 +161,7 @@
                 </nav>
             </div>
 
-            <div class="container" style="background-color: #e0e4f4; height: 100vh;">
+            <div class="container content-container ">
                 <main>
                     @yield('content')
                 </main>
