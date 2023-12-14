@@ -150,7 +150,7 @@
                                 <a class="nav-link sidebar-text" data-bs-toggle="collapse" href="#customerCollapse" role="button" aria-expanded="false" aria-controls="customerCollapse">Customer</a>
                                 <ul class="collapse ml-3" id="customerCollapse">
                                     <li><a class="nav-link sidebar-text" href="{{ url('/customers/create') }}">Registration</a></li>
-                                    <li><a class="nav-link sidebar-text" href="{{ url('/customers/index') }}">Listing</a></li>
+                                    <li><a class="nav-link sidebar-text" href="{{ url('/customers') }}">Listing</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
