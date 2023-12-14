@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Customers;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customers::all();
         return view('customers.index', compact('customers'));
     }
 
@@ -20,7 +20,7 @@ class CustomersController extends Controller
 
     public function store(Request $request)
     {
-        $customer = new Customer;
+        $customer = new Customers;
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
@@ -36,14 +36,14 @@ class CustomersController extends Controller
         return redirect()->route('customers.index');
     }
 
-    public function edit(Customer $customer)
+    public function edit(Customers $customer)
     {
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Customers $customer)
     {
-        $customer = new Customer;
+        $customer = new Customers;
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
@@ -59,7 +59,7 @@ class CustomersController extends Controller
         return redirect()->route('customers.index');
     }
 
-    public function destroy(Customer $customer)
+    public function destroy(Customers $customer)
     {
         $customer->delete();
         return redirect()->route('customers.index');
