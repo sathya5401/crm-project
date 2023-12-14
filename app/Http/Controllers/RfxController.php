@@ -194,12 +194,12 @@ class RfxController extends Controller
         if (!$user->can_edit_rfx) {
             return view('errors.permission')->with('message', 'You do not have permission to edit proposals.');
         }
-
+    
         $Rfx = Rfx::find($id);
         $users = User::all();
+        $documents = $Rfx->documents; // Retrieve associated documents
     
-
-        return view('editRfx', ['Rfx' => $Rfx,'users' => $users]);
+        return view('editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
     }
 
     public function update(Request $request, $id)
@@ -242,8 +242,36 @@ class RfxController extends Controller
         $Rfx->award_amount = $validatedData['award_amount'];
         $Rfx->Status = $validatedData['Status'];
 
+        // Remove deleted documents
+        if ($request->has('delete_documents')) {
+            foreach ($request->delete_documents as $documentId) {
+                $document = Document::find($documentId);
+                if ($document) {
+                    $document->delete();
+                }
+            }
+        }
 
-    
+        // Update documents if files are provided
+        if ($request->hasFile('file')) {
+            // Handle file uploads and associate them with the RFx as documents
+            foreach ($request->file('file') as $key => $file) {
+                $filename = $file->getClientOriginalName();
+                $filePath = $file->storeAs('files', $filename, 'public');
+
+                // Create associated Document for each file
+                $document = new Document([
+                    'document_name' => $request->input('document_name')[$key] ?? null,
+                    'document_type' => $request->input('document_type')[$key] ?? null,
+                    'file' => json_encode(['path' => $filePath]),
+                ]);
+
+                // Associate the Document with the RFx
+                $Rfx->documents()->save($document);
+            }
+        }
+
+        $Rfx->assignedUser()->associate($validatedData['user_id']);
         $Rfx->save();
     
         return redirect()->route('rfx.index')->with('success', 'Rfx updated successfully.');

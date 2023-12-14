@@ -82,6 +82,7 @@ Route::put('/RFx/update/{id}', [RfxController::class, 'update'])->name('rfx.upda
 Route::get('/RFx/{id}', [RfxController::class, 'show'])->name('rfx.show');
 
 
+
 Route::get('/leads/confirmregister', function () {
     return view('user.confirm');
 });
