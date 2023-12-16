@@ -21,7 +21,7 @@ class RfxController extends Controller
         }
         $users = User::all(); // Fetch the list of users
 
-        return view('newRFx', ['users' => $users]);
+        return view('rfx.newRFx', ['users' => $users]);
     }
     public function store(Request $request)
     {
@@ -95,7 +95,7 @@ class RfxController extends Controller
         // Fetch the list of users
         $users = User::all();
         
-        return view('user.confirm',['users' => $users]); 
+        return view('rfx.RFx',['users' => $users]); 
     }
 
     public function index(Request $request)
@@ -116,7 +116,7 @@ class RfxController extends Controller
         // Calculate total number of records (for pagination)
         $totalRecords = Rfx::count();
     
-        return view('RFx', [
+        return view('rfx.RFx', [
             'Rfx' => $Rfx,
             'currentPage' => $currentPage,
             'perPage' => $perPage,
@@ -152,7 +152,7 @@ class RfxController extends Controller
         // Calculate total number of records (for pagination)
         $totalRecords = Rfx::count();
 
-        return view('RFx', [
+        return view('rfx.RFx', [
             'Rfx' => $Rfx,
             'currentPage' => $currentPage,
             'perPage' => $perPage,
@@ -199,7 +199,7 @@ class RfxController extends Controller
         $users = User::all();
         $documents = $Rfx->documents; // Retrieve associated documents
     
-        return view('editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
+        return view('rfx.editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
     }
 
     public function update(Request $request, $id)
@@ -283,6 +283,6 @@ class RfxController extends Controller
     $documents = $Rfx->documents; // Retrieve associated documents
 
     
-    return view('rfxdetails', compact('Rfx', 'documents'));
+    return view('rfx.rfxdetails', compact('Rfx', 'documents'));
     }
 }

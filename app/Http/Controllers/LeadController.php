@@ -18,7 +18,7 @@ class LeadController extends Controller
             return view('errors.permission')->with('message', 'You do not have permission to create leads.');
         }
 
-        return view('newlead');
+        return view('leads.newlead');
     }
 
     public function store(Request $request)
@@ -57,7 +57,7 @@ class LeadController extends Controller
         // Calculate total number of records (for pagination)
         $totalRecords = Lead::count();
     
-        return view('leads', [
+        return view('leads.leads', [
             'leads' => $leads,
             'currentPage' => $currentPage,
             'perPage' => $perPage,
@@ -88,7 +88,7 @@ class LeadController extends Controller
     
     // Calculate total number of records (for pagination)
     $totalRecords = Lead::count();
-    return view('leads', [
+    return view('leads.leads', [
         'leads' => $leads,
         'currentPage' => $currentPage,
         'perPage' => $perPage,
@@ -125,7 +125,7 @@ class LeadController extends Controller
         $leads = Lead::find($id);
 
 
-        return view('editlead', ['leads' => $leads]);
+        return view('leads.editlead', ['leads' => $leads]);
     }
 
     public function update(Request $request, $id)
@@ -166,6 +166,6 @@ class LeadController extends Controller
     {
     $leads = Lead::findOrFail($id);
     
-    return view('lead_details', compact('leads'));
+    return view('leads.lead_details', compact('leads'));
     }
 }

@@ -65,7 +65,7 @@
                   <h4> Edit Customer</h4>
                </div>
                <div>
-                  <a href="{{ url('customers/index') }}" class="btn btn-light"> Back </a>
+                  <a href="{{ url('/customers') }}" class="btn btn-light"> Back </a>
                </div>
             </div>
          </div>
