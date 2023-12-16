@@ -142,14 +142,14 @@ Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 
 
-
+use App\Http\Controllers\MarketingController;
 Route::get('/marketing/home', function () {
     return view('marketing.home');
 });
-
-Route::get('/marketing/deals', function () {
-    return view('marketing.deals');
-});
+Route::get ('/marketing/deals', [MarketingController::class, 'deals']) ->name('marketing.deals');
+// Route::get('/marketing/deals', function () {
+//     return view('marketing.deals');
+// });
 
 Route::get('/marketing/meeting', function () {
     return view('marketing.meeting');

@@ -65,15 +65,44 @@
                         <a href="{{ url('marketing/email') }}" class="btn btn-primary" style="color: white">Group Email</a>
                     </div>
                 </div>
+                <div class="col-12">
+                    <h4> DEALS</h4>
+                </div>
+            </div>
+            <div class="row">
+                @if(count($deals) > 0)
+                            <table class="deals-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Quote No</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Customer Email</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Title </th>
+                                        <th scope="col">Due date </th>
+                                        <th scope="col">Quote Amount </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($deals as $rfq)
+                                        <tr>
+                                            <td>RQ{{ $rfq->id }}</td>
+                                            <td>{{ $rfq->Custom_Name }}</td>    
+                                            <td>{{ $rfq->Custom_Email }}</td>
+                                            <td>{{ $rfq->Company }}</td>
+                                            <td>{{ $rfq->RFQ_title }}</td>
+                                            <td>{{ $rfq->Due_date }}</td>
+                                            <td> {{ $rfq->Quota_mount }}</td>
+                                        </tr>
+                                    @endforeach   
+                                </tbody>
+                            </table>   
+                        @else
+                            <p class="no-deals"> No ongoing deals </p>
+                        @endif
             </div>
         </div>    
    </section>
-    <section>
-        <div>
-             <h4> DEALS</h4>
-        </div>
-    </section>
-
 @endsection
 
 
