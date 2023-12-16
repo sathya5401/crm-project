@@ -7,3 +7,4 @@
     <textarea name="message" placeholder="Your Message"></textarea>
     <button type="submit">Submit Inquiry</button>
 </form>
+
