@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^1.1",
+        "phpmailer/phpmailer": "^6.9",
         "revolution/laravel-google-sheets": "^6.2",
         "spatie/laravel-query-builder": "^5.6"
     },

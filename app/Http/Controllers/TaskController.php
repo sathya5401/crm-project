@@ -16,7 +16,7 @@ class TaskController extends Controller
     {
         $users = User::all(); // Fetch the list of users
 
-        return view('newtasks', ['users' => $users]);
+        return view('tasks.newtasks', ['users' => $users]);
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class TaskController extends Controller
         // Fetch the list of users
         $users = User::all();
         
-        return view('user.confirm',  ['users' => $users]); 
+        return view('tasks.tasks',  ['users' => $users]); 
     }
 
     public function index(Request $request)
@@ -60,7 +60,7 @@ class TaskController extends Controller
         // Calculate total number of records (for pagination)
         $totalRecords = Task::count();
     
-        return view('tasks', [
+        return view('tasks.tasks', [
             'task' => $task,
             'currentPage' => $currentPage,
             'perPage' => $perPage,
@@ -105,7 +105,7 @@ class TaskController extends Controller
         // Fetch the list of users for the dropdown
         $users = User::all();
     
-        return view('edittasks', ['task' => $task, 'users' => $users]);
+        return view('tasks.edittasks', ['task' => $task, 'users' => $users]);
     }
 
 
@@ -148,7 +148,7 @@ class TaskController extends Controller
     $task = Task::with('comments.user')->findOrFail($id);
     $comments = $task->comments;
     
-    return view('task_details', compact('task','comments'));
+    return view('tasks.task_details', compact('task','comments'));
     }
 
     public function storeComment(Request $request)

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('leads', function (Blueprint $table) {
+        Schema::table('meetings', function (Blueprint $table) {
             //
-           // $table->timestamps();
+            $table->unsignedBigInteger('host_id');
+            $table->foreign('host_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -22,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('leads', function (Blueprint $table) {
+        Schema::table('meeting', function (Blueprint $table) {
             //
         });
     }
