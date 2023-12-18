@@ -66,14 +66,58 @@
                     </div>
                 </div>
             </div>
-        </div>    
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ url('marketing/meeting/new') }}" class="btn btn-primary" style="color: white; margin-top: 2%;">New Meeting</a>
+                </div>
+                <div class="col-12">
+                    <h4> MEETING</h4>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Host</th>
+                    <th scope="col"> Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($meeting as $key => $temp)
+                    <tr >
+                        <td scope="row">{{ $key + 1 }}</td>
+                        <td>{{ $temp->title }}</td>
+                        <td>{{ $temp->location }}</td>
+                        <td>{{ $temp->from}}</td>
+                        <td>{{ $temp->to}}</td>
+                        <td>{{ optional($temp->host)->name }}</td>
+                        <td class="icons">  
+                            <a href="">
+                                <img src="{{ url('img/edit.png') }}" alt="Edit">
+                            </a> 
+                            <a href=""
+                        onclick="event.preventDefault();
+                                    if (confirm('Are you sure you want to delete this user?')) {
+                                        document.getElementById('delete-form-{{ $temp->id }}').submit();
+                                    }">
+                            <img src="{{ url('img/delete.png') }}" alt="delete">
+                        </a>
+                        <form id="delete-form-{{ $temp->id }}" action="{{ route('user.delete', $temp->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>  
 
    </section>
-   <section>
-        <div>
-             <h4> MEETING</h4>
-        </div>
-    </section>
 @endsection
 
 

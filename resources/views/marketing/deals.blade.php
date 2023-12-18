@@ -47,6 +47,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 </style>
 
 
@@ -66,7 +67,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <h4> DEALS</h4>
+                    <h4>Ongoing DEALS</h4>
                 </div>
             </div>
             <div class="row">
