@@ -146,14 +146,17 @@ use App\Http\Controllers\MarketingController;
 Route::get('/marketing/home', function () {
     return view('marketing.home');
 });
-Route::get ('/marketing/deals', [MarketingController::class, 'deals']) ->name('marketing.deals');
+Route::get ('/marketing/deals', [MarketingController::class, 'deals']) ->name('deals');
+Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->name('meeting');
+Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
+Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
+
 // Route::get('/marketing/deals', function () {
 //     return view('marketing.deals');
 // });
-
-Route::get('/marketing/meeting', function () {
-    return view('marketing.meeting');
-});
+// Route::get('/marketing/meeting', function () {
+//     return view('marketing.meeting');
+// });
 
 Route::get('/marketing/email', function () {
     return view('marketing.email');
