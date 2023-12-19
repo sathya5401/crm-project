@@ -11,7 +11,11 @@ use App\Models\Comment;
 
 class TaskController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function new()
     {
         $users = User::all(); // Fetch the list of users
