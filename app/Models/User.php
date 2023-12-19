@@ -36,6 +36,7 @@ class User extends Authenticatable
         'can_download_data',
         'can_connect_rfqs_data',
         'can_connect_leads_data',
+        'first_login',
     ];
 
     /**

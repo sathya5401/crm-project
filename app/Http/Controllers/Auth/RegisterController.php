@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'can_download_data' => 1,
             'can_connect_rfqs_data' => 1,
             'can_connect_leads_data' => 1,
+            'first_login' => 0,
         ]);
     }
 }

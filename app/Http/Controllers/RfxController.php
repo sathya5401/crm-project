@@ -11,7 +11,12 @@ use App\Models\Document;
 
 
 class RfxController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function new()
     {
         $user = Auth::user();

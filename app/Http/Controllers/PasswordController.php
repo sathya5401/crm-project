@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth; // Add this use statement
+
 use App\Models\User;
 
 class PasswordController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showSetPasswordForm($token)
     {
         // Validate the token and display the password setting form
@@ -40,4 +48,28 @@ class PasswordController extends Controller
 
         return redirect()->route('user.listing')->with('success', 'Password set successfully.');
     }
+
+    public function showChangeForm()
+    {   
+        $user = Auth::user();
+
+        return view('user.newuser',['user' => $user]);
+    }
+
+    public function change(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        // Update the user's password
+        auth()->user()->update([
+            'password' => Hash::make($request->password),
+            'first_login' => false,
+        ]);
+
+        // Redirect the user after password change
+        return redirect()->route('home')->with('success', 'Password changed successfully!');
+    }
+
 }

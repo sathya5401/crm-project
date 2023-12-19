@@ -37,6 +37,10 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+use App\Http\Controllers\PasswordController;
+Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change');
+Route::post('/password/change', [PasswordController::class, 'change'])->name('password.change.post');
+
 
 use App\Http\Controllers\UserController;
 Route::get('/user/register', [UserController::class, 'create'])->name('user.register.create');
