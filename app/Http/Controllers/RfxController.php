@@ -100,7 +100,7 @@ class RfxController extends Controller
         // Fetch the list of users
         $users = User::all();
         
-        return view('rfx.RFx',['users' => $users]); 
+        return redirect()->route('rfx.index')->with('success', 'Rfx created successfully.');
     }
 
     public function index(Request $request)

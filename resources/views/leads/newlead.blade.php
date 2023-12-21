@@ -84,9 +84,6 @@
                         <div class="col-6 flex-inputs">
                            <label for="name">Name</label>
                            <input type="text" name="name" id="name" required />
-                           @error('name')
-                              <span class="text-danger">{{ $message }}</span>
-                           @enderror
                         </div>
                         <div class="col-6 flex-inputs">
                            <label for="phone_number">Phone Number</label>
@@ -121,7 +118,10 @@
                         <div class="col-6 flex-inputs">
                            <label for="email">Email</label>
                            <input type="email" name="email" id="email" required />
-                        </div>
+                           @error('email')
+                              <span class="error">{{ $message }}</span>
+                           @enderror
+                           </div>
                         <div class="col-6 flex-inputs">
                            <label for="company">Company</label>
                            <input type="company" name="company" id="company" required />
