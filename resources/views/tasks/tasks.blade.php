@@ -103,37 +103,32 @@
                         <td> <a href="{{ route('tasks.show', $temp->id) }}"> {{ $temp->subject }} </a> </td>
                         <td>{{ $temp->owner }}</td>
                         <td>{{ $temp->due_date}}</td>
-                        <form method="post" action="{{ route('tasks.updateStatus', $temp->id) }}">
+                        <form method="post" action="{{ route('tasks.updateStatus', $temp->id) }}" class="status-form">
                             @csrf
                             @method('PATCH')
                             <td>
                                 <div class="flex-accordion">
                                     <div class="form-group">
-                                        <select name="status" class="form-control">
+                                        <select name="status" class="form-control status-dropdown">
                                             <option value="open" {{ $temp->status == 'open' ? 'selected' : '' }}>Open</option>
                                             <option value="close" {{ $temp->status == 'close' ? 'selected' : '' }}>Close</option>
-                                            <!-- Add more status options as needed -->
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left:2%;"></button>
                                 </div>
                             </td>
                         </form>
-                        <!-- Update priority form -->
-                        <form method="post" action="{{ route('tasks.updatePriority', $temp->id) }}">
+                        <form method="post" action="{{ route('tasks.updatePriority', $temp->id) }}" class="priority-form">
                             @csrf
                             @method('PATCH')
                             <td>
                                 <div class="flex-accordion">
                                     <div class="form-group">
-                                        <select name="priority" class="form-control">
+                                        <select name="priority" class="form-control priority-dropdown">
                                             <option value="low" {{ $temp->priority == 'low' ? 'selected' : '' }}>Low</option>
                                             <option value="medium" {{ $temp->priority == 'medium' ? 'selected' : '' }}>Medium</option>
                                             <option value="high" {{ $temp->priority == 'high' ? 'selected' : '' }}>High</option>
-                                            <!-- Add more priority options as needed -->
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left:2%;"></button>
                                 </div>
                             </td>
                         </form>
@@ -170,6 +165,43 @@
 
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Update Status
+        document.querySelectorAll('.status-dropdown').forEach(function (dropdown) {
+            dropdown.addEventListener('change', function () {
+                var form = this.form; // Use this.form to get the associated form
+                var formData = new FormData(form);
+                submitForm(form, formData);
+            });
+        });
+
+        // Update Priority
+        document.querySelectorAll('.priority-dropdown').forEach(function (dropdown) {
+            dropdown.addEventListener('change', function () {
+                var form = this.form; // Use this.form to get the associated form
+                var formData = new FormData(form);
+                submitForm(form, formData);
+            });
+        });
+
+        function submitForm(form, formData) {
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response if needed
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+</script>
 
 
 

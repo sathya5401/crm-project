@@ -44,7 +44,7 @@ class TaskController extends Controller
         // Fetch the list of users
         $users = User::all();
         
-        return view('tasks.tasks',  ['users' => $users]); 
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
     public function index(Request $request)
@@ -79,7 +79,7 @@ class TaskController extends Controller
             $task->update(['status' => $request->status]);
             // $task->update(['priority' => $request->priority]);
 
-            return redirect()->back()->with('success', 'Status updated successfully.');
+            return response()->json(['message' => 'Status updated successfully']);
         }
 
     public function updatePriority(Request $request, $id)
@@ -88,7 +88,7 @@ class TaskController extends Controller
             // $task->update(['status' => $request->status]);
             $task->update(['priority' => $request->priority]);
 
-            return redirect()->back()->with('success', 'Status updated successfully.');
+            return response()->json(['message' => 'Priority updated successfully']);
         }
 
     public function delete($id)
