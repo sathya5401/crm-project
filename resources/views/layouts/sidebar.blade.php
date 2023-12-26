@@ -156,6 +156,9 @@
                             <li class="nav-item">
                                 <a class="nav-link sidebar-text" href="{{ url('/marketing/home') }}">Marketing</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link sidebar-text" href="{{ url('/inquiry') }}">Inquiry</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
