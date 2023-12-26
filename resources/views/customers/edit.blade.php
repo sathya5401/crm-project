@@ -72,8 +72,8 @@
          <div class="row card-row">
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
-               <h1>Edit Customer</h1>
-
+             <!--  <h1>Edit Customer</h1>
+ 
                <form method="POST" action="{{ route('customers.update', $customer->id) }}">
     @csrf
     @method('PUT')
@@ -91,7 +91,7 @@
 </form>
 
 
-    <!-- resources/views/customers/create.blade.php -->
+    resources/views/customers/create.blade.php -->
 <h5> Edit Customer</h5>
 <form method="POST" action="{{ route('customers.update', $customer->id) }}">
     @csrf
@@ -100,69 +100,69 @@
     <div class="row">
         <div class="col-6 flex-inputs">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="{{ $customer->name }}" required>
+            <input type="text" id="name" name="name" value="{{ $customer->name }}" >
         </div>
 
         <div class="col-6 flex-inputs">
             <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">   
+            <input type="text" id="phone" name="phone" value="{{ $customer->phone }}" >   
         </div>
     </div>
 
     <div class="row">
         <div class="col-6 flex-inputs">
             <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter Address">
+            <input type="text" id="address" name="address" value="{{ $customer->address }}" >
         </div>
 
         <div class="col-6 flex-inputs">
             <label for="registration_no">Registration No:</label>
-            <input type="text" id="registration_no" name="Enter registration_no" placeholder="Enter registration number">
+            <input type="text" id="registration_no" name="registration_no" value="{{ $customer->registration_no }}" >
         </div>
     </div>
 
     <div class="row">
         <div class="col-6 flex-inputs">
-            <label for="phone">Website URL:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter Website URL">
+            <label for="website_url">Website URL:</label>
+            <input type="text" id="website_url" name="website_url" value="{{ $customer->website_url }}" >
         </div>
 
     <div class="col-6 flex-inputs">
-    <label for="registration_no">Fax Number:</label>
-    <input type="text" id="registration_no" name="registration_no" placeholder="Enter Fax Number">
+    <label for="fax_no">Fax Number:</label>
+    <input type="text" id="fax_no" name="fax_no" value="{{ $customer->fax_no }}" >
     </div>
 
-    <!--person in charge -->
+<!--    person in charge -->
 
-    <div class="row"></div>
+<div class="row"></div>
     <h5>  </h5>
     <div class="space"></div>
 
     <div class="row">
     <h5> Person in charge</h5>
         <div class="col-3 flex-inputs">
-            <label for="phone">Name:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter person in charge's name">
+            <label for="pic">Name:</label>
+            <input type="text" id="pic" name="pic" value="{{ $customer->pic }}" >
         </div>
 
         <div class="col-3 flex-inputs">
-            <label for="registration_no">Phone:</label>
-            <input type="text" id="registration_no" name="registration_no" placeholder="Enter person in charge's phone number" >
+            <label for="pic_phone">Phone:</label>
+            <input type="text" id="pic_phone" name="pic_phone" value="{{ $customer->pic_phone }}" >
         </div>
 
         <div class="col-3 flex-inputs">
-            <label for="registration_no">Email:</label>
-            <input type="text" id="registration_no" name="registration_no" placeholder="Enter person in charge's email">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="{{ $customer->email }}" >
         </div>
 
         <div class="col-3 flex-inputs">
-            <label for="registration_no">Designation:</label>
-            <input type="text" id="registration_no" name="registration_no" placeholder="Enter person in charge's designation">
+            <label for="designation">Designation:</label>
+            <input type="text" id="designation" name="designation" value="{{ $customer->designation }}" >
         </div>
-    </div>
+    </div> 
 
     <div class="col-12" style="margin-top:3%">
-        <button type="submit" >Register</button>
+        <button type="submit" >Update Customer</button>
         <div class="container">
     </div>
 
