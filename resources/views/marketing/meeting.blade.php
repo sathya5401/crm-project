@@ -66,21 +66,26 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <a href="{{ url('marketing/meeting/new') }}" class="btn btn-primary" style="color: white; margin-top: 2%;">New Meeting</a>
-                </div>
-                <div class="col-12">
-                    <h4> MEETING</h4>
+        <div class="container" style="padding-top: 3%; margin-top: 3%">
+            <div class="row" style="margin-bottom: 3%;">
+                <div class="col-12 flex">
+                    <div>
+                        <h4>MEETING</h4>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <a href="{{ url('marketing/meeting/new') }}" class="btn btn-light">+ Create New Meeting</a>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Location</th>
+                    <th scope="col">Location/Link</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Host</th>
@@ -96,13 +101,10 @@
                         <td>{{ $temp->from}}</td>
                         <td>{{ $temp->to}}</td>
                         <td>{{ optional($temp->host)->name }}</td>
-                        <td class="icons">  
-                            <a href="">
-                                <img src="{{ url('img/edit.png') }}" alt="Edit">
-                            </a> 
+                        <td class="icons">
                             <a href=""
                         onclick="event.preventDefault();
-                                    if (confirm('Are you sure you want to delete this user?')) {
+                                    if (confirm('Are you sure you want to delete this meeting?')) {
                                         document.getElementById('delete-form-{{ $temp->id }}').submit();
                                     }">
                             <img src="{{ url('img/delete.png') }}" alt="delete">
@@ -116,8 +118,7 @@
                 @endforeach
             </tbody>
         </table>  
-
-   </section>
+    </section>
 @endsection
 
 

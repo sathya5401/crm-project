@@ -48,7 +48,6 @@ class CustomersController extends Controller
 
     public function update(Request $request, Customers $customer)
     {
-        $customer = new Customers;
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;

@@ -1,5 +1,5 @@
 <!-- resources/views/inquiry/create.blade.php -->
-<form method="POST" action="{{ url('/inquiry') }}">
+<form method="POST" action="{{ url('/inquiries) }}">
     @csrf
     <input type="text" id="id" placeholder="Your ID">
     <input type="text" name="name" placeholder="Your Name">

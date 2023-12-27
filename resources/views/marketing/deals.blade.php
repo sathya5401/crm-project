@@ -61,15 +61,18 @@
             <div class="row">
                 <div class="col-12 flex-buttons">
                     <div>
-                        <a href="{{ url('marketing/deals') }}" class="btn btn-primary" style="color: white">Deals</a>
-                        <a href="{{ url('marketing/meeting') }}" class="btn btn-primary" style="color: white">Meeting</a>
-                        <a href="{{ url('marketing/email') }}" class="btn btn-primary" style="color: white">Group Email</a>
+                    <a href="{{ url('marketing/deals') }}" class="btn btn-primary" style="color: white">Deals</a>
+                    <a href="{{ url('marketing/meeting') }}" class="btn btn-primary" style="color: white">Meeting</a>
+                    <a href="{{ url('marketing/email') }}" class="btn btn-primary" style="color: white">Group Email</a>
                     </div>
                 </div>
-                <div class="col-12">
-                    <h4>Ongoing DEALS</h4>
-                </div>
             </div>
+        </div>    
+    </section>
+        <div>
+             <h4> ONGOING DEALS</h4>
+        </div>
+    <section>
             <div class="row">
                 @if(count($deals) > 0)
                             <table class="deals-table">
