@@ -67,7 +67,7 @@
          <div class="row" style="margin-bottom: 3%;">
             <div class="col-12 flex">
                <div>
-                  <h4> Create New User</h4>
+                  <h4> Create New Meeting</h4>
                </div>
                <div>
                   <a href="{{ url('marketing/meeting') }}" class="btn btn-light"> Back </a>
@@ -89,7 +89,7 @@
                      </div>
                      <div class="row">
                         <div class="col-12 flex-inputs">
-                           <label for="location">Location: </label>
+                           <label for="location">Location/Link: </label>
                            <input type="text" name="location" id="location" required />
                         </div>
                      </div>
