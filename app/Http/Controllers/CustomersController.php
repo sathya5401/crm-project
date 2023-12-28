@@ -46,8 +46,9 @@ class CustomersController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customers $customer)
-    {
+    public function update(Request $request, $id)
+    {   
+        $customer = Customers::find($id);
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
