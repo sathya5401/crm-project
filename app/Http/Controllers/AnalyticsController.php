@@ -28,7 +28,6 @@ class AnalyticsController extends Controller
         
 
 
-
         //3rd diagram
          // Calculate start and end of the current month
         $startOfMonth = now()->startOfMonth();
@@ -42,9 +41,13 @@ class AnalyticsController extends Controller
         // Calculate total revenue for this month
         $totalRevenue = $approvedRfx->sum('award_amount');
 
+        $startOflastMonth = now()->subMonth()->startOfMonth();
+        $endOflastMonth = now()->subMonth()->endOfMonth();
+
+
         // Calculate the percentage increase compared to the previous month
         $previousMonthRevenue = Rfx::where('Status', 'awarded')
-            ->whereBetween('date_award', [$startOfMonth->subMonth()->startOfMonth(), $endOfMonth->subMonth()->endOfMonth()])
+            ->whereBetween('date_award', [ $startOflastMonth,$endOflastMonth])
             ->sum('award_amount');
 
         $percentageIncreaseRevenue = ($previousMonthRevenue > 0) ? (($totalRevenue - $previousMonthRevenue) / $previousMonthRevenue) * 100 : 100;

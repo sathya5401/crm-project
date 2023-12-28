@@ -38,7 +38,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\PasswordController;
-Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change')->middleware('auth');;
+Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change')->middleware('auth');
 Route::post('/password/change', [PasswordController::class, 'change'])->name('password.change.post');
 
 
