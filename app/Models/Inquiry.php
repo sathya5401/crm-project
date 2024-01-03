@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inquiry extends Model
 {
-    protected $fillable = ['id', 'name', 'email', 'message'];
+    protected $fillable = ['id', 'name', 'email', 'message','status'];
     use HasFactory;
 }
