@@ -139,8 +139,9 @@ Route::put('/customers/{customer}', [CustomersController::class, 'update'])->nam
 use App\Http\Controllers\ClientInquiryController;
 use App\Http\Controllers\SupportInquiryController;
 
-Route::get('/inquiry', [ClientInquiryController::class, 'create']);
-Route::post('/inquiry', [ClientInquiryController::class, 'store']);
+Route::get('/inquiry', [ClientInquiryController::class, 'index']);
+Route::get('/inquiry/new', [ClientInquiryController::class, 'create']);
+Route::post('/inquiry/new', [ClientInquiryController::class, 'store']);
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 

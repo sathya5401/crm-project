@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth; // Add this use statement
 use Illuminate\Http\Request;
 use App\Models\Inquiry;
+use App\Models\User; 
 
 class ClientInquiryController extends Controller
 {   
@@ -12,9 +14,17 @@ class ClientInquiryController extends Controller
         $this->middleware('auth');
     }
     
+    public function index() {
+        
+        $user = Auth::user();
+        $inquiry = Inquiry::where('name', $user->name )->get();
+        $inquiries = Inquiry::all();
+        return view('inquiry.listing',['inquiry'=> $inquiry, 'inquiries' =>  $inquiries]);
+    }
     public function create()
     {
-        return view('inquiry.create');
+        $user = Auth::user();
+        return view('inquiry.create',['user' => $user]);
     }
 
     public function store(Request $request)
@@ -27,6 +37,6 @@ class ClientInquiryController extends Controller
 
         $inquiry = Inquiry::create($validatedData);
 
-        return redirect('/')->with('success', 'Inquiry submitted successfully.');
+        return redirect('/inquiry')->with('success', 'Inquiry submitted successfully.');
     }
 }

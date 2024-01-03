@@ -69,15 +69,22 @@
          <div class="row card-row">
             <div class="col-12">
                <div class="card-body" style="padding: 2%;">
-        
-    <!-- resources/views/customers/create.blade.php -->
-<h5> New Inquiry </h5>
-    <form method="POST" action="{{ url('/inquiries') }}">
-    @csrf
-    <textarea name="message" placeholder="Your Message"></textarea>
-    <button type="submit">Submit Inquiry</button>
-</form>
-</div>
+                  <!-- resources/views/customers/create.blade.php -->
+                  <h5> New Inquiry </h5>
+                  <form method="POST" action="{{ url('/inquiry/new') }}">
+                     @csrf
+                     <input type="text" name="name" value="{{ $user->name}}">
+                     <input type="email" name="email" placeholder="Your Email">
+                     <textarea name="message" placeholder="Your Message"></textarea>
+                     <label for="Status">Status</label>
+                     <select name="Status" id="Status" required>
+                        <option value="new"> New </option>
+                        <option value="in-progress"> In-progress </option>
+                        <option value="completed"> Completed </option>
+                     </select>
+                     <button type="submit">Submit Inquiry</button>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
@@ -85,26 +92,4 @@
 @endsection
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- resources/views/inquiry/create.blade.php 
-<form method="POST" action="{{ url('/inquiry') }}">
-    @csrf
-    <input type="text" id="id" placeholder="Your ID">
-    <input type="text" name="name" placeholder="Your Name">
-    <input type="email" name="email" placeholder="Your Email">
-    <textarea name="message" placeholder="Your Message"></textarea>
-    <button type="submit">Submit Inquiry</button>
-</form>-->
 
