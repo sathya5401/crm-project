@@ -73,4 +73,13 @@ class ClientInquiryController extends Controller
         return redirect()->back()->with('success', 'Remark submitted successfully.');
     }
 
+    public function inquiryData(){
+
+        $inquiries = Inquiry::all()->count();
+        $solved = Inquiry::where('status', 'completed')->count();
+        $pending = Inquiry::where('status', [ 'new', 'in-progress'])->count();
+
+        return view('inquiry.data', ['inquiries' => $inquiries, 'solved' => $solved , 'pending' => $pending]);
+    }
+
 }
