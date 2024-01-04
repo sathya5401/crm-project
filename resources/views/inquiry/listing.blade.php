@@ -99,8 +99,13 @@
 
         @if ( (Auth::user()->is_admin) === 0)
             <div class="container container1">
-                <div>
-                        All inquiries
+                <div class="flex-buttons">
+                    <div>
+                        All Inquiries
+                    </div>
+                    <div>
+                        <a href="{{ route('inquiry.data') }}" class="btn btn-primary" style="color: black;"><b> View Inquiries Data </b></a>
+                    </div>
                 </div>
                 <table class="table table-bordered">
                     <thead>
