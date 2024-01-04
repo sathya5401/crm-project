@@ -63,6 +63,9 @@
         @if ( (Auth::user()->is_admin) === 1)
             <div class="container container1">
                 <div class="row">
+                    <div>
+                        My Inquiries
+                    </div>
                     <div class="col-12 flex-buttons">
                         <div>
                             <a href="{{ url('inquiry/new') }}" class="btn btn-primary" style="color: black">Add Inquiry</a>
@@ -83,7 +86,9 @@
                 @foreach ($inquiry as $key => $inquiry)
                         <tr >
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $inquiry->message }}</td>
+                            <td>
+                                <a href="{{ route('inquiry.show', $inquiry->id) }}" > {{ $inquiry->message }} </a>
+                            </td>
                             <td> {{ $inquiry->status }}</td>
                         
                         </tr>
@@ -94,6 +99,9 @@
 
         @if ( (Auth::user()->is_admin) === 0)
             <div class="container container1">
+                <div>
+                        All inquiries
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -107,7 +115,9 @@
                     @foreach ($inquiries as $key => $inquiries)
                             <tr >
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $inquiries->message }}</td>
+                                <td>
+                                  <a href="{{ route('inquiry.show', $inquiries->id) }}" > {{ $inquiries->message }} </a>
+                                </td>
                                 <td>{{ $inquiries->name}}</td>
                                 <td> {{ $inquiries->status}} </td>
                             </tr>
