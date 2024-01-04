@@ -142,6 +142,10 @@ use App\Http\Controllers\SupportInquiryController;
 Route::get('/inquiry', [ClientInquiryController::class, 'index']);
 Route::get('/inquiry/new', [ClientInquiryController::class, 'create']);
 Route::post('/inquiry/new', [ClientInquiryController::class, 'store']);
+Route::get('/inquiry/{id}', [ClientInquiryController::class, 'show'])->name('inquiry.show');
+Route::put('/inquiry/{id}/updateStatus',[ClientInquiryController::class,'updateStatus'])->name('inquiry.updateStatus');
+Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemarks'])->name('remarks.store');
+
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 
