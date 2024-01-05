@@ -36,6 +36,7 @@ class CustomersController extends Controller
         $customer->pic = $request->pic;
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
+        $customer->Company = $request->Company;
         $customer->save();
 
         return redirect()->route('customers.index');
@@ -59,6 +60,8 @@ class CustomersController extends Controller
         $customer->pic = $request->pic;
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
+        $customer->Company = $request->Company;
+
         $customer->save();
 
         return redirect()->route('customers.index');

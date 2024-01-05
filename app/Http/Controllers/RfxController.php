@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Rfx;
 use App\Models\User; 
-use App\Models\Document; 
+use App\Models\Document;
+use App\Models\Customers; 
+
 
 
 class RfxController extends Controller
@@ -24,9 +26,11 @@ class RfxController extends Controller
         if (!$user->can_create_rfx) {
             return view('errors.permission')->with('message', 'You do not have permission to create proposals.');
         }
+
+        $customers = Customers::all();
         $users = User::all(); // Fetch the list of users
 
-        return view('rfx.newRFx', ['users' => $users]);
+        return view('rfx.newRFx', ['users' => $users, 'customers' => $customers]);
     }
     public function store(Request $request)
     {

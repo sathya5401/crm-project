@@ -88,7 +88,12 @@
                      <div class="row">
                         <div class="col-6 flex-inputs">
                            <label for="Company">Company</label>
-                           <input type="text" name="Company" id="Company" required autofocus />
+                           <!-- <input type="text" name="Company" id="Company" required autofocus /> -->
+                           <select name="Company" id="Company" required>
+                              @foreach ($customers as $customer)
+                                 <option value="{{ $customer->Company }}">{{ $customer->Company }}</option>
+                              @endforeach
+                           </select>
                         </div>
                         <div class="col-6 flex-inputs">
                            <label for="user_id">PIC</label>
@@ -112,7 +117,12 @@
                         </div>
                         <div class="col-6 flex-inputs">
                            <label for="Custom_Name">Customer PIC</label>
-                           <input type="text" name="Custom_Name" id="Custom_Name" required />
+                           <!-- <input type="text" name="Custom_Name" id="Custom_Name" required /> -->
+                           <select name="Custom_Name" id="Custom_Name" required>
+                              @foreach ($customers as $customer)
+                                 <option value="{{ $customer->name }}">{{ $customer->name }}</option>
+                              @endforeach
+                           </select>
                         </div>
                      </div>
                      <div class="row">
