@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inquiry extends Model
 {
-    protected $fillable = ['id', 'name', 'email', 'message'];
+    protected $fillable = ['id', 'name', 'email', 'message','status'];
     use HasFactory;
+
+    public function remarks()
+{
+    return $this->hasMany(Remarks::class);
+}
 }

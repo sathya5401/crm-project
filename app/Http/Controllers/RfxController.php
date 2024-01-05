@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Rfx;
 use App\Models\User; 
-use App\Models\Document; 
+use App\Models\Document;
+use App\Models\Customers; 
+
 
 
 class RfxController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function new()
     {
         $user = Auth::user();
@@ -19,9 +26,11 @@ class RfxController extends Controller
         if (!$user->can_create_rfx) {
             return view('errors.permission')->with('message', 'You do not have permission to create proposals.');
         }
+
+        $customers = Customers::all();
         $users = User::all(); // Fetch the list of users
 
-        return view('rfx.newRFx', ['users' => $users]);
+        return view('rfx.newRFx', ['users' => $users, 'customers' => $customers]);
     }
     public function store(Request $request)
     {
@@ -95,7 +104,7 @@ class RfxController extends Controller
         // Fetch the list of users
         $users = User::all();
         
-        return view('rfx.RFx',['users' => $users]); 
+        return redirect()->route('rfx.index')->with('success', 'Rfx created successfully.');
     }
 
     public function index(Request $request)
@@ -194,12 +203,13 @@ class RfxController extends Controller
         if (!$user->can_edit_rfx) {
             return view('errors.permission')->with('message', 'You do not have permission to edit proposals.');
         }
-    
+
+        $customers = Customers::all();
         $Rfx = Rfx::find($id);
         $users = User::all();
         $documents = $Rfx->documents; // Retrieve associated documents
     
-        return view('rfx.editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
+        return view('rfx.editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents, 'customers' => $customers]);
     }
 
     public function update(Request $request, $id)

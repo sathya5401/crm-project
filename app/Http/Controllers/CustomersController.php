@@ -6,7 +6,12 @@ use App\Models\Customers;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $customers = Customers::all();
@@ -31,6 +36,7 @@ class CustomersController extends Controller
         $customer->pic = $request->pic;
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
+        $customer->Company = $request->Company;
         $customer->save();
 
         return redirect()->route('customers.index');
@@ -41,9 +47,9 @@ class CustomersController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customers $customer)
-    {
-        $customer = new Customers;
+    public function update(Request $request, $id)
+    {   
+        $customer = Customers::find($id);
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
         $customer->phone = $request->phone;
@@ -54,6 +60,8 @@ class CustomersController extends Controller
         $customer->pic = $request->pic;
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
+        $customer->Company = $request->Company;
+
         $customer->save();
 
         return redirect()->route('customers.index');

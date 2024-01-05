@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -48,5 +50,16 @@ class LoginController extends Controller
         auth()->logout();
 
         return redirect('/login');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->first_login) {
+            // If it's the user's first login, redirect them to the password change form
+            return redirect()->route('password.change');
+        }
+
+        // Otherwise, redirect to the intended URL or the default home page
+        return redirect()->intended($this->redirectPath());
     }
 }

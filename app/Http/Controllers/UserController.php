@@ -10,7 +10,12 @@ use App\Mail\RegistrationEmail;
 
 
 class UserController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create()
     {
         if ( (Auth::user()->is_admin) === 1)  {

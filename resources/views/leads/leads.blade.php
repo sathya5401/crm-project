@@ -65,6 +65,12 @@
     justify-content: flex-end !important;
 }
 
+.subject-font{
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -122,7 +128,7 @@
                 @foreach ($leads as $key => $lead)
                     <tr >
                         <td scope="row">{{ $key+1 }}</td>
-                        <td><a href="{{ route('leads.show', $lead->id) }}"> {{ $lead->name }} </a> </td>
+                        <td><a class="subject-font" href="{{ route('leads.show', $lead->id) }}"> {{ $lead->name }} </a> </td>
                         <td>{{ $lead->email }}</td>
                         <td>{{ $lead->title}}</td>
                         <td>{{ $lead->faxNo}}</td>

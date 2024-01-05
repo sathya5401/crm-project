@@ -66,14 +66,45 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
 
-   </section>
-   <section>
+        <section>
         <div>
              <h4> EMAIL</h4>
         </div>
-    </section>
+        </section>
+         
+        <div class="row card-row">
+            <div class="col-12">
+               <div class="card-body" style="padding: 2%;">
+                  <form method="POST" action="{{ route('send.email') }}">
+                     @csrf
+                     
+                     <div class="row">
+                        <div class="col-12 flex-inputs">
+                           <label for="email">Email: </label>
+                           <input type="text" name="email" id="email" required autofocus />
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-12 flex-inputs">
+                           <label for="subject">Subject: </label>
+                           <input type="text" name="subject" id="subject" required />
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-12 flex-inputs">
+                           <label for="message">Message: </label>
+                           <textarea name="message" placeholder="Your Message"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-12" style="margin-top:3%">
+                        <button type="submit">Send</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+   </section>
 @endsection
 
 

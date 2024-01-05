@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Inquiry;
 
 class SupportInquiryController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $inquiries = Inquiry::all();

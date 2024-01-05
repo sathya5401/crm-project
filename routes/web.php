@@ -37,6 +37,10 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+use App\Http\Controllers\PasswordController;
+Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change')->middleware('auth');
+Route::post('/password/change', [PasswordController::class, 'change'])->name('password.change.post');
+
 
 use App\Http\Controllers\UserController;
 Route::get('/user/register', [UserController::class, 'create'])->name('user.register.create');
@@ -117,12 +121,7 @@ Route::get('/insert-data-to-sheet', [GoogleSpreadsheetController::class, 'insert
 
 
 use App\Http\Controllers\CustomersController;
-// Route::get('/customers/create', function () {
-//     return view('customers.create');
-// });
-// Route::get('/customers', function () {
-//     return view('customers.index');
-// });
+
 Route:: resource ('customers', CustomersController::class);
 Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
 Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
@@ -135,8 +134,14 @@ Route::put('/customers/{customer}', [CustomersController::class, 'update'])->nam
 use App\Http\Controllers\ClientInquiryController;
 use App\Http\Controllers\SupportInquiryController;
 
-Route::get('/inquiry', [ClientInquiryController::class, 'create']);
-Route::post('/inquiry', [ClientInquiryController::class, 'store']);
+Route::get('/inquiry', [ClientInquiryController::class, 'index']);
+Route::get('/inquiry/new', [ClientInquiryController::class, 'create']);
+Route::post('/inquiry/new', [ClientInquiryController::class, 'store']);
+Route::get('/inquiry/{id}', [ClientInquiryController::class, 'show'])->name('inquiry.show');
+Route::put('/inquiry/{id}/updateStatus',[ClientInquiryController::class,'updateStatus'])->name('inquiry.updateStatus');
+Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemarks'])->name('remarks.store');
+Route::get('/inquirydata', [ClientInquiryController::class, 'inquiryData'])->name('inquiry.data');
+
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 
@@ -151,13 +156,6 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 
-// Route::get('/marketing/deals', function () {
-//     return view('marketing.deals');
-// });
-// Route::get('/marketing/meeting', function () {
-//     return view('marketing.meeting');
-// });
-
-Route::get('/marketing/email', function () {
-    return view('marketing.email');
-});
+use App\Http\Controllers\MailController;
+Route::get('/marketing/email', function () {return view('marketing.email');});
+Route::post('/send',[MailController::class,'send'])->name('send.email');
