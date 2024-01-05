@@ -121,12 +121,7 @@ Route::get('/insert-data-to-sheet', [GoogleSpreadsheetController::class, 'insert
 
 
 use App\Http\Controllers\CustomersController;
-// Route::get('/customers/create', function () {
-//     return view('customers.create');
-// });
-// Route::get('/customers', function () {
-//     return view('customers.index');
-// });
+
 Route:: resource ('customers', CustomersController::class);
 Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
 Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
@@ -161,13 +156,6 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 
-// Route::get('/marketing/deals', function () {
-//     return view('marketing.deals');
-// });
-// Route::get('/marketing/meeting', function () {
-//     return view('marketing.meeting');
-// });
-
-Route::get('/marketing/email', function () {
-    return view('marketing.email');
-});
+use App\Http\Controllers\MailController;
+Route::get('/marketing/email', function () {return view('marketing.email');});
+Route::post('/send',[MailController::class,'send'])->name('send.email');
