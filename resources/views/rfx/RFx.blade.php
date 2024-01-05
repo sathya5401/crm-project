@@ -53,6 +53,12 @@
     justify-content: flex-end !important;
 }
 
+.subject-font{
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -110,7 +116,7 @@
             <tbody>
                 @foreach ($Rfx as $key => $rfq)
                     <tr >
-                        <td scope="row"><a href="{{ route('rfx.show', $rfq->id) }}">RQ{{ $rfq->id }} </a></td>
+                        <td scope="row"><a class="subject-font" href="{{ route('rfx.show', $rfq->id) }}">RQ{{ $rfq->id }} </a></td>
                         <td>{{ $rfq->Company }}</td>
                         <td>{{ $rfq->Custom_Name }}</td>    
                         <td>{{ $rfq->Custom_Email }}</td>

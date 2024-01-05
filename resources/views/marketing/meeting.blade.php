@@ -39,7 +39,7 @@
   cursor: pointer;
 } */
 .container1{
-    margin-bottom: 5%;
+    margin-bottom: 3%;
     margin-top: 2%;
 }
 .flex-buttons{
@@ -66,8 +66,8 @@
                     </div>
                 </div>
             </div>
-        <div class="container" style="padding-top: 3%; margin-top: 3%">
-            <div class="row" style="margin-bottom: 3%;">
+        <div class="container" style="padding-top: 3%; margin-top: 0%">
+            <div class="row" style="margin-bottom: 0%;">
                 <div class="col-12 flex">
                     <div>
                         <h4>MEETING</h4>
