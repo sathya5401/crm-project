@@ -203,12 +203,13 @@ class RfxController extends Controller
         if (!$user->can_edit_rfx) {
             return view('errors.permission')->with('message', 'You do not have permission to edit proposals.');
         }
-    
+
+        $customers = Customers::all();
         $Rfx = Rfx::find($id);
         $users = User::all();
         $documents = $Rfx->documents; // Retrieve associated documents
     
-        return view('rfx.editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents]);
+        return view('rfx.editRfx', ['Rfx' => $Rfx, 'users' => $users, 'documents' => $documents, 'customers' => $customers]);
     }
 
     public function update(Request $request, $id)
