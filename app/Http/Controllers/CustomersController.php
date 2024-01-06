@@ -12,9 +12,16 @@ class CustomersController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+        public function index(Request $request)
     {
-        $customers = Customers::all();
+        $query = Customers::query();
+
+        // Check if a category filter is applied
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category', $request->category);
+        }
+
+        $customers = $query->get();
         return view('customers.index', compact('customers'));
     }
 
@@ -37,6 +44,8 @@ class CustomersController extends Controller
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
         $customer->Company = $request->Company;
+        $customer->category = $request->category;
+        //$customer->reference = $request->reference;
         $customer->save();
 
         return redirect()->route('customers.index');
@@ -61,6 +70,8 @@ class CustomersController extends Controller
         $customer->pic_phone = $request->pic_phone;
         $customer->designation = $request->designation;
         $customer->Company = $request->Company;
+        $customer->category = $request->category;
+        //$customer->reference = $request->reference;
 
         $customer->save();
 

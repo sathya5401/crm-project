@@ -24,7 +24,7 @@ class MailController extends Controller
     $mail_data = [
         'recipient' => $customer->email,
         'fromEmail' => 'u2005370@siswa.um.edu.my',
-        'fromName' => 'CRM',
+        'fromName' => 'CRM Project',
         'subject' => $request->subject,
         'body' => $request->message
     ];
