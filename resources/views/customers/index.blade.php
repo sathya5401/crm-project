@@ -75,7 +75,7 @@
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Person in Charge</th>
                     <th scope="col"> Action</th>
@@ -85,7 +85,7 @@
             @foreach ($customers as $customer)
                     <tr >
                         <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->address }}</td>
+                        <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone}}</td>
                         <td>{{ $customer->pic}}</td>
                         <td class="icons">  
