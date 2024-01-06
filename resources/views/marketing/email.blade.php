@@ -81,10 +81,6 @@
                      @csrf
                      
                      <div class="row">
-                        <div class="col-12 flex-inputs">
-                           <label for="email">Email: </label>
-                           <input type="text" name="email" id="email" required autofocus />
-                        </div>
                      </div>
                      <div class="row">
                         <div class="col-12 flex-inputs">
