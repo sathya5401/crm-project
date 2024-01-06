@@ -85,35 +85,36 @@
                             <form method="POST" action="{{ route('customers.store') }}">
                                 @csrf
 
-    <div class="row">
-        <div class="col-6 flex-inputs">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter Name">
-        </div>
+                                <div class="row">
+                                    <div class="col-6 flex-inputs">
+                                        <label for="name">Name:</label>
+                                        <input type="text" id="name" name="name" placeholder="Enter Name">
+                                    </div>
 
-        <div class="col-6 flex-inputs">
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">   
-        </div>
-    </div>
+                                    <div class="col-6 flex-inputs">
+                                        <label for="Company">Company:</label>
+                                        <input type="text" id="Company" name="Company" placeholder="Enter Company">   
+                                    </div>
 
-    <div class="row">
-        <div class="col-6 flex-inputs">
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter Address">
-        </div>
+                                    <div class="col-6 flex-inputs">
+                                        <label for="phone">Phone:</label>
+                                        <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">   
+                                    </div>
 
-        <div class="col-6 flex-inputs">
-            <label for="registration_no">Registration No:</label>
-            <input type="text" id="registration_no" name="registration_no" placeholder="Enter registration number">
-        </div>
-    </div>
+                                    <div class="col-6 flex-inputs">
+                                        <label for="address">Address:</label>
+                                        <input type="text" id="address" name="address" placeholder="Enter Address">
+                                    </div>
 
-    <div class="row">
-        <div class="col-6 flex-inputs">
-            <label for="website_url">Website URL:</label>
-            <input type="text" id="website_url" name="website_url" placeholder="Enter Website URL">
-        </div>
+                                    <div class="col-6 flex-inputs">
+                                        <label for="registration_no">Registration No:</label>
+                                        <input type="text" id="registration_no" name="registration_no" placeholder="Enter registration number">
+                                    </div>
+
+                                    <div class="col-6 flex-inputs">
+                                        <label for="website_url">Website URL:</label>
+                                        <input type="text" id="website_url" name="website_url" placeholder="Enter Website URL">
+                                    </div>
 
                                     <div class="col-6 flex-inputs">
                                         <label for="fax_no">Fax Number:</label>
@@ -129,21 +130,21 @@
                                         <input type="text" id="pic" name="pic" placeholder="Enter person in charge's name">
                                     </div>
 
-        <div class="col-3 flex-inputs">
-            <label for="pic_phone">Phone:</label>
-            <input type="text" id="pic_phone" name="pic_phone" placeholder="Enter person in charge's phone number" >
-        </div>
+                                    <div class="col-3 flex-inputs">
+                                        <label for="pic_phone">Phone:</label>
+                                        <input type="text" id="pic_phone" name="pic_phone" placeholder="Enter person in charge's phone number">
+                                    </div>
 
-        <div class="col-3 flex-inputs">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" placeholder="Enter person in charge's email">
-        </div>
+                                    <div class="col-3 flex-inputs">
+                                        <label for="email">Email:</label>
+                                        <input type="text" id="email" name="email" placeholder="Enter person in charge's email">
+                                    </div>
 
-        <div class="col-3 flex-inputs">
-            <label for="designation">Designation:</label>
-            <input type="text" id="designation" name="designation" placeholder="Enter person in charge's designation">
-        </div>
-    </div>
+                                    <div class="col-3 flex-inputs">
+                                        <label for="designation">Designation:</label>
+                                        <input type="text" id="designation" name="designation" placeholder="Enter person in charge's designation">
+                                    </div>
+                                </div>
 
                                 <div class="col-12" style="margin-top: 3%">
                                     <button type="submit">Register</button>
