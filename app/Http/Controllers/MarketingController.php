@@ -65,4 +65,11 @@ class MarketingController extends Controller
 
         return redirect()->route('meeting')->with('success', 'Meeting created successfully.');  
       }
+
+      public function destroy(Meeting $meeting)
+      {
+          $meeting->delete();
+          return redirect()->route('meeting');
+      }
+      
 }

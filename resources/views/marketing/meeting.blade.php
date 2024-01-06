@@ -109,7 +109,7 @@
                                     }">
                             <img src="{{ url('img/delete.png') }}" alt="delete">
                         </a>
-                        <form id="delete-form-{{ $temp->id }}" action="{{ route('user.delete', $temp->id) }}" method="POST" style="display: none;">
+                        <form id="delete-form-{{ $temp->id }}" action="{{ route('meeting.destroy', $temp->id) }}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
                         </form>

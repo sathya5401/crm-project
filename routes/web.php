@@ -155,6 +155,9 @@ Route::get ('/marketing/deals', [MarketingController::class, 'deals']) ->name('d
 Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->name('meeting');
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
+Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
+
+
 
 use App\Http\Controllers\MailController;
 Route::get('/marketing/email', function () {return view('marketing.email');});
