@@ -55,6 +55,11 @@
     display: flex !important;
     justify-content: flex-end !important;
 }
+.subject-font{
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
 </style>
 
 
@@ -100,7 +105,7 @@
                 @foreach ($task as $key => $temp)
                     <tr >
                         <td scope="row">{{ $key + 1 }}</td>
-                        <td> <a href="{{ route('tasks.show', $temp->id) }}"> {{ $temp->subject }} </a> </td>
+                        <td> <a class="subject-font" href="{{ route('tasks.show', $temp->id) }}"> {{ $temp->subject }} </a> </td>
                         <td>{{ $temp->owner }}</td>
                         <td>{{ $temp->due_date}}</td>
                         <form method="post" action="{{ route('tasks.updateStatus', $temp->id) }}" class="status-form">

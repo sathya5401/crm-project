@@ -84,17 +84,14 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="{{ $customer->name }}" >
         </div>
-        <div class="col-6 flex-inputs">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="{{ $customer->email }}">
-        </div>
-    </div>
 
-    <div class="row">
         <div class="col-6 flex-inputs">
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" value="{{ $customer->phone }}" >   
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-6 flex-inputs">
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" value="{{ $customer->address }}" >
@@ -106,15 +103,22 @@
             <label for="registration_no">Registration No:</label>
             <input type="text" id="registration_no" name="registration_no" value="{{ $customer->registration_no }}" >
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-6 flex-inputs">
             <label for="website_url">Website URL:</label>
             <input type="text" id="website_url" name="website_url" value="{{ $customer->website_url }}" >
         </div>
-
-    <div class="col-6 flex-inputs">
-    <label for="fax_no">Fax Number:</label>
-    <input type="text" id="fax_no" name="fax_no" value="{{ $customer->fax_no }}" >
     </div>
+
+    <div class="row">
+        <div class="col-6 flex-inputs">
+            <label for="fax_no">Fax Number:</label>
+            <input type="text" id="fax_no" name="fax_no" value="{{ $customer->fax_no }}" >
+        </div>
+    </div>
+
 
 <!--    person in charge -->
 

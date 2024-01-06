@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -228,92 +230,107 @@
 @endsection
 </body>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-        var ctx = document.getElementById('performanceChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Leads created', 'Deals created', 'Deals won'],
-                datasets: [{
-                    label: 'Count',
-                    data: [{{$leadsCreated}}, {{$dealsCreated}}, {{$dealsWon}}],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 206, 86, 0.8)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
+    var ctx = document.getElementById('performanceChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Leads created', 'Deals created', 'Deals won'],
+            datasets: [{
+                label: 'Count',
+                data: [{{$leadsCreated}}, {{$dealsCreated}}, {{$dealsWon}}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    grid: {
+                        display: false
                     }
                 },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
                     }
                 }
-            }
-        });
-    });
-    
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var rfxAnalysisCtx = document.getElementById('rfxAnalysisChart').getContext('2d');
-        var rfxAnalysisChart = new Chart(rfxAnalysisCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Created deals', 'Approved deals', 'Rejected deals'],
-                datasets: [{
-                    data: [{{$rfxCreated}}, {{$rfxApproved}}, {{$rfxRejected}}],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
-                }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'RFx Analysis (Last 3 Months)',
-                        font: {
-                            size: 16
-                        }
-                    },
-                    legend: {
-                        position: 'bottom'
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: Math.round,
+                    font: {
+                        weight: 'bold',
+                        size: 16
                     }
                 }
             }
-        });
+        }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var rfxAnalysisCtx = document.getElementById('rfxAnalysisChart').getContext('2d');
+    var rfxAnalysisChart = new Chart(rfxAnalysisCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Created deals', 'Approved deals', 'Rejected deals'],
+            datasets: [{
+                data: [{{$rfxCreated}}, {{$rfxApproved}}, {{$rfxRejected}}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'RFx Analysis (Last 3 Months)',
+                    font: {
+                        size: 16
+                    }
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                datalabels: {
+                    color: 'black',
+                    formatter: (value, ctx) => {
+                        return value + '%';
+                    }
+                }
+            }
+        }
+    });
+});
 </script>

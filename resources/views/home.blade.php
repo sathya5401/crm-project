@@ -124,6 +124,11 @@
     overflow-y: auto;
 }
 
+.subject-font{
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
 
 </style>
 
@@ -160,7 +165,7 @@
                         <tbody>
                             @foreach($tasks as $task)
                                 <tr>
-                                    <td> <a href="{{ route('tasks.show', $task->id) }}"> {{ $task->subject }} </a> </td>
+                                    <td> <a class="subject-font" href="{{ route('tasks.show', $task->id) }}"> {{ $task->subject }} </a> </td>
                                     <td> {{ $task->due_date }} </td>
                                     <!-- <td> {{ $task->status }} </td> -->
                                     <td> {{ $task->priority }} </td>
@@ -192,7 +197,7 @@
                             <tbody>
                                 @foreach($rfx as $rfq)
                                     <tr>
-                                        <td>RQ{{ $rfq->id }}</td>
+                                        <td><a class="subject-font" href="{{ route('rfx.show', $rfq->id) }}">RQ{{ $rfq->id }} </a></td>
                                         <td>{{ $rfq->Custom_Name }}</td>    
                                         <td>{{ $rfq->Custom_Email }}</td>
                                         <td>{{ $rfq->Company }}</td>
