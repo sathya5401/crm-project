@@ -76,7 +76,7 @@
             <h4>Email</h4>
             <form method="POST" action="{{ route('send.email') }}" enctype="multipart/form-data">
                 @csrf
-                <!-- Category Selection -->
+                <!-- Category Selection 
                 <div class="form-group">
                     <label for="category">Category:</label>
                     <select name="category" id="category" class="form-control" required>
@@ -86,8 +86,13 @@
                         <option value="midstream">Midstream Customers</option>
                         <option value="downstream">Downstream Customers</option>
                     </select>
-                </div>
+                </div>-->
 
+                <!-- email-->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control" required />
+                </div>
                 <!-- Subject -->
                 <div class="form-group">
                     <label for="subject">Subject:</label>

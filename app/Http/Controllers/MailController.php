@@ -1,54 +1,60 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Customers;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class MailController extends Controller
 {
-    public function send (Request $request){
-        //validate form
-        $request->validate([
-            'subject'=> 'required',
-            'message'=> 'required'
+    public function send(Request $request)
+    {
+        // Validate form
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+            'attachment' => 'nullable|file|max:20480' // Max 20MB file
         ]);
 
-    
-    $customers = Customers::all();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
+        if ($this->isOnline()) {
+            $attachment = $request->file('attachment');
 
-    if($this->isOnline()){
+            Mail::send('marketing.email-template', ['body' => $request->message], function ($message) use ($request, $attachment) {
+                $message->to($request->email)
+                        ->from('u2005370@siswa.um.edu.my', 'CRM Project')
+                        ->subject($request->subject);
 
+                // Attach file if it's uploaded
+                if ($attachment && $attachment->isValid()) {
+                    $message->attach($attachment->getRealPath(), [
+                        'as' => $attachment->getClientOriginalName(),
+                        'mime' => $attachment->getClientMimeType(),
+                    ]);
+                }
+            });
 
-    foreach ($customers as $customer) {    
-    $mail_data = [
-        'recipient' => $customer->email,
-        'fromEmail' => 'u2005370@siswa.um.edu.my',
-        'fromName' => 'CRM Project',
-        'subject' => $request->subject,
-        'body' => $request->message
-    ];
-    
+            return redirect()->back()->with('success', 'Email Sent!');
 
-    \Mail::send ('marketing.email-template',$mail_data, function ($message) use ($mail_data){
-        $message->to($mail_data['recipient'])
-        ->from($mail_data['fromEmail'], $mail_data['fromName'])
-        ->subject ($mail_data['subject']);
-    });
+        } else {
+            return redirect()->back()->with('error', 'Check your internet connection');
+        }
     }
 
-     return redirect()->back()->with('success', 'Email Sent!');
-
-    }else {
-        return redirect()->back() -> withInput()->with('error', 'Check your internet connection');
-    }
-}
-
-public function isOnline($site = "https://youtube.com/"){
-    if(@fopen ($site, "r")){
-        return true;
-    }else{
+    public function isOnline($site = "https://youtube.com/")
+    {
+        try {
+            if (@fopen($site, "r")) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
         return false;
-    } 
-}
+    }
 }
