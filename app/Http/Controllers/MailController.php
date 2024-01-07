@@ -48,7 +48,7 @@ class MailController extends Controller
                 }
             });
 
-            return redirect()->back()->with('success', 'Email Sent!');
+            return redirect()->to('marketing/sentmail');
 
         } else {
             return redirect()->back()->with('error', 'Check your internet connection');

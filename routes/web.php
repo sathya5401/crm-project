@@ -158,8 +158,13 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
+Route::get('/marketing/sentmail', function () { return view('marketing.sentmail');});
 
 
 use App\Http\Controllers\MailController;
 Route::get('/marketing/email', function () {return view('marketing.email');});
 Route::post('/send',[MailController::class,'send'])->name('send.email');
+
+
+
+
