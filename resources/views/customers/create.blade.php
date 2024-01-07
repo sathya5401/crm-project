@@ -81,70 +81,98 @@
                         <div class="card-body" style="padding: 2%;">
 
                             <!-- resources/views/customers/create.blade.php -->
-                            <h5>Create New Customer</h5>
                             <form method="POST" action="{{ route('customers.store') }}">
                                 @csrf
 
                                 <div class="row">
                                     <div class="col-6 flex-inputs">
                                         <label for="name">Name:</label>
-                                        <input type="text" id="name" name="name" placeholder="Enter Name">
+                                        <input type="text" id="name" name="name" placeholder="Enter Name" required >
                                     </div>
-
+                                
                                     <div class="col-6 flex-inputs">
                                         <label for="Company">Company:</label>
-                                        <input type="text" id="Company" name="Company" placeholder="Enter Company">   
+                                        <input type="text" id="Company" name="Company" placeholder="Enter Company" required>   
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-6 flex-inputs">
                                         <label for="phone">Phone:</label>
-                                        <input type="text" id="phone" name="phone" placeholder="Enter Phone Number">   
+                                        <input type="text" id="phone" name="phone" placeholder="Enter Phone Number" required>   
                                     </div>
 
                                     <div class="col-6 flex-inputs">
+                                        <label for="email">Email:</label>
+                                        <input type="text" id="email" name="email" placeholder="Enter Email" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 flex-inputs">
                                         <label for="address">Address:</label>
-                                        <input type="text" id="address" name="address" placeholder="Enter Address">
+                                        <input type="text" id="address" name="address" placeholder="Enter Address" required>
                                     </div>
 
                                     <div class="col-6 flex-inputs">
                                         <label for="registration_no">Registration No:</label>
-                                        <input type="text" id="registration_no" name="registration_no" placeholder="Enter registration number">
+                                        <input type="text" id="registration_no" name="registration_no" placeholder="Enter registration number" required>
                                     </div>
+                                </div>    
 
+                                <div class="row">
                                     <div class="col-6 flex-inputs">
                                         <label for="website_url">Website URL:</label>
-                                        <input type="text" id="website_url" name="website_url" placeholder="Enter Website URL">
+                                        <input type="text" id="website_url" name="website_url" placeholder="Enter Website URL"required>
                                     </div>
 
                                     <div class="col-6 flex-inputs">
                                         <label for="fax_no">Fax Number:</label>
-                                        <input type="text" id="fax_no" name="fax_no" placeholder="Enter Fax Number">
+                                        <input type="text" id="fax_no" name="fax_no" placeholder="Enter Fax Number"required>
+                                    </div>
+                               
+
+                                <!-- Customer Category-->
+                                <h5>Customer Category</h5>
+                                <div class="row">
+                                    <div class="col-12 flex-inputs">
+                                        <select name="category" id="category" class="form-control" required>
+                                            <option value="" disabled selected>Please Select Customer Category</option>
+                                            <option value="Upstream">upstream</option>
+                                            <option value="Midstream">midstream</option>
+                                            <option value="Downstream">downstream</option>
+                                        </select>
                                     </div>
                                 </div>
+
 
                                 <!-- Person in charge -->
-                                <h5>Person in charge</h5>
-                                <div class="row person-in-charge">
-                                    <div class="col-3 flex-inputs">
-                                        <label for="pic">Name:</label>
-                                        <input type="text" id="pic" name="pic" placeholder="Enter person in charge's name">
+                                <h5>Person in Charge</h5>
+                                    <div class="row person-in-charge">
+                                        <div class="col-md-4 flex-inputs">
+                                            <label for="pic">Name:</label>
+                                            <input type="text" id="pic" name="pic" placeholder="Enter person in charge's name"required>
+                                        </div>
+
+                                        <div class="col-md-4 flex-inputs">
+                                            <label for="pic_phone">Phone:</label>
+                                            <input type="text" id="pic_phone" name="pic_phone" placeholder="Enter person in charge's phone number"required>
+                                        </div>
+
+                                        <div class="col-md-4 flex-inputs">
+                                            <label for="designation">Designation:</label>
+                                            <input type="text" id="designation" name="designation" placeholder="Enter person in charge's designation"required>
+                                        </div>
                                     </div>
 
-                                    <div class="col-3 flex-inputs">
-                                        <label for="pic_phone">Phone:</label>
-                                        <input type="text" id="pic_phone" name="pic_phone" placeholder="Enter person in charge's phone number">
+                                <!-- Customer References
+                                <h5>Customer References</h5>
+                                <div class="row customer reference">
+                                    <div class="col-12 flex-inputs">
+                                        <label for="reference">Document</label>
+                                        <input type="reference" name="reference[]" multiple />
                                     </div>
-
-                                    <div class="col-3 flex-inputs">
-                                        <label for="email">Email:</label>
-                                        <input type="text" id="email" name="email" placeholder="Enter person in charge's email">
-                                    </div>
-
-                                    <div class="col-3 flex-inputs">
-                                        <label for="designation">Designation:</label>
-                                        <input type="text" id="designation" name="designation" placeholder="Enter person in charge's designation">
-                                    </div>
-                                </div>
+                                </div>-->
 
                                 <div class="col-12" style="margin-top: 3%">
                                     <button type="submit">Register</button>

@@ -63,30 +63,48 @@
         <div class="container container1">
             <div class="row">
                 <div class="col-12 flex-buttons">
-                    <div>
                         <a href="{{ url('customers/create') }}" class="btn btn-primary" style="color: black">Create New Customer</a>
-                    </div>
                 </div>
             </div>
         </div>    
-    
+
+        <div class="row">
+            <form action="{{ route('customers.index') }}" method="GET" class="form-inline justify-content-end">
+                <div class="form-group mb-2">
+                    <label for="filter-category" class="sr-only"></label>
+                    <select name="category" id="filter-category" class="form-control">
+                        <option value="">All Categories</option>
+                        <option value="Upstream">Upstream</option>
+                        <option value="Midstream">Midstream</option>
+                        <option value="Downstream">Downstream</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+            </form>
+        </div>
+
         
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th scope="col">No</th> <!-- Numbering header -->
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Phone Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Person in Charge</th>
                     <th scope="col"> Action</th>
                 </tr>
             </thead>
             <tbody>
+            @php $rowNumber = 1; @endphp <!-- Initialize a counter -->
             @foreach ($customers as $customer)
                     <tr >
+                        <td>{{ $rowNumber++ }}</td> <!-- Increment and display the row number -->
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->email }}</td>
-                        <td>{{ $customer->phone}}</td>
+                        <td>{{ $customer->address }}</td>
+                        <td>{{ $customer->category}}</td>
                         <td>{{ $customer->pic}}</td>
                         <td class="icons">  
                             <a href="{{ route('customers.edit', $customer->id) }}">
@@ -114,23 +132,3 @@
 
 </body>
 </html>
-
-
-<!-- resources/views/customers/index.blade.php 
-<h1>Customers</h1>
-
-<a href="{{ route('customers.create') }}">Add New Customer</a>
-
-<ul>
-    @foreach ($customers as $customer)
-        <li>
-            {{ $customer->name }} - {{ $customer->address }}
-            <a href="{{ route('customers.edit', $customer->id) }}">Edit</a>
-            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    @endforeach
-</ul>-->

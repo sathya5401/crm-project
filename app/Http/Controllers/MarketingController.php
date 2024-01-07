@@ -31,8 +31,7 @@ class MarketingController extends Controller
 
     public function meeting() {
 
-        $meeting = Meeting::all();
-
+        $meeting = Meeting::orderBy('created_at', 'desc')->get(); // Sort by creation date, newest first
         return view('marketing.meeting', compact('meeting'));
     }
 
@@ -66,4 +65,11 @@ class MarketingController extends Controller
 
         return redirect()->route('meeting')->with('success', 'Meeting created successfully.');  
       }
+
+      public function destroy(Meeting $meeting)
+      {
+          $meeting->delete();
+          return redirect()->route('meeting');
+      }
+      
 }
