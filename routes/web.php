@@ -125,10 +125,16 @@ use App\Http\Controllers\CustomersController;
 Route:: resource ('customers', CustomersController::class);
 Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
 Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
+Route::post('/customers/store', [CustomersController::class, 'store'])->name('customers.store');
 // Display edit form
 Route::get('/customers/{customer}/edit', [CustomersController::class, 'edit'])->name('customers.edit');
 // Handle update
 Route::put('/customers/{customer}', [CustomersController::class, 'update'])->name('customers.update');
+Route::get('/customers/data', [CustomersController::class, 'show'])->name('customers.data');
+//Route::get('/customers/search', 'CustomersController@search')->name('customers.search');
+
+
+
 
 
 use App\Http\Controllers\ClientInquiryController;
