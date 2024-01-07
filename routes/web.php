@@ -141,8 +141,11 @@ Route::get('/inquiry/{id}', [ClientInquiryController::class, 'show'])->name('inq
 Route::put('/inquiry/{id}/updateStatus',[ClientInquiryController::class,'updateStatus'])->name('inquiry.updateStatus');
 Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemarks'])->name('remarks.store');
 Route::get('/inquirydata', [ClientInquiryController::class, 'inquiryData'])->name('inquiry.data');
+// Route::delete('/inquiry/listing/{inquiry}', [ClientInquiryController::class, 'destroy'])->name('inquiry.destroy');
+
 
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
+
 
 
 

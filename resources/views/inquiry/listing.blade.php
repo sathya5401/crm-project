@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-12 flex-buttons">
                     <div style="margin-top: 2%;">
-                        <a href="{{ url('inquiry/new') }}" class="btn btn-primary">Add Inquiry</a>
+                        <a href="{{ url('inquiry/new') }}" class="btn btn-primary">Add New Inquiry</a>
                     </div>
                 </div>
             </div>

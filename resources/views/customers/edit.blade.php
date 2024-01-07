@@ -173,10 +173,14 @@
                                         <input type="reference" name="reference[]" multiple />
                                     </div>
                                 </div>-->
-
                                 <div class="col-12" style="margin-top: 3%">
-                                    <button type="submit">Update Customer</button>
+                                    <button type="submit" id="updateButton">Update Customer</button>
                                 </div>
+                                <script>
+                                    document.getElementById('updateButton').addEventListener('click', function() {
+                                        alert('Successfully update!');
+                                    });
+                                </script>
                             </form>
                         </div>
                     </div>
