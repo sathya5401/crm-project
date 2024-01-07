@@ -134,9 +134,6 @@ Route::get('/customers/data', [CustomersController::class, 'show'])->name('custo
 //Route::get('/customers/search', 'CustomersController@search')->name('customers.search');
 
 
-
-
-
 use App\Http\Controllers\ClientInquiryController;
 use App\Http\Controllers\SupportInquiryController;
 
@@ -148,15 +145,11 @@ Route::put('/inquiry/{id}/updateStatus',[ClientInquiryController::class,'updateS
 Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemarks'])->name('remarks.store');
 Route::get('/inquirydata', [ClientInquiryController::class, 'inquiryData'])->name('inquiry.data');
 // Route::delete('/inquiry/listing/{inquiry}', [ClientInquiryController::class, 'destroy'])->name('inquiry.destroy');
-
-
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 
-
-
-
 use App\Http\Controllers\MarketingController;
+
 Route::get('/marketing/home', function () {
     return view('marketing.home');
 });
@@ -165,7 +158,6 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
-
 
 
 use App\Http\Controllers\MailController;

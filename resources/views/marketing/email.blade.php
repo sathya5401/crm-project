@@ -76,23 +76,23 @@
             <h4>Email</h4>
             <form method="POST" action="{{ route('send.email') }}" enctype="multipart/form-data">
                 @csrf
-                <!-- Category Selection 
+                <!-- Category Selection -->
                 <div class="form-group">
-                    <label for="category">Category:</label>
-                    <select name="category" id="category" class="form-control" required>
-                        <option value="all">All Categories</option>
-                        <option value="all">All Users</option>
-                        <option value="upstream">Upstream Customers</option>
-                        <option value="midstream">Midstream Customers</option>
-                        <option value="downstream">Downstream Customers</option>
-                    </select>
-                </div>-->
-
-                <!-- email-->
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" id="email" class="form-control" required />
+                    <label>Categories Recipient</label>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="categories[]" value="users"> Users</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="categories[]" value="upstream"> Upstream Customers</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="categories[]" value="midstream"> Midstream Customers</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="categories[]" value="downstream"> Downstream Customers</label>
+                    </div>
                 </div>
+
                 <!-- Subject -->
                 <div class="form-group">
                     <label for="subject">Subject:</label>
@@ -105,15 +105,15 @@
                     <textarea name="message" id="message" class="form-control" required></textarea>
                 </div>
 
-                <!-- Attachment -->
+                <!-- Attachment (multiple) -->
                 <div class="form-group">
-                    <label for="attachment">Attachment:</label>
-                    <input type="file" name="attachment" id="attachment" class="form-control">
+                    <label for="attachments">Attachments:</label>
+                    <input type="file" name="attachments[]" id="attachments" class="form-control" multiple>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="submit" id="sendButton" class="btn btn-primary">Send</button>
                 </div>
             </form>
         </div>
