@@ -58,6 +58,9 @@
                     <div>
                         <h4>New Inquiry</h4>
                     </div>
+                    <div>
+                            <a href="{{ url('/inquiry') }}" class="btn btn-light">Back</a>
+                    </div>
                 </div>
             </div>
             <div class="row card-row">
@@ -72,11 +75,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Your Email">
+                                <input type="email" class="form-control" name="email" value="{{ $user->email }}">
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea class="form-control" name="message" placeholder="Your Message"></textarea>
+                                <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="Status">Status</label>
@@ -88,6 +91,22 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit Inquiry</button>
                         </form>
+                        <div id="successMessage" style="display: none;">
+                            Inquiry submitted successfully.
+                        </div>
+
+                    <script>
+                        function showSuccessMessage() {
+                            // Show the success message
+                            document.getElementById('successMessage').style.display = 'block';
+
+                            // You can also hide the form if needed
+                            document.querySelector('form').style.display = 'none';
+
+                            // Return false to prevent the form from submitting
+                            return false;
+                        }
+                    </script>
                     </div>
                 </div>
                 <div class="col-md-6">
