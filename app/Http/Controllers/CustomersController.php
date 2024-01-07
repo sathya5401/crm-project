@@ -12,8 +12,9 @@ class CustomersController extends Controller
         $this->middleware('auth');
     }
     
-        public function index(Request $request)
+    public function index(Request $request)
     {
+        $customers = Customers::all();
         $query = Customers::query();
 
         // Check if a category filter is applied

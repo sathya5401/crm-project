@@ -175,8 +175,15 @@
                                 </div>-->
 
                                 <div class="col-12" style="margin-top: 3%">
-                                    <button type="submit">Register</button>
+                                    <button type="submit" id="registerButton">Register</button>
                                 </div>
+
+                                <script>
+                                    document.getElementById('registerButton').addEventListener('click', function() {
+                                        alert('Successfully created customer!');
+                                    });
+                                </script>
+
                             </form>
                         </div>
                     </div>

@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,6 +56,11 @@
     display: flex !important;
     justify-content: flex-end !important;
 }
+
+.text-center {
+    text-align: center;
+}
+
 </style>
 
 
@@ -87,26 +97,26 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">No</th> <!-- Numbering header -->
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Person in Charge</th>
-                    <th scope="col"> Action</th>
+                    <th class="text-center" scope="col">No</th>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Email</th>
+                    <th class="text-center" scope="col">Address</th>
+                    <th class="text-center" scope="col">Category</th>
+                    <th class="text-center" scope="col">Person in Charge</th>
+                    <th class="text-center" scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
             @php $rowNumber = 1; @endphp <!-- Initialize a counter -->
             @foreach ($customers as $customer)
                     <tr >
-                        <td>{{ $rowNumber++ }}</td> <!-- Increment and display the row number -->
-                        <td>{{ $customer->name }}</td>
-                        <td>{{ $customer->email }}</td>
-                        <td>{{ $customer->address }}</td>
-                        <td>{{ $customer->category}}</td>
-                        <td>{{ $customer->pic}}</td>
-                        <td class="icons">  
+                    <td class="text-center">{{ $rowNumber++ }}</td>
+                    <td class="text-center">{{ $customer->name }}</td>
+                    <td class="text-center">{{ $customer->email }}</td>
+                    <td class="text-center">{{ $customer->address }}</td>
+                    <td class="text-center">{{ $customer->category}}</td>
+                    <td class="text-center">{{ $customer->pic}}</td>
+                    <td class="text-center icons">  
                             <a href="{{ route('customers.edit', $customer->id) }}">
                                 <img src="{{ url('img/edit.png') }}" alt="Edit">
                             </a> 

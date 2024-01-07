@@ -82,4 +82,12 @@ class ClientInquiryController extends Controller
         return view('inquiry.data', ['inquiries' => $inquiries, 'solved' => $solved , 'pending' => $pending]);
     }
 
+    /*public function destroy(Inquiry $inquiry)
+    {
+        $inquiry->delete();
+
+        // Redirect to the inquiry listing page or any other page you want.
+        return redirect()->route('inquiry.index');
+    }*/
+
 }
