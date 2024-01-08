@@ -67,9 +67,9 @@
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     MY_CRM
                 </a>
-                <a href="">
+                <!-- <a href="">
                     <img class="notify-img" src="{{ url('img/notification.png') }}">
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
