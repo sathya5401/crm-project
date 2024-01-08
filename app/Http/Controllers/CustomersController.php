@@ -33,6 +33,23 @@ class CustomersController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            // Add your validation rules here
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+            'registration_no' => 'required',
+            'website_url'=> 'required',
+            'fax_no' => 'required',
+            'pic' => 'required',
+            'pic_phone' => 'required',
+            'designation' => 'required',
+            'Company' => 'required',
+            'category' => 'required',
+        ]);
+
+
         $customer = new Customers;
         $customer->name = $request->name;
         $customer->email = $request->email ?? 'default@email.com'; // Default value if email is not provided
@@ -49,7 +66,7 @@ class CustomersController extends Controller
         //$customer->reference = $request->reference;
         $customer->save();
 
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Customer created successfully!');
     }
 
     public function edit(Customers $customer)
@@ -84,4 +101,20 @@ class CustomersController extends Controller
         $customer->delete();
         return redirect()->route('customers.index');
     }
+
+    public function show()
+    {
+        $upstreamCount = Customers::where('category', 'upstream')->count();
+        $midstreamCount = Customers::where('category', 'midstream')->count();
+        $downstreamCount = Customers::where('category', 'downstream')->count();
+        $total = Customers::count();
+    
+        return view('customers.data', [
+            'upstream' => $upstreamCount, 
+            'midstream' => $midstreamCount, 
+            'downstream' => $downstreamCount, 
+            'total' => $total
+        ]);
+    }
+    
 }

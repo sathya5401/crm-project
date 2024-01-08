@@ -125,10 +125,13 @@ use App\Http\Controllers\CustomersController;
 Route:: resource ('customers', CustomersController::class);
 Route::get ('/customers', [CustomersController::class, 'index']) ->name('customers.index');
 Route::get ('/customers/create', [CustomersController::class, 'create']) ->name('customers.create');
+Route::post('/customers/store', [CustomersController::class, 'store'])->name('customers.store');
 // Display edit form
 Route::get('/customers/{customer}/edit', [CustomersController::class, 'edit'])->name('customers.edit');
 // Handle update
 Route::put('/customers/{customer}', [CustomersController::class, 'update'])->name('customers.update');
+Route::get('/customers/data', [CustomersController::class, 'show'])->name('customers.data');
+//Route::get('/customers/search', 'CustomersController@search')->name('customers.search');
 
 
 use App\Http\Controllers\ClientInquiryController;
@@ -142,15 +145,11 @@ Route::put('/inquiry/{id}/updateStatus',[ClientInquiryController::class,'updateS
 Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemarks'])->name('remarks.store');
 Route::get('/inquirydata', [ClientInquiryController::class, 'inquiryData'])->name('inquiry.data');
 // Route::delete('/inquiry/listing/{inquiry}', [ClientInquiryController::class, 'destroy'])->name('inquiry.destroy');
-
-
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
 
 
-
-
-
 use App\Http\Controllers\MarketingController;
+
 Route::get('/marketing/home', function () {
     return view('marketing.home');
 });
@@ -159,9 +158,13 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
-
+Route::get('/marketing/sentmail', function () { return view('marketing.sentmail');});
 
 
 use App\Http\Controllers\MailController;
 Route::get('/marketing/email', function () {return view('marketing.email');});
 Route::post('/send',[MailController::class,'send'])->name('send.email');
+
+
+
+

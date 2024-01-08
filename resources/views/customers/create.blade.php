@@ -81,7 +81,7 @@
                         <div class="card-body" style="padding: 2%;">
 
                             <!-- resources/views/customers/create.blade.php -->
-                            <form method="POST" action="{{ route('customers.store') }}">
+                            <form method="POST" action="{{ route('customers.store') }}" id="customerForm">
                                 @csrf
 
                                 <div class="row">
@@ -175,16 +175,21 @@
                                 </div>-->
 
                                 <div class="col-12" style="margin-top: 3%">
-                                    <button type="submit" id="registerButton">Register</button>
+                                    <button type="button" id="registerButton">Register</button>
                                 </div>
-
-                                <script>
-                                    document.getElementById('registerButton').addEventListener('click', function() {
-                                        alert('Successfully created customer!');
-                                    });
-                                </script>
-
                             </form>
+                            <script>
+                                document.getElementById('registerButton').addEventListener('click', function() {
+                                    var form = document.getElementById('customerForm');
+                                    if (form.checkValidity()) {
+                                        form.submit();
+                                        alert('Successfully created customer!');
+                                    } else {
+                                        form.reportValidity();
+                                        // No alert here since the browser will show validation messages
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>

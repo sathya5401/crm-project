@@ -70,13 +70,19 @@
 @extends('layouts.sidebar')
 @section('content')
    <Section class="container-fluid ">
-        <div class="container container1">
-            <div class="row">
-                <div class="col-12 flex-buttons">
-                        <a href="{{ url('customers/create') }}" class="btn btn-primary" style="color: black">Create New Customer</a>
-                </div>
+   <div class="container container1">
+        <div class="row">
+            <!-- First Column for Create Button -->
+            <div class="col-md-6">
+                <a href="{{ url('customers/create') }}" class="btn btn-primary" >Create New Customer</a>
             </div>
-        </div>    
+
+            <!-- Second Column for Data Button, with right alignment -->
+            <div class="col-md-6 text-md-right">
+                <a href="{{ route('customers.data') }}" class="btn btn-primary">View Customer Data</a>
+            </div>
+        </div>
+    </div>
 
         <div class="row">
             <form action="{{ route('customers.index') }}" method="GET" class="form-inline justify-content-end">
