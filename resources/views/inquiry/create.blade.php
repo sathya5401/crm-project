@@ -67,7 +67,8 @@
                 <div class="col-md-6">
                     <div class="card-body" style="padding: 2%;">
                         <!-- <h5> New Inquiry </h5> -->
-                        <form method="POST" action="{{ url('/inquiry/new') }}">
+                        <form method="POST" action="{{ url('/inquiry/new') }}" id="inquiryForm">
+
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -91,22 +92,12 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit Inquiry</button>
                         </form>
-                        <div id="successMessage" style="display: none;">
-                            Inquiry submitted successfully.
-                        </div>
+                        <script>
+                            document.getElementById('inquiryForm').addEventListener('submit', function(event) {
+                                alert('Inquiry submitted!');
+                            });
+                        </script>
 
-                    <script>
-                        function showSuccessMessage() {
-                            // Show the success message
-                            document.getElementById('successMessage').style.display = 'block';
-
-                            // You can also hide the form if needed
-                            document.querySelector('form').style.display = 'none';
-
-                            // Return false to prevent the form from submitting
-                            return false;
-                        }
-                    </script>
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -63,18 +63,19 @@
     @extends('layouts.sidebar')
     @section('content')
     <section class="container-fluid bg-purple">
-        <div class="container" style="margin-bottom: 2%;">
-            <div class="row">
-                <div class="col-12 flex-row">
-                    <div>
-                        <h4>Create New Meeting</h4>
-                    </div>
-                    <div>
-                        <a href="{{ url('marketing/meeting') }}" class="btn btn-light">Back</a>
-                    </div>
+    <div class="container" style="margin-bottom: 2%;">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between">
+                <div>
+                    <h4>Create New Meeting</h4>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="https://meet.google.com/" target="_blank" class="btn btn-primary mr-2">Get meeting link</a>
+                    <a href="{{ url('marketing/meeting') }}" class="btn btn-light">Back</a>
                 </div>
             </div>
         </div>
+    </div>
     </section>
     <section class="container">
         <div class="row card-row">
