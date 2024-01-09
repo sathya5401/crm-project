@@ -40,7 +40,7 @@
     background-color: #FFFFFF;
     margin-top: 3%;
     padding: 3%;
-    width: 60%;
+    width: 100%;
     margin-left: 6%;
     border: 1px solid #ddd; /* Add a border for better separation */
     border-radius: 8px; /* Add border-radius for a softer look */
@@ -78,6 +78,7 @@
     padding: 2%;
     width: 60%;
     margin-left: 6%;
+    margin-bottom: 2%;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
@@ -138,7 +139,6 @@
 
 @section('content')
     <section class="container-fluid">
-        <div class="container flex-container">
             <div class="detailscontainer">
                 <div class="user-info">
                     <h3><b>Welcome back, {{$user->name}} </b></h3>
@@ -149,6 +149,38 @@
                     </a>
                 </div>
                 <img src="{{ url('img/face.png') }}" alt="face">
+            </div>
+        <div class="container flex-container">
+            <div class="container dealscontainer">
+                <h3>Upcoming Meetings</h3>
+                @if(count($upcomingMeetings) > 0)
+                    <div class="deals-table-container">
+                        <table class="deals-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <!-- <th scope="col">Host</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($upcomingMeetings as $meeting)
+                                    <tr>
+                                        <td><a class="subject-font">{{ $meeting->title }}</a></td>
+                                        <td>{{ $meeting->location }}</td>
+                                        <td>{{ $meeting->from }}</td>
+                                        <td>{{ $meeting->to }}</td>
+                                        <!-- <td>{{ $meeting->host->name }}</td> -->
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="no-deals"> No upcoming meetings for you. </p>
+                @endif
             </div>
             <div class="taskcontainer">
                 <h3>My Tasks</h3>

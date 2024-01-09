@@ -158,6 +158,7 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
+// Route::get('/meeting/{meeting}', [MeetingController::class, 'show'])->name('meeting.show');
 Route::get('/marketing/sentmail', function () { return view('marketing.sentmail');});
 
 
