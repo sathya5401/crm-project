@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('location');
+            $table->string('location',500);
             $table->dateTime('from'); // Date and time column
             $table->dateTime('to'); // Date and time column
 

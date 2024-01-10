@@ -39,7 +39,15 @@
     @extends('layouts.sidebar')
     @section('content')
         <div class="container-fluid">
-            <h2>Inquiry Analysis</h2>
+            <div class="row mb-3 align-items-center"> <!-- Align items center for vertical alignment -->
+                <div class="col-6 text-center"> <!-- Column for Customer Data Heading, centered text -->
+                    <h2>Inquiry Analysis</h2>
+                </div>
+                <div class="col-6 text-right"> <!-- Column for Back button, aligned to the right -->
+                    <a href="{{ url('/inquiry') }}" class="btn btn-secondary" style="background-color: purple; border-color: purple;">Back</a>
+                </div>
+            </div>
+
             <canvas class="canvas" id="inquiryAnalysisChart"></canvas>
         </div>
     @endsection
@@ -51,7 +59,7 @@
             var inquiryAnalysisChart = new Chart(inquiryAnalysisCtx, {
                 type: 'pie',
                 data: {
-                    labels: ['Created inquiries', 'Solved inquiries', 'Pending inquiries'],
+                    labels: ['New inquiries', 'Complete inquiries', 'In-progress inquiries'],
                     datasets: [{
                         data: [{{$inquiries}}, {{$solved}}, {{$pending}}],
                         backgroundColor: [

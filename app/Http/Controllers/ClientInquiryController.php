@@ -75,9 +75,9 @@ class ClientInquiryController extends Controller
 
     public function inquiryData(){
 
-        $inquiries = Inquiry::all()->count();
+        $inquiries = Inquiry::where('status', 'new')->count();
         $solved = Inquiry::where('status', 'completed')->count();
-        $pending = Inquiry::where('status', [ 'new', 'in-progress'])->count();
+        $pending = Inquiry::where('status', 'in-progress')->count();
 
         return view('inquiry.data', ['inquiries' => $inquiries, 'solved' => $solved , 'pending' => $pending]);
     }

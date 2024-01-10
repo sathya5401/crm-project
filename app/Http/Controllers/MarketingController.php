@@ -44,7 +44,7 @@ class MarketingController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
+            'location' => 'required|string|max:500',
             'from' => 'required|date',
             'to' => 'required|date|after:from',
             'host_id' => 'required|exists:users,id',

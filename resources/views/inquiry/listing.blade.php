@@ -77,7 +77,7 @@
         <div class="container container1">
             <div class="row">
                 <div>
-                   <h3> My Inquiries </h3> 
+                   <h3> My Inquiry </h3> 
                 </div>
                 <div class="col-12 flex-buttons">
                     <div style="margin-top: 2%;">
@@ -111,7 +111,7 @@
         <div class="container container1">
             <div style="margin-bottom: 3%;" class="flex-buttons">
                 <div>
-                   <h3>All Inquiries </h3> 
+                   <h3>Inquiry List </h3> 
                 </div>
                 <div>
                     <a href="{{ route('inquiry.data') }}" class="btn btn-primary">View Inquiries Data</a>
