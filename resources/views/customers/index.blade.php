@@ -84,7 +84,11 @@
         </div>
     </div>
 
-        <div class="row">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Customer List</h2> <!-- Added Customer List here -->
+        </div>
+        <div class="col-md-6">
             <form action="{{ route('customers.index') }}" method="GET" class="form-inline justify-content-end">
                 <div class="form-group mb-2">
                     <label for="filter-category" class="sr-only"></label>
@@ -98,6 +102,8 @@
                 <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
             </form>
         </div>
+    </div>
+
 
         
         <table class="table table-bordered">

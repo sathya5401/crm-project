@@ -86,6 +86,7 @@
                 </div>
             </div>
         </div>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -117,6 +118,24 @@
                     <a href="{{ route('inquiry.data') }}" class="btn btn-primary">View Inquiries Data</a>
                 </div>
             </div>
+
+           <div class="row">
+                <div class="col-md-6 d-flex justify-content-between">
+                    <form action="{{ route('inquiry.index') }}" method="GET" class="form-inline">
+                        <div class="form-group mb-2">
+                            <label for="filter-status" class="sr-only"></label>
+                            <select name="status" id="filter-status" class="form-control">
+                                <option value="">All Status</option>
+                                <option value="new">New</option>
+                                <option value="in-progress">In-progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2 ml-2">Filter</button>
+                    </form>
+                </div>
+            </div>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>

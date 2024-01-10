@@ -146,6 +146,8 @@ Route::post('/remarks/store/{id}', [ClientInquiryController::class, 'storeRemark
 Route::get('/inquirydata', [ClientInquiryController::class, 'inquiryData'])->name('inquiry.data');
 // Route::delete('/inquiry/listing/{inquiry}', [ClientInquiryController::class, 'destroy'])->name('inquiry.destroy');
 Route::get('/support/inquiries', [SupportInquiryController::class, 'index']);
+Route::get('/inquiries', [SupportInquiryController::class, 'index'])->name('inquiry.index');
+
 
 
 use App\Http\Controllers\MarketingController;

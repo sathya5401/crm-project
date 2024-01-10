@@ -14,21 +14,32 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- styles -->
     <style>
-        body {
-            background-color: #f8f9fa;
+         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
 
+        .bg-purple {
+            background-color: #e0dcfc;
+        }
+
+        .table thead tr {
+            background-color: #dc3545 !important;
+            color: white;
+        }
+        .icons {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .container1 {
+            margin-bottom: 5%;
+            margin-top: 2%;
+        }
         .container {
             margin-top: 20px;
-        }
-
-        .btn-back {
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
         }
 
         form {
@@ -39,15 +50,15 @@
             margin-right: 10px;
         }
 
-        select, textarea {
+        select {
             margin-bottom: 10px;
         }
 
         .comments-section {
             margin-top: 1%;
-            /* background-color: #e9ecef; Light Gray Background */
             padding: 20px;
             border-radius: 8px;
+            background-color: #ffffff; /* White Background */
         }
 
         .comment {
@@ -61,6 +72,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ced4da; /* Border Color */
             border-radius: 4px;
         }
@@ -73,60 +85,107 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inquiry-details {
+            margin-top: 20px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: max-content 1fr; /* Adjust these values as needed */
+            grid-gap: 8px; /* Reduced gap */
+            align-items: start;
+        }
+
+        .grid-layout > div {
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
     @extends('layouts.sidebar')
-
     @section('content')
+    <section class="container-fluid">
         <div class="container">
-            <a href="{{ url('/inquiry') }}" class="btn btn-light btn-back">Back</a>
-            <h1>Inquiry Details</h1>
-            <p><strong>Name:</strong> {{ $inquiry->name }}</p>
-            <p><strong>Email:</strong> {{ $inquiry->email }}</p>
-            <p><strong>Message:</strong> {{ $inquiry->message }}</p>
+                <div class="header">
+                    <h2 style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">Inquiry Details</h2>
+                    <a href="{{ url('/inquiry') }}" class="btn btn-light btn-back">Back</a>
+                </div>
+             
+        <div>    
+            <div class="inquiry-details grid-layout">
+                <div><strong>Name:</strong></div>
+                <div>{{ $inquiry->name }}</div>
+                
+                <div><strong>Email:</strong></div>
+                <div>{{ $inquiry->email }}</div>
+
+                <div><strong>Message:</strong></div>
+                <div>{{ $inquiry->message }}</div>
+            </div>
+        </div>
 
             @if (Auth::user()->is_admin === 0)
-            <form method="POST" action="{{ route('inquiry.updateStatus', $inquiry->id) }}">
-                @csrf
-                @method('PUT')
+                <form method="POST" action="{{ route('inquiry.updateStatus', $inquiry->id) }}" id="updateStatus">
+                    @csrf
+                    @method('PUT')
 
-                <div class="form-group row">
-                    <label for="status" class="col-2 col-form-label">Status:</label>
-                    <div class="col-6">
-                        <select name="status" id="status" class="form-control" required>
-                            <option value="new" @if($inquiry->status == 'new') selected @endif>New</option>
-                            <option value="in-progress" @if($inquiry->status == 'in-progress') selected @endif>In-progress</option>
-                            <option value="completed" @if($inquiry->status == 'completed') selected @endif>Completed</option>
-                        </select>
-                    </div>
-                </div>
+                    <div class="form-group row">
+                        <!-- Label -->
+                        <label for="status" class="col-auto col-form-label">Status:</label>
 
-                <div class="form-group row">
-                    <div class="col-sm-6 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <!-- Select Dropdown -->
+                        <div class="col-md-3">
+                            <select name="status" id="status" class="form-control" required>
+                                <option value="new" @if($inquiry->status == 'new') selected @endif>New</option>
+                                <option value="in-progress" @if($inquiry->status == 'in-progress') selected @endif>In-progress</option>
+                                <option value="completed" @if($inquiry->status == 'completed') selected @endif>Completed</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
             @endif
 
             @if (Auth::user()->is_admin === 1)
-                <p><strong>Status:</strong> {{ $inquiry->status }}</p>
+                <div class="inquiry-details grid-layout">
+                    <div><strong>Status:</strong></div>
+                    <div>{{ $inquiry->status }}</div>
+                </div>
             @endif
         </div>
 
         <!-- Comments Section -->
         <div class="container comments-section">
-            <h2>Comments Section</h2>
-
+            <h3>Comments Section</h3>
+            
             @foreach ($remarks as $remark)
                 <div class="comment">
-                    <strong>User:</strong> {{ $remark->comment }}
+                    <strong>
+                        @if (Auth::user()->is_admin === 0 && $remark->user_id === Auth::user()->id)
+                            You:
+                        @elseif (Auth::user()->is_admin === 1 && $remark->user_id !== Auth::user()->id)
+                            You:
+                        @else
+                            Admin:
+                        @endif
+                    </strong> {{ $remark->comment }}
                 </div>
             @endforeach
 
             @if (Auth::check())
-                <form method="POST" action="{{ route('remarks.store', $inquiry->id) }}" style="margin-bottom: 1%;">
+                <form method="POST" action="{{ route('remarks.store', $inquiry->id) }}" style="margin-bottom: 1%;" id="comment">
                     @csrf
                     <div class="form-group">
                         <label for="comment">Add Comment</label>
@@ -135,7 +194,14 @@
                     <button class="btn btn-primary" type="submit">Submit Comment</button>
                 </form>
             @endif
+                <script>
+                    document.getElementById('comment').addEventListener('submit', function(event) {
+                        alert('Comment added!');
+                    });
+                </script>
         </div>
+    </section>
     @endsection
 </body>
 </html>
+

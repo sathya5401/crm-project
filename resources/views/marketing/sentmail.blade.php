@@ -62,20 +62,22 @@
     @extends('layouts.sidebar')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center" style="height: 25vh;"> <!-- Wrapper with Flexbox -->
+<div class="d-flex justify-content-center align-items-center" style="height: 25vh;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Email Sent') }}</div>
-                    <div class="card-body">
-                        {{ __('Successfully sent email!') }}
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <span>{{ __('Successfully sent email!') }}</span>
+                        <a href="{{ url('marketing/email') }}" class="btn btn-light">Back</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 </body>
 </html>
