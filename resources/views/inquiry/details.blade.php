@@ -14,11 +14,11 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- styles -->
     <style>
-         body {
+         /* body {
             font-family: 'Nunito', sans-serif;
             background-color: #f8f9fa;
             color: #343a40;
-        }
+        } */
 
         .bg-purple {
             background-color: #e0dcfc;
@@ -38,9 +38,9 @@
             margin-bottom: 5%;
             margin-top: 2%;
         }
-        .container {
-            margin-top: 20px;
-        }
+        /* .container {
+            margin-top: 1%;
+        } */
 
         form {
             margin-top: 20px;
@@ -56,6 +56,7 @@
 
         .comments-section {
             margin-top: 1%;
+            margin-bottom: 2%;
             padding: 20px;
             border-radius: 8px;
             background-color: #ffffff; /* White Background */
@@ -90,6 +91,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 2%;
         }
 
         .inquiry-details {
