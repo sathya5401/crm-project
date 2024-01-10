@@ -37,7 +37,15 @@ class ClientInquiryController extends Controller
             'message' => 'required',
         ]);
 
-        $inquiry = Inquiry::create($validatedData);
+        // $inquiry = Inquiry::create($validatedData);
+        $inquiry = Inquiry::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'message' => $validatedData['message'],
+            'status' => "new",
+            
+        ]);
+        
 
         return redirect('/inquiry')->with('success', 'Inquiry submitted successfully.');
     }
