@@ -14,17 +14,32 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- styles -->
     <style>
-        body {
-            background-color: #f8f9fa;
+         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
 
+        .bg-purple {
+            background-color: #e0dcfc;
+        }
+
+        .table thead tr {
+            background-color: #dc3545 !important;
+            color: white;
+        }
+        .icons {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .container1 {
+            margin-bottom: 5%;
+            margin-top: 2%;
+        }
         .container {
             margin-top: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
         }
 
         form {
@@ -35,7 +50,7 @@
             margin-right: 10px;
         }
 
-        select, textarea {
+        select {
             margin-bottom: 10px;
         }
 
@@ -57,6 +72,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ced4da; /* Border Color */
             border-radius: 4px;
         }
@@ -80,10 +96,6 @@
             margin-top: 20px;
         }
 
-        .btn-back {
-            /* Additional styling for the back button if needed */
-        }
-
         .grid-layout {
             display: grid;
             grid-template-columns: max-content 1fr; /* Adjust these values as needed */
@@ -103,9 +115,11 @@
     <section class="container-fluid">
         <div class="container">
                 <div class="header">
-                    <h1 style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">Inquiry Details</h1>
+                    <h2 style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">Inquiry Details</h2>
                     <a href="{{ url('/inquiry') }}" class="btn btn-light btn-back">Back</a>
                 </div>
+             
+        <div>    
             <div class="inquiry-details grid-layout">
                 <div><strong>Name:</strong></div>
                 <div>{{ $inquiry->name }}</div>
@@ -116,6 +130,7 @@
                 <div><strong>Message:</strong></div>
                 <div>{{ $inquiry->message }}</div>
             </div>
+        </div>
 
             @if (Auth::user()->is_admin === 0)
                 <form method="POST" action="{{ route('inquiry.updateStatus', $inquiry->id) }}" id="updateStatus">
