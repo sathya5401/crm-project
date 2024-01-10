@@ -82,14 +82,14 @@
                                 <label for="message">Message</label>
                                 <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="Status">Status</label>
                                 <select class="form-control" name="Status" id="Status" required>
                                     <option value="new"> New </option>
                                     <option value="in-progress"> In-progress </option>
                                     <option value="completed"> Completed </option>
                                 </select>
-                            </div>
+                            </div> -->
                             <button type="submit" class="btn btn-primary">Submit Inquiry</button>
                         </form>
                         <script>
