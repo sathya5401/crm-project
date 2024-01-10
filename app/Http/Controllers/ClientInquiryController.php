@@ -21,8 +21,10 @@ class ClientInquiryController extends Controller
         $user = Auth::user();
         $inquiry = Inquiry::where('name', $user->name )->get();
         $inquiries = Inquiry::all();
+
         return view('inquiry.listing',['inquiry'=> $inquiry, 'inquiries' =>  $inquiries]);
     }
+
     public function create()
     {
         $user = Auth::user();

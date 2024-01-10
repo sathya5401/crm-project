@@ -12,11 +12,18 @@ class SupportInquiryController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $inquiries = Inquiry::all();
+        $inquiries = Inquiry::query(); // Create a query builder instance
 
-        return view('support.inquiries', compact('inquiries'));
+        if ($request->has('status') && $request->status != '') {
+            $inquiries->where('status', $request->status); // Use the where method on $inquiries
+        }
+
+        $inquiries = $inquiries->get(); // Execute the query and retrieve the results
+
+        return view('inquiry.listing', compact('inquiries'));
     }
+
 }
 

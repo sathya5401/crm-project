@@ -81,7 +81,7 @@
         <div class="row card-row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form method="POST" action="{{ route('meeting.store') }}">
+                    <form method="POST" action="{{ route('meeting.store') }}" id="meetingForm">
                         @csrf
                         <div class="row">
                            <div class="col-6 form-group">
@@ -128,6 +128,11 @@
                             <button type="submit" class="btn btn-primary">Create Meeting</button>
                         </div>
                     </form>
+                        <script>
+                                document.getElementById('meetingForm').addEventListener('submit', function(event) {
+                                    alert('Meeting created!');
+                                });
+                        </script>
                 </div>
             </div>
         </div>
