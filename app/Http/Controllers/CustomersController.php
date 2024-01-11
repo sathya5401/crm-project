@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CustomersController extends Controller
 {   
@@ -28,6 +31,12 @@ class CustomersController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
+
+        if (!$user->can_create_custom) {
+            return view('errors.permission')->with('message', 'You do not have permission to create customers.');
+        }
+
         return view('customers.create');
     }
 
@@ -70,7 +79,13 @@ class CustomersController extends Controller
     }
 
     public function edit(Customers $customer)
-    {
+    {   
+        $user = Auth::user();
+
+        if (!$user->can_edit_custom) {
+            return view('errors.permission')->with('message', 'You do not have permission to edit customers data.');
+        }
+
         return view('customers.edit', compact('customer'));
     }
 
@@ -97,7 +112,13 @@ class CustomersController extends Controller
     }
 
     public function destroy(Customers $customer)
-    {
+    {   
+        $user = Auth::user();
+
+        if (!$user->can_delete_custom) {
+            return view('errors.permission')->with('message', 'You do not have permission to delete customers.');
+        }
+
         $customer->delete();
         return redirect()->route('customers.index');
     }

@@ -127,7 +127,7 @@
             <tbody>
                 @foreach ($leads as $key => $lead)
                     <tr >
-                        <td scope="row">{{ $key+1 }}</td>
+                        <td scope="row">{{ $loop->index + 1 + ($currentPage - 1) * $perPage }}</td>
                         <td><a class="subject-font" href="{{ route('leads.show', $lead->id) }}"> {{ $lead->name }} </a> </td>
                         <td>{{ $lead->email }}</td>
                         <td>{{ $lead->title}}</td>

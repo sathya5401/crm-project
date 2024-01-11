@@ -160,8 +160,25 @@ Route::get ('/marketing/meeting', [MarketingController::class, 'meeting']) ->nam
 Route::get ('/marketing/meeting/new', [MarketingController::class, 'createMeeting']) ->name('createMeeting');
 Route::post('/marketing/meeting/new', [MarketingController::class, 'store'])->name('meeting.store');
 Route::delete('/marketing/meeting/{meeting}', [MarketingController::class, 'destroy'])->name('meeting.destroy');
-// Route::get('/meeting/{meeting}', [MeetingController::class, 'show'])->name('meeting.show');
-Route::get('/marketing/sentmail', function () { return view('marketing.sentmail');});
+// Route::get('/meeting/sentmail', [MeetingController::class, 'show'])->name('meeting.show');
+Route::get('/marketing/sentmail', function () {
+    // Check if the user is authenticated
+    if (Auth::check()) {
+        $user = Auth::user();
+
+        // Check if the user has permission to edit customers data
+        if ($user->can_send_email) {
+            // User has permission, return the view
+            return view('marketing.sentmail');
+        } else {
+            // User does not have permission, return a permission error view
+            return view('errors.permission')->with('message', 'You do not have permission send email.');
+        }
+    }
+
+    // If the user is not authenticated, you might want to redirect to the login page
+    return redirect('/login');
+})->middleware('auth'); // Apply the 'auth' middleware to ensure the user is authenticated
 
 
 use App\Http\Controllers\MailController;

@@ -50,58 +50,31 @@ class UserController extends Controller
     }
 
     public function index(Request $request)
-    {
-        if ( (Auth::user()->is_admin) === 1)  {
-            abort(403); // Return a 403 Forbidden response if normal user tries to access user listing
-        }
-
-        $searchTerm = null; // Set the default value for $searchTerm
-        // $users = User::where('is_admin', 1)->get(); // Retrieve only normal users (is_admin = 1)
-        $perPage = 6; // Number of items to display per page
-        $currentPage = $request->input('page', 1);
-        $offset = ($currentPage - 1) * $perPage;
-    
-        $users = User::where('is_admin', 1)->skip($offset)->take($perPage)->get();
-    
-        // Calculate total number of records (for pagination)
-        $totalRecords = User::count();
-
-        return view('user.listing', [
-            'users' => $users,
-            'currentPage' => $currentPage,
-            'perPage' => $perPage,
-            'totalRecords' => $totalRecords,
-            'searchTerm' => $searchTerm
-        ]);
-    }
-
-    public function search(Request $request)
 {
-    $searchTerm = $request->input('search');
-    $users = null;
-
-    if ($searchTerm) {
-        $users = User::where('is_admin', 1)
-                      ->where(function ($query) use ($searchTerm) {
-                          $query->where('name', 'like', '%'.$searchTerm.'%')
-                                ->orWhere('email', 'like', '%'.$searchTerm.'%')
-                                ->orWhere('role', 'like', '%'.$searchTerm.'%')
-                                ->orWhere('branch', 'like', '%'.$searchTerm.'%')
-                                ->orWhere('phone_number', 'like', '%'.$searchTerm.'%');
-                      })
-                      ->get();
-    } else {
-        $users = User::where('is_admin', 1)->get();
+    if (Auth::user()->is_admin === 1) {
+        abort(403);
     }
 
-    $perPage = 6; // Number of items to display per page
+    $searchTerm = null;
+    $users = User::where('is_admin', 1);
+
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        $users = $users->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('email', 'like', '%' . $searchTerm . '%')
+                ->orWhere('role', 'like', '%' . $searchTerm . '%')
+                ->orWhere('branch', 'like', '%' . $searchTerm . '%')
+                ->orWhere('phone_number', 'like', '%' . $searchTerm . '%');
+        });
+    }
+
+    $perPage = 6;
     $currentPage = $request->input('page', 1);
     $offset = ($currentPage - 1) * $perPage;
-    
-    // $users = User::where('is_admin', 1)->skip($offset)->take($perPage)->get();
-    
-    // Calculate total number of records (for pagination)
-    $totalRecords = User::count();
+
+    $totalRecords = $users->count();
+    $users = $users->skip($offset)->take($perPage)->get();
 
     return view('user.listing', [
         'users' => $users,
@@ -111,6 +84,36 @@ class UserController extends Controller
         'searchTerm' => $searchTerm
     ]);
 }
+
+public function search(Request $request)
+{
+    $searchTerm = $request->input('search');
+    $users = User::where('is_admin', 1)
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('email', 'like', '%' . $searchTerm . '%')
+                ->orWhere('role', 'like', '%' . $searchTerm . '%')
+                ->orWhere('branch', 'like', '%' . $searchTerm . '%')
+                ->orWhere('phone_number', 'like', '%' . $searchTerm . '%');
+        })
+        ->get();
+
+    $perPage = 6;
+    $currentPage = $request->input('page', 1);
+    $offset = ($currentPage - 1) * $perPage;
+
+    $totalRecords = $users->count();
+    $users = $users->skip($offset)->take($perPage)->get();
+
+    return view('user.listing', [
+        'users' => $users,
+        'currentPage' => $currentPage,
+        'perPage' => $perPage,
+        'totalRecords' => $totalRecords,
+        'searchTerm' => $searchTerm
+    ]);
+}
+
 
     public function delete($id)
     {
@@ -203,8 +206,11 @@ class UserController extends Controller
         $user->can_connect_rfqs_data = $request->has('connect_rfx');
         $user->can_connect_leads_data = $request->has('connect_leads');
         $user->can_download_data = $request->has('download_data');
-
-
+        $user->can_create_custom = $request->has('customer_create');
+        $user->can_delete_custom = $request->has('customer_delete');
+        $user->can_edit_custom = $request->has('customer_edit');
+        $user->can_send_email = $request->has('send_email');
+        $user->can_create_meeting = $request->has('create_meeting');
         $user->save();
 
         return redirect()->route('user.listing')->with('success', 'User updated successfully.');

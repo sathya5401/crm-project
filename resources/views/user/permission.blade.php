@@ -174,6 +174,52 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="customer_create" id="customer_create" {{ $user->can_create_custom ? 'checked' : '' }}>
+                            <label class="form-check-label" for="customer_create">
+                                Create Customer
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="customer_delete" id="customer_delete" {{ $user->can_delete_custom ? 'checked' : '' }}>
+                            <label class="form-check-label" for="customer_delete">
+                                Delete Customer
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="customer_edit" id="customer_edit" {{ $user->can_edit_custom ? 'checked' : '' }}>
+                            <label class="form-check-label" for="customer_edit">
+                                Edit Customer
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="send_email" id="send_email" {{ $user->can_send_email ? 'checked' : '' }}>
+                            <label class="form-check-label" for="send_email">
+                                Send Email
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="create_meeting" id="create_meeting" {{ $user->can_create_meeting ? 'checked' : '' }}>
+                            <label class="form-check-label" for="create_meeting">
+                                Create Meeting
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-update">Update Permissions</button>
             </div>
         </form>
