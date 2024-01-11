@@ -36,9 +36,15 @@ class MarketingController extends Controller
     }
 
     public function createMeeting() {
+        
+        $user = Auth::user();
 
+        if (!$user->can_create_meeting) {
+            return view('errors.permission')->with('message', 'You do not have permission to create meeting.');
+        }
         $users = User::all();
-        return view('marketing.newmeeting', compact('users'));    }
+        return view('marketing.newmeeting', compact('users'));    
+    }
 
     public function store(Request $request)
     {
@@ -71,5 +77,7 @@ class MarketingController extends Controller
           $meeting->delete();
           return redirect()->route('meeting');
       }
+
+
       
 }

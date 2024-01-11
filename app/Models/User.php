@@ -37,6 +37,11 @@ class User extends Authenticatable
         'can_connect_rfqs_data',
         'can_connect_leads_data',
         'first_login',
+        'can_create_custom',
+        'can_edit_custom',
+        'can_create_meeting',
+        'can_send_email',
+        'can_delete_custom',
     ];
 
     /**

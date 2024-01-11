@@ -99,7 +99,7 @@
             <tbody>
                 @foreach ($users as $key => $user)
                     <tr >
-                        <td scope="row">{{ $key + 1 }}</td>
+                        <td scope="row">{{ $loop->index + 1 + ($currentPage - 1) * $perPage }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role}}</td>
