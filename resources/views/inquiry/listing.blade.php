@@ -102,7 +102,10 @@
                     <td>
                         <a href="{{ route('inquiry.show', $inquiry->id) }}">{{ $inquiry->message }}</a>
                     </td>
-                    <td>{{ $inquiry->status }}</td>
+                    <td class="{{ $inquiry->status == 'new' ? 'status-new' : ($inquiry->status == 'in-progress' ? 'status-in-progress' : 'status-completed') }}">
+                        {{ $inquiry->status }}
+                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
