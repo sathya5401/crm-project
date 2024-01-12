@@ -175,13 +175,7 @@
             @foreach ($remarks as $remark)
                 <div class="comment">
                     <strong>
-                        @if (Auth::user()->is_admin === 0 && $remark->user_id === Auth::user()->id)
-                            You:
-                        @elseif (Auth::user()->is_admin === 1 && $remark->user_id !== Auth::user()->id)
-                            You:
-                        @else
-                            Admin:
-                        @endif
+                        >
                     </strong> {{ $remark->comment }}
                 </div>
             @endforeach
