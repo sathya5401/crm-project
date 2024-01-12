@@ -83,6 +83,13 @@ class RegisterController extends Controller
             'can_connect_rfqs_data' => 1,
             'can_connect_leads_data' => 1,
             'first_login' => 0,
+            'can_download_data' => 1,
+            'can_create_custom' => 1,
+            'can_delete_custom' => 1,
+            'can_edit_custom' => 1,
+            'can_send_email' => 1,
+            'can_create_meeting' => 1
+
         ]);
     }
 }
