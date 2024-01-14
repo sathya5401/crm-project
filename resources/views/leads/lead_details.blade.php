@@ -11,9 +11,9 @@
         } */
         .container {
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1%;
+            /* border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
         }
         h2 {
             color: #6c757d;

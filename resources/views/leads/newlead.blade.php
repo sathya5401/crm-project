@@ -119,7 +119,7 @@
                            <label for="email">Email</label>
                            <input type="email" name="email" id="email" required />
                            @error('email')
-                              <span class="error">{{ $message }}</span>
+                              <span class="alert-danger error">{{ $message }}</span>
                            @enderror
                            </div>
                         <div class="col-6 flex-inputs">
