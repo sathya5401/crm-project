@@ -115,6 +115,7 @@
                                 <div class="flex-accordion">
                                     <div class="form-group">
                                         <select name="status" class="form-control status-dropdown">
+                                            <option> Select </option>
                                             <option value="open" {{ $temp->status == 'open' ? 'selected' : '' }}>Open</option>
                                             <option value="close" {{ $temp->status == 'close' ? 'selected' : '' }}>Close</option>
                                         </select>
@@ -129,6 +130,7 @@
                                 <div class="flex-accordion">
                                     <div class="form-group">
                                         <select name="priority" class="form-control priority-dropdown">
+                                            <option> Select </option>
                                             <option value="low" {{ $temp->priority == 'low' ? 'selected' : '' }}>Low</option>
                                             <option value="medium" {{ $temp->priority == 'medium' ? 'selected' : '' }}>Medium</option>
                                             <option value="high" {{ $temp->priority == 'high' ? 'selected' : '' }}>High</option>
